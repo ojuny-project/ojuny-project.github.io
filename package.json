@@ -15,15 +15,15 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/starlight": "^0.42.7",
-    "astro": "^7.4.2",
+    "@astrojs/starlight": "^0.42.8",
+    "astro": "^7.4.4",
     "sharp": "^0.35.5",
     "shiki": "^4.5.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "tar": "^7.5.22",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "yaml": "^2.9.1"
   }
 }
