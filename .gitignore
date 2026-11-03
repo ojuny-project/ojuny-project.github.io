@@ -7,3 +7,15 @@ result-*
 
 # Ignore NixOS interactive test driver history
 **/.nixos-test-history
+
+# Node and Astro build outputs
+node_modules
+dist
+.astro
+.env
+.env.*
+!.env.example
+
+# Editor and OS files
+.DS_Store
+*.swp
