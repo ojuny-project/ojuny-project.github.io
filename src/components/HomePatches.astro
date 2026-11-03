@@ -1,0 +1,39 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="patches"
+  alt
+  eyebrow="Patches"
+  title="A patch is a Nix module"
+  description="Patches are flake-parts modules. A patch can expose or tweak any NixOS option or any option from a flake-sourced module. It can also ship its own GUI settings, so its controls appear in the main settings menu."
+  action={{ label: "Patches overview", href: `${base}patches/overview/` }}
+  columns={2}
+  items={[
+    {
+      eyebrow: "Shape",
+      title: "Flake-parts shaped",
+      body: "A patch is a module, not a script. It composes with the rest of the flake.",
+    },
+    {
+      eyebrow: "Reach",
+      title: "Any option",
+      body: "Expose or tweak any NixOS option or any option from a flake-sourced module.",
+    },
+    {
+      eyebrow: "GUI",
+      title: "Settings included",
+      body: "Patches can ship @menu and @option annotations. Their controls appear in the same settings menu.",
+    },
+    {
+      eyebrow: "Lifecycle",
+      title: "Install, enable, remove",
+      body: "ojuny-patches copies one module. Enable it in the menu. Remove it when you are done.",
+      href: `${base}patches/creating/`,
+      linkLabel: "Create a patch",
+    },
+  ]}
+/>

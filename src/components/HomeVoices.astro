@@ -1,0 +1,38 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const voices = [
+  {
+    quote: "We can fix every paper cut. We just do it declaratively.",
+    source: "The Ojuny Doctrine",
+  },
+  {
+    quote: "The compositor and shell stay upstream.",
+    source: "Desktop overview",
+  },
+  {
+    quote: "Read the diff.",
+    source: "The Ojuny Doctrine",
+  },
+];
+---
+
+<HomeSection id="voices" alt>
+  <SectionHeading
+    eyebrow="Voices"
+    title="The docs say it best"
+    description="Short lines from the project, without a testimonial budget."
+  />
+
+  <div class="ojuny-voice-grid">
+    {
+      voices.map((voice) => (
+        <blockquote class="ojuny-voice" data-reveal>
+          <p>“{voice.quote}”</p>
+          <cite>{voice.source}</cite>
+        </blockquote>
+      ))
+    }
+  </div>
+</HomeSection>

@@ -1,0 +1,37 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="windows"
+  alt
+  eyebrow="Windows"
+  title="A true escape from Windows"
+  description="No Windows key, no dual boot, no telemetry. Virtualize Windows when you must, run games through Proton and Wine, and replace the rest with FOSS alternatives from nixpkgs, Flathub, and flakes."
+  action={{ label: "Virtualization patch", href: `${base}patches/overview/` }}
+  columns={2}
+  items={[
+    {
+      eyebrow: "Virtualize",
+      title: "Don't dual-boot",
+      body: "The virtualization patch adds libvirt, QEMU, and virt-manager. Run Windows in a VM when you must.",
+    },
+    {
+      eyebrow: "Compatibility",
+      title: "Proton and Wine",
+      body: "Steam, Proton GE, Wine, winetricks, and protontricks are one patch or toggle away.",
+    },
+    {
+      eyebrow: "Packages",
+      title: "A massive package set",
+      body: "nixpkgs, Flathub, and flakes. Most Windows-only workflows have a native or web alternative.",
+    },
+    {
+      eyebrow: "Independence",
+      title: "No Windows key",
+      body: "No licence, no telemetry, no dual-boot partition. The escape is real.",
+    },
+  ]}
+/>

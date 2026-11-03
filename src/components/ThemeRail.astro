@@ -1,0 +1,53 @@
+---
+import { SCHEMES } from "../scripts/theme";
+
+const rail = SCHEMES.filter((_, index) => index % 10 === 0).slice(0, 36);
+const swatches = ["base08", "base0a", "base0b", "base0c", "base0d", "base0e"];
+---
+
+<div class="ojuny-theme-rail" data-theme-rail data-reveal>
+  {
+    rail.map((scheme) => (
+      <button
+        type="button"
+        class="ojuny-theme-rail-card"
+        data-rail-scheme={scheme.id}
+        aria-label={`Use ${scheme.name}`}
+      >
+        <span class="ojuny-theme-rail-swatches" aria-hidden="true">
+          {swatches.map((slot) => (
+            <span style={`--swatch: ${scheme.palette[slot]}`} />
+          ))}
+        </span>
+        <strong>{scheme.name}</strong>
+        <small>{scheme.variant}</small>
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  import { THEME_EVENT, applyScheme, readStoredScheme, schemeById } from "../scripts/theme";
+
+  const rail = document.querySelector<HTMLElement>("[data-theme-rail]");
+
+  function syncRail(): void {
+    if (!rail) return;
+    const current = readStoredScheme();
+    for (const card of rail.querySelectorAll<HTMLElement>("[data-rail-scheme]")) {
+      card.classList.toggle("is-current", card.dataset.railScheme === current.id);
+    }
+  }
+
+  if (rail) {
+    rail.addEventListener("click", (event) => {
+      const card = (event.target as HTMLElement).closest<HTMLElement>("[data-rail-scheme]");
+      const scheme = card ? schemeById(card.dataset.railScheme ?? "") : undefined;
+      if (!scheme) return;
+      applyScheme(scheme);
+      syncRail();
+    });
+    window.addEventListener(THEME_EVENT, syncRail);
+    syncRail();
+  }
+</script>

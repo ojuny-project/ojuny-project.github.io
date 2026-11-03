@@ -1,0 +1,44 @@
+---
+---
+
+<script is:inline>
+  (() => {
+    const storageKey = "ojuny.base16";
+    const root = document.documentElement;
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    let scheme = null;
+
+    try {
+      scheme = JSON.parse(localStorage.getItem(storageKey) || "null");
+    } catch {
+      scheme = null;
+    }
+
+    if (
+      scheme &&
+      typeof scheme === "object" &&
+      (scheme.variant === "dark" || scheme.variant === "light") &&
+      scheme.palette &&
+      typeof scheme.palette === "object"
+    ) {
+      for (const [key, value] of Object.entries(scheme.palette)) {
+        if (/^base0[0-9a-f]$/i.test(key) && /^#[0-9a-f]{6}$/i.test(value)) {
+          root.style.setProperty(`--${key.toLowerCase()}`, value);
+        }
+      }
+      root.dataset.theme = scheme.variant;
+      root.dataset.scheme = scheme.id;
+      root.style.colorScheme = scheme.variant;
+      if (themeColor && typeof scheme.palette.base00 === "string") {
+        themeColor.setAttribute("content", scheme.palette.base00);
+      }
+    } else {
+      root.dataset.theme = "dark";
+      root.style.colorScheme = "dark";
+    }
+
+    window.StarlightThemeProvider = {
+      updatePickers() {},
+    };
+  })();
+</script>

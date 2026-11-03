@@ -1,0 +1,13 @@
+---
+interface Props {
+  phrases: string[];
+}
+
+const { phrases } = Astro.props;
+---
+
+<span class="ojuny-typewriter" data-typewriter data-phrases={JSON.stringify(phrases)}>
+  <span data-typewriter-text>{phrases[0] ?? ""}</span><span
+    class="ojuny-typewriter-caret"
+    aria-hidden="true"></span>
+</span>

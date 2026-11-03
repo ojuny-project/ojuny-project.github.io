@@ -1,0 +1,44 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const base = import.meta.env.BASE_URL;
+const items = [
+  {
+    title: "Ojuny is pre-release",
+    excerpt: "No ISO release yet, and the CLI is incomplete.",
+    href: `${base}status/`,
+  },
+  {
+    title: "No ISO release yet",
+    excerpt: "The installer images are built from source in the installer repository.",
+    href: `${base}downloads/`,
+  },
+  {
+    title: "Support is GitHub issues only",
+    excerpt: "No support team, no paid support, and no warranty.",
+    href: "https://github.com/ojuny-project",
+  },
+];
+---
+
+<HomeSection id="news">
+  <SectionHeading
+    eyebrow="Status"
+    title="Where the project stands"
+    action={{ label: "Read the status page", href: `${base}status/` }}
+  />
+
+  <ul class="ojuny-news-list">
+    {
+      items.map((item) => (
+        <li data-reveal>
+          <a href={item.href}>
+            <span class="ojuny-news-title">{item.title}</span>
+            <span class="ojuny-news-excerpt">{item.excerpt}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</HomeSection>

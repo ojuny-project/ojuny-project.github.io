@@ -1,0 +1,100 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const layouts = [
+  {
+    id: "master",
+    label: "Master",
+    caption: "One big window, a stack beside it.",
+  },
+  {
+    id: "dwindle",
+    label: "Dwindle",
+    caption: "Every new window splits the active one. Good for deep work.",
+  },
+  {
+    id: "scroller",
+    label: "Scroller",
+    caption: "A horizontal ribbon of windows. Good for wide monitors.",
+  },
+];
+---
+
+<HomeSection id="watch" alt>
+  <SectionHeading
+    eyebrow="See it in action"
+    title="A desktop tour, not a slideshow"
+    description="Master, dwindle, and scroller layouts from the same bind definitions. Change one setting and the session follows."
+    action={{ label: "Read the desktop docs", href: "/desktop/overview/" }}
+  />
+
+  <div class="ojuny-tour" data-tour>
+    <div class="ojuny-tour-tabs" role="tablist" aria-label="Window layouts">
+      {
+        layouts.map((layout, index) => (
+          <button
+            type="button"
+            class:list={["ojuny-tour-tab", { "is-active": index === 0 }]}
+            data-tour-tab={layout.id}
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+          >
+            {layout.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="ojuny-tour-screen">
+      <div class="ojuny-tour-bar" aria-hidden="true">
+        <span class="ojuny-tour-bar-brand">Ojuny</span>
+        <span class="ojuny-tour-bar-workspaces"><span></span><span></span><span></span></span>
+        <span class="ojuny-tour-bar-clock">09:41</span>
+      </div>
+      <div class="ojuny-tour-workspace" data-tour-workspace data-layout="master">
+        <div class="ojuny-tour-window is-a"><span>terminal</span></div>
+        <div class="ojuny-tour-window is-b"><span>browser</span></div>
+        <div class="ojuny-tour-window is-c"><span>editor</span></div>
+      </div>
+      <div class="ojuny-tour-dock" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="ojuny-tour-caption" data-tour-caption>
+      {layouts[0].caption}
+    </div>
+  </div>
+</HomeSection>
+
+<script>
+  const tour = document.querySelector<HTMLElement>("[data-tour]");
+  if (tour) {
+    const workspace = tour.querySelector<HTMLElement>("[data-tour-workspace]");
+    const caption = tour.querySelector<HTMLElement>("[data-tour-caption]");
+    const tabs = Array.from(tour.querySelectorAll<HTMLButtonElement>("[data-tour-tab]"));
+    const copy: Record<string, string> = {
+      master: "One big window, a stack beside it.",
+      dwindle: "Every new window splits the active one. Good for deep work.",
+      scroller: "A horizontal ribbon of windows. Good for wide monitors.",
+    };
+
+    for (const tab of tabs) {
+      tab.addEventListener("click", () => {
+        const layout = tab.dataset.tourTab ?? "master";
+        if (!workspace) return;
+        workspace.dataset.layout = layout;
+        workspace.classList.remove("is-switching");
+        void workspace.offsetWidth;
+        workspace.classList.add("is-switching");
+        for (const other of tabs) {
+          const active = other === tab;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-selected", active ? "true" : "false");
+        }
+        if (caption) caption.textContent = copy[layout] ?? "";
+      });
+    }
+  }
+</script>

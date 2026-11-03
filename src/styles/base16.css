@@ -1,0 +1,165 @@
+:root {
+  --base00: #272e33;
+  --base01: #2e383c;
+  --base02: #414b50;
+  --base03: #859289;
+  --base04: #9da9a0;
+  --base05: #d3c6aa;
+  --base06: #edeada;
+  --base07: #fffbef;
+  --base08: #e67e80;
+  --base09: #e69875;
+  --base0a: #dbbc7f;
+  --base0b: #a7c080;
+  --base0c: #83c092;
+  --base0d: #7fbbb3;
+  --base0e: #d699b6;
+  --base0f: #9da9a0;
+  color-scheme: dark;
+}
+
+:root,
+:root[data-theme="dark"] {
+  --ojuny-on-accent: var(--base00);
+  --ojuny-strong: var(--base07);
+  --ojuny-heading: var(--base06);
+  --ojuny-text-muted: color-mix(in srgb, var(--base05) 90%, var(--base00));
+  --ojuny-text-subtle: color-mix(in srgb, var(--base05) 82%, var(--base00));
+
+  --sl-color-white: var(--base07);
+  --sl-color-gray-1: var(--base06);
+  --sl-color-gray-2: var(--base05);
+  --sl-color-gray-3: var(--base04);
+  --sl-color-gray-4: var(--base03);
+  --sl-color-gray-5: var(--base02);
+  --sl-color-gray-6: var(--base01);
+  --sl-color-gray-7: var(--base01);
+  --sl-color-black: var(--base00);
+}
+
+:root[data-theme="light"] {
+  --ojuny-on-accent: var(--base00);
+  --ojuny-strong: var(--base05);
+  --ojuny-heading: var(--base05);
+  --ojuny-text-muted: color-mix(in srgb, var(--base05) 90%, var(--base00));
+  --ojuny-text-subtle: color-mix(in srgb, var(--base05) 82%, var(--base00));
+
+  --sl-color-white: var(--base05);
+  --sl-color-gray-1: var(--base05);
+  --sl-color-gray-2: var(--base05);
+  --sl-color-gray-3: color-mix(in srgb, var(--base05) 82%, var(--base00));
+  --sl-color-gray-4: color-mix(in srgb, var(--base05) 55%, var(--base00));
+  --sl-color-gray-5: var(--base02);
+  --sl-color-gray-6: var(--base01);
+  --sl-color-gray-7: var(--base00);
+  --sl-color-black: var(--base00);
+}
+
+:root {
+  --sl-color-text: var(--base05);
+  --sl-color-text-accent: var(--base0d);
+  --sl-color-text-invert: var(--ojuny-on-accent);
+  --sl-color-bg: var(--base00);
+  --sl-color-bg-nav: var(--base01);
+  --sl-color-bg-sidebar: var(--base01);
+  --sl-color-bg-inline-code: var(--base02);
+  --sl-color-bg-accent: var(--base0d);
+  --sl-color-hairline-light: var(--base02);
+  --sl-color-hairline: var(--base02);
+  --sl-color-hairline-shade: var(--base03);
+  --sl-color-accent-low: color-mix(in srgb, var(--base0d) 18%, var(--base00));
+  --sl-color-accent: var(--base0d);
+  --sl-color-accent-high: var(--base0c);
+  --sl-color-backdrop-overlay: color-mix(in srgb, var(--base00) 72%, transparent);
+  --sl-color-bg-badge: var(--base02);
+  --sl-color-border-badge: var(--base03);
+  --sl-color-text-badge: var(--base05);
+  --sl-color-banner-bg: var(--base0d);
+  --sl-color-banner-text: var(--ojuny-on-accent);
+  --sl-color-asides-border: var(--base0d);
+  --sl-color-asides-text-accent: var(--base0d);
+
+  --sl-color-orange: var(--base09);
+  --sl-color-orange-low: color-mix(in srgb, var(--base09) 20%, var(--base00));
+  --sl-color-orange-high: color-mix(in srgb, var(--base09) 72%, var(--sl-color-white));
+  --sl-color-green: var(--base0b);
+  --sl-color-green-low: color-mix(in srgb, var(--base0b) 20%, var(--base00));
+  --sl-color-green-high: color-mix(in srgb, var(--base0b) 72%, var(--sl-color-white));
+  --sl-color-blue: var(--base0d);
+  --sl-color-blue-low: color-mix(in srgb, var(--base0d) 20%, var(--base00));
+  --sl-color-blue-high: color-mix(in srgb, var(--base0d) 72%, var(--sl-color-white));
+  --sl-color-purple: var(--base0e);
+  --sl-color-purple-low: color-mix(in srgb, var(--base0e) 20%, var(--base00));
+  --sl-color-purple-high: color-mix(in srgb, var(--base0e) 72%, var(--sl-color-white));
+  --sl-color-red: var(--base08);
+  --sl-color-red-low: color-mix(in srgb, var(--base08) 20%, var(--base00));
+  --sl-color-red-high: color-mix(in srgb, var(--base08) 72%, var(--sl-color-white));
+
+  --shiki-foreground: var(--base05);
+  --shiki-background: var(--base01);
+  --shiki-color-text: var(--base05);
+  --shiki-color-background: var(--base01);
+  --shiki-token-constant: var(--base09);
+  --shiki-token-string: var(--base0b);
+  --shiki-token-comment: var(--base03);
+  --shiki-token-keyword: var(--base0e);
+  --shiki-token-parameter: var(--base08);
+  --shiki-token-function: var(--base0d);
+  --shiki-token-string-expression: var(--base0c);
+  --shiki-token-punctuation: var(--base05);
+  --shiki-token-link: var(--base0d);
+  --shiki-ansi-black: var(--base03);
+  --shiki-ansi-black-dim: color-mix(in srgb, var(--base03) 70%, var(--base01));
+  --shiki-ansi-red: var(--base08);
+  --shiki-ansi-red-dim: color-mix(in srgb, var(--base08) 70%, var(--base01));
+  --shiki-ansi-green: var(--base0b);
+  --shiki-ansi-green-dim: color-mix(in srgb, var(--base0b) 70%, var(--base01));
+  --shiki-ansi-yellow: var(--base0a);
+  --shiki-ansi-yellow-dim: color-mix(in srgb, var(--base0a) 70%, var(--base01));
+  --shiki-ansi-blue: var(--base0d);
+  --shiki-ansi-blue-dim: color-mix(in srgb, var(--base0d) 70%, var(--base01));
+  --shiki-ansi-magenta: var(--base0e);
+  --shiki-ansi-magenta-dim: color-mix(in srgb, var(--base0e) 70%, var(--base01));
+  --shiki-ansi-cyan: var(--base0c);
+  --shiki-ansi-cyan-dim: color-mix(in srgb, var(--base0c) 70%, var(--base01));
+  --shiki-ansi-white: var(--base05);
+  --shiki-ansi-white-dim: color-mix(in srgb, var(--base05) 70%, var(--base01));
+  --shiki-ansi-bright-black: var(--base04);
+  --shiki-ansi-bright-black-dim: color-mix(in srgb, var(--base04) 70%, var(--base01));
+  --shiki-ansi-bright-red: var(--base08);
+  --shiki-ansi-bright-red-dim: color-mix(in srgb, var(--base08) 70%, var(--base01));
+  --shiki-ansi-bright-green: var(--base0b);
+  --shiki-ansi-bright-green-dim: color-mix(in srgb, var(--base0b) 70%, var(--base01));
+  --shiki-ansi-bright-yellow: var(--base0a);
+  --shiki-ansi-bright-yellow-dim: color-mix(in srgb, var(--base0a) 70%, var(--base01));
+  --shiki-ansi-bright-blue: var(--base0d);
+  --shiki-ansi-bright-blue-dim: color-mix(in srgb, var(--base0d) 70%, var(--base01));
+  --shiki-ansi-bright-magenta: var(--base0e);
+  --shiki-ansi-bright-magenta-dim: color-mix(in srgb, var(--base0e) 70%, var(--base01));
+  --shiki-ansi-bright-cyan: var(--base0c);
+  --shiki-ansi-bright-cyan-dim: color-mix(in srgb, var(--base0c) 70%, var(--base01));
+  --shiki-ansi-bright-white: var(--base07);
+  --shiki-ansi-bright-white-dim: color-mix(in srgb, var(--base07) 70%, var(--base01));
+
+  --pagefind-ui-primary: var(--base0d);
+  --pagefind-ui-text: var(--base05);
+  --pagefind-ui-background: var(--base00);
+  --pagefind-ui-border: var(--base02);
+  --pagefind-ui-tag: var(--base01);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 0.375rem;
+  --pagefind-ui-font: var(--__sl-font);
+}
+
+::selection {
+  background: var(--base02);
+  color: var(--base05);
+}
+
+:focus-visible {
+  outline-color: var(--base0d);
+}
+
+* {
+  scrollbar-color: var(--base02) var(--base00);
+}

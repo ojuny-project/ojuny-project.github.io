@@ -1,0 +1,70 @@
+---
+import HomeSection from "./HomeSection.astro";
+import TypewriterTail from "./TypewriterTail.astro";
+import BrandImage from "./BrandImage.astro";
+import logo from "../assets/ojuny-logo.png";
+
+const base = import.meta.env.BASE_URL;
+const phrases = ["paper cut", "opaque setup", "missing app", "hidden setting", "flake"];
+---
+
+<HomeSection id="about">
+  <div class="ojuny-about">
+    <div class="ojuny-about-head" data-reveal>
+      <p class="ojuny-eyebrow">The short version</p>
+      <h2 class="ojuny-about-title">
+        We can fix every <TypewriterTail phrases={phrases} />
+      </h2>
+    </div>
+
+    <div class="ojuny-about-body">
+      <div class="ojuny-about-copy" data-reveal>
+        <p>
+        Linux desktops usually start as a pile of dotfiles, a wiki, and a prayer.
+        Ojuny starts with a flake: typed options, readable modules, and a menu
+        that writes real configuration.
+      </p>
+      <p>
+        A desktop should not trade one opaque setup for another. Ojuny keeps the
+        pieces upstream and readable: MangoWM and Dux Shell are documented
+        projects, the configuration is Nix, and the settings menu writes real
+        options. There is a GUI for temporary apps and a Flatpak store patch,
+        not a terminal-only ritual.
+      </p>
+      <p>
+        When something breaks, you read the module, change the option, and
+        rebuild. You do not need to ask a model to guess at your machine.
+      </p>
+        <p>
+          Behind it all is the <a href={`${base}doctrine/`}>Ojuny Doctrine</a>:
+          seven rules for a desktop you can read, rebuild, and hand to someone
+          else.
+        </p>
+      </div>
+
+      <figure class="ojuny-quote" data-reveal>
+      <div class="ojuny-quote-mark" aria-hidden="true">“</div>
+      <blockquote>
+        When you install ojuny, that is not my desktop. It is yours.
+      </blockquote>
+      <figcaption>
+        <span class="ojuny-quote-badge">
+          <BrandImage
+            src={logo.src}
+            width={96}
+            height={96}
+            alt=""
+            loading="lazy"
+            class="ojuny-quote-logo"
+          />
+        </span>
+        <span class="ojuny-quote-meta">
+          <strong>SDG</strong>
+          <small>Maintainer, Ojuny</small>
+        </span>
+        <a href={`${base}getting-started/what-is-ojuny/`} aria-label="Read what Ojuny is">→</a>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</HomeSection>

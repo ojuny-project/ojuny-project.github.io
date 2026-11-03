@@ -1,0 +1,29 @@
+{
+  "name": "ojuny-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && node scripts/prefix-base.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "update:base16": "node scripts/update-base16.mjs",
+    "og": "node scripts/make-og.mjs",
+    "wallpaper:preview": "node scripts/make-wallpaper-preview.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/starlight": "^0.42.7",
+    "astro": "^7.4.2",
+    "sharp": "^0.35.5",
+    "shiki": "^4.5.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "tar": "^7.5.22",
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,54 @@
+---
+import brand from "../assets/ojuny-brand-large.png";
+import BrandImage from "./BrandImage.astro";
+import HexagonField from "./HexagonField.astro";
+
+const facts = ["360 themes", "patches, not forks", "1 flake", "0 funding"];
+---
+
+<section class="ojuny-home-hero" aria-labelledby="ojuny-home-title">
+  <div class="ojuny-home-field" aria-hidden="true"></div>
+  <HexagonField />
+  <div class="ojuny-home-glow" aria-hidden="true"></div>
+  <div class="ojuny-home-brand-shadow" aria-hidden="true"></div>
+
+  <div class="ojuny-home-hero-inner">
+    <a class="ojuny-home-callout" href="#themes">
+      <span class="ojuny-home-callout-dot" aria-hidden="true"></span>
+      360 themes. One picker.
+      <span aria-hidden="true">→</span>
+    </a>
+
+    <BrandImage
+      src={brand.src}
+      width={1800}
+      height={512}
+      alt="Ojuny"
+      loading="eager"
+      class="ojuny-home-brand"
+    />
+
+    <h1 id="ojuny-home-title" class="ojuny-home-tagline">
+      Unapologetically dotfiles by <a href="https://github.com/ojuny-project">SDG</a>
+    </h1>
+
+    <p class="ojuny-home-lead">
+      An opinionated NixOS desktop built on MangoWM and Dux Shell. 360 themes, a
+      settings menu that writes real Nix, and a flake you can read end to end.
+    </p>
+
+    <div class="ojuny-home-actions">
+      <a class="ojuny-button" href="#install">Get Ojuny</a>
+      <a class="ojuny-button secondary" href="#watch">See it in action</a>
+    </div>
+
+    <ul class="ojuny-home-facts" aria-label="Project facts">
+      {facts.map((fact) => <li>{fact}</li>)}
+    </ul>
+
+    <a class="ojuny-home-scroll" href="#about">
+      Scroll
+      <span aria-hidden="true">↓</span>
+    </a>
+  </div>
+</section>

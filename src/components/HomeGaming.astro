@@ -1,0 +1,36 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="gaming"
+  eyebrow="Gaming"
+  title="SteamOS mode, one toggle"
+  description="The base install is lean. Patches add what you need. When you want a console-like session, enable the Gamescope session in the Gaming page and log into Steam Big Picture."
+  action={{ label: "Application pages", href: `${base}desktop/apps/` }}
+  columns={2}
+  items={[
+    {
+      eyebrow: "Lean",
+      title: "Lean by default",
+      body: "Steam, Proton GE, GameMode, and compatibility tools are one toggle away.",
+    },
+    {
+      eyebrow: "Console",
+      title: "Steam Big Picture",
+      body: "Enable the Gamescope session in the menu to boot straight into Steam Big Picture.",
+    },
+    {
+      eyebrow: "Both modes",
+      title: "One install",
+      body: "The desktop session stays. The Gamescope session is an additional login option, not a second system.",
+    },
+    {
+      eyebrow: "Gaps",
+      title: "Patches fill them",
+      body: "Wine, winetricks, protontricks, and gamescope are installable without a terminal ritual.",
+    },
+  ]}
+/>

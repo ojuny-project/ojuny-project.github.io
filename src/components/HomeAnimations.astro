@@ -1,0 +1,143 @@
+<noscript>
+  <style>
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</noscript>
+
+<script>
+
+  const KEY_MS = 58;
+  const KEY_JITTER = 60;
+  const WORD_PAUSE = 95;
+  const ENDING_PAUSE = 70;
+  const HESITATE_ODDS = 0.07;
+  const HESITATE_MS = 140;
+  const DELETE_MS = 27;
+  const HOLD_MS = 2100;
+  const TURN_MS = 420;
+
+  function setupTypewriter(host: HTMLElement): void {
+    const text = host.querySelector<HTMLElement>("[data-typewriter-text]");
+    const phrases = JSON.parse(host.dataset.phrases ?? "[]") as string[];
+    if (!text || phrases.length === 0) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      text.textContent = phrases[0] ?? "";
+      host.dataset.typing = "0";
+      return;
+    }
+
+    let timer = 0;
+    let index = 0;
+    let length = 0;
+    let deleting = false;
+    let running = false;
+    const block = host.closest<HTMLElement>(".ojuny-about-title");
+
+    const nextIndex = (current: number) => (current + 1) % phrases.length;
+    const sharedPrefix = (first: string, second: string) => {
+      let position = 0;
+      while (
+        position < first.length &&
+        position < second.length &&
+        first[position] === second[position]
+      ) {
+        position += 1;
+      }
+      return position;
+    };
+
+    const delay = () => {
+      const phrase = phrases[index];
+      if (deleting) return DELETE_MS;
+      let value = KEY_MS + Math.random() * KEY_JITTER;
+      if (phrase[length - 1] === " ") value += WORD_PAUSE;
+      if (length >= phrase.length - 2) value += ENDING_PAUSE;
+      if (Math.random() < HESITATE_ODDS) value += HESITATE_MS;
+      return value;
+    };
+
+    const step = () => {
+      const phrase = phrases[index];
+      text.textContent = phrase.slice(0, length);
+
+      let wait = delay();
+      if (!deleting && length === phrase.length) {
+        deleting = true;
+        wait = HOLD_MS;
+      } else if (
+        deleting &&
+        length === sharedPrefix(phrase, phrases[nextIndex(index)])
+      ) {
+        deleting = false;
+        index = nextIndex(index);
+        wait = TURN_MS;
+      } else {
+        length += deleting ? -1 : 1;
+      }
+
+      host.dataset.typing = wait >= HOLD_MS || wait === TURN_MS ? "0" : "1";
+      timer = window.setTimeout(step, wait);
+    };
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      step();
+    };
+
+    const stop = () => {
+      running = false;
+      window.clearTimeout(timer);
+    };
+
+    const reserve = () => {
+      if (!block) return;
+      const before = text.textContent;
+      block.style.minHeight = "";
+      let tallest = 0;
+      for (const phrase of phrases) {
+        text.textContent = phrase;
+        tallest = Math.max(tallest, block.getBoundingClientRect().height);
+      }
+      text.textContent = before;
+      block.style.minHeight = `${Math.ceil(tallest)}px`;
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { rootMargin: "96px" },
+    );
+
+    if (document.fonts?.ready) void document.fonts.ready.then(reserve);
+    else reserve();
+
+    observer.observe(host);
+  }
+
+  for (const host of document.querySelectorAll<HTMLElement>("[data-typewriter]")) {
+    setupTypewriter(host);
+  }
+
+  const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    for (const element of elements) element.classList.add("is-visible");
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+
+    for (const element of elements) observer.observe(element);
+  }
+</script>

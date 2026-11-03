@@ -1,0 +1,52 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+import PalettePreview from "./PalettePreview.astro";
+import ThemeRail from "./ThemeRail.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeSection id="themes">
+  <SectionHeading
+    eyebrow="Themes"
+    title="360 themes. One picker."
+    description="The site and the desktop share the same base16 collection. Change the scheme and the text, code blocks, UI chrome, and wallpaper preview follow."
+    action={{ label: "Browse all schemes", href: `${base}color-schemes/` }}
+  />
+
+  <p class="ojuny-keyhint" data-reveal>
+    Press <kbd>T</kbd> to flip through all 360 schemes, or pick one below.
+  </p>
+
+  <div data-reveal>
+    <PalettePreview />
+  </div>
+
+  <ThemeRail />
+</HomeSection>
+
+<script>
+  import { SCHEMES, applyScheme, readStoredScheme } from "../scripts/theme";
+
+  let index = SCHEMES.findIndex((scheme) => scheme.id === readStoredScheme().id);
+  if (index < 0) index = 0;
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key.toLowerCase() !== "t" || event.metaKey || event.ctrlKey || event.altKey || event.repeat) {
+      return;
+    }
+
+    const target = event.target;
+    if (
+      target instanceof HTMLElement &&
+      target.matches("input, textarea, select, [contenteditable='true']")
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    index = (index + 1) % SCHEMES.length;
+    applyScheme(SCHEMES[index]);
+  });
+</script>

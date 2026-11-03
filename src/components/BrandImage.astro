@@ -1,0 +1,39 @@
+---
+interface Props {
+  src: string;
+  width: number;
+  height: number;
+  alt?: string;
+  class?: string;
+  loading?: "eager" | "lazy";
+}
+
+const {
+  src,
+  width,
+  height,
+  alt = "",
+  class: className,
+  loading = "lazy",
+} = Astro.props;
+---
+
+<span class:list={["ojuny-brand-shell", className]}>
+  <img
+    class="ojuny-brand-fallback"
+    src={src}
+    width={width}
+    height={height}
+    alt={alt}
+    loading={loading}
+    decoding="async"
+  />
+  <canvas
+    class="ojuny-brand-canvas"
+    data-brand-canvas
+    data-brand-src={src}
+    width={width}
+    height={height}
+    aria-hidden="true"
+  ></canvas>
+</span>

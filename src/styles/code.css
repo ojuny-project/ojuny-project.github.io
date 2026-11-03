@@ -1,0 +1,100 @@
+.astro-code {
+  padding: 1rem 1.1rem !important;
+  border: 1px solid var(--base02);
+  border-radius: 0.6rem;
+  background: var(--base01) !important;
+  color: var(--base05) !important;
+  font-size: var(--sl-text-sm);
+  line-height: 1.65;
+  overflow-x: auto;
+}
+
+.astro-code code {
+  background: transparent !important;
+  font-size: inherit;
+}
+
+.astro-code .line {
+  display: block;
+  min-height: 1.65em;
+}
+
+:not(pre) > code {
+  padding: 0.12em 0.35em;
+  border: 1px solid var(--base02);
+  border-radius: 0.3rem;
+  background: var(--base02);
+  color: var(--ojuny-heading);
+  font-size: 0.92em;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--base0d);
+  text-decoration-color: color-mix(in srgb, var(--base0d) 45%, transparent);
+  text-underline-offset: 0.15em;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)):hover {
+  color: var(--base0c);
+  text-decoration-color: currentColor;
+}
+
+.sl-markdown-content h2,
+.sl-markdown-content h3 {
+  color: var(--ojuny-heading);
+}
+
+.sl-markdown-content h2 {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--base02);
+}
+
+.sl-markdown-content blockquote {
+  border-inline-start: 3px solid var(--base0d);
+  background: var(--base01);
+  color: var(--ojuny-text-muted);
+}
+
+.sl-markdown-content table {
+  border-color: var(--base02);
+}
+
+.sl-markdown-content th {
+  background: var(--base01);
+  color: var(--ojuny-heading);
+}
+
+.sl-markdown-content td,
+.sl-markdown-content th {
+  border-color: var(--base02);
+}
+
+.sl-markdown-content tr:nth-child(2n) {
+  background: color-mix(in srgb, var(--base01) 55%, transparent);
+}
+
+.sl-markdown-content kbd {
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--base03);
+  border-bottom-width: 2px;
+  border-radius: 0.3rem;
+  background: var(--base01);
+  color: var(--ojuny-heading);
+  font-family: var(--__sl-font-mono);
+  font-size: 0.85em;
+}
+
+.sl-markdown-content hr {
+  border-color: var(--base02);
+}
+
+.card,
+.sl-link-card {
+  border-color: var(--base02) !important;
+  background: var(--base01) !important;
+}
+
+.card:hover,
+.sl-link-card:hover {
+  border-color: var(--base0d) !important;
+}

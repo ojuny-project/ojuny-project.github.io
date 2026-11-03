@@ -1,0 +1,39 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="developers"
+  alt
+  eyebrow="Developers"
+  title="A desktop that gets out of the way"
+  description="Devshells, flakes, and a settings menu that adapts to your workflow. The same Nix that builds the desktop can build your projects."
+  action={{ label: "Template layout", href: `${base}configuration/template-layout/` }}
+  columns={2}
+  items={[
+    {
+      eyebrow: "Devshells",
+      title: "Per-project environments",
+      body: "nix develop gives each project its own toolchain. The desktop and the project use the same reproducible Nix.",
+    },
+    {
+      eyebrow: "Flakes",
+      title: "One mental model",
+      body: "The system is a flake. Your projects can be flakes too. The same inputs, locks, and builds everywhere.",
+    },
+    {
+      eyebrow: "Settings",
+      title: "Adapts to the workflow",
+      body: "The menu exposes the knobs you use, and the Nix stays readable when you outgrow the GUI.",
+    },
+    {
+      eyebrow: "Control",
+      title: "CLI and patches",
+      body: "ojuny and ojuny-patches give you scriptable control without hand-editing the desktop.",
+      href: `${base}cli/ojuny/`,
+      linkLabel: "CLI reference",
+    },
+  ]}
+/>

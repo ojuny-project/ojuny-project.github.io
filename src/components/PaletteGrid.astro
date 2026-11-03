@@ -1,0 +1,140 @@
+---
+---
+
+<div class="ojuny-palette-tools" data-palette-tools>
+  <label class="ojuny-search">
+    <span class="sr-only">Search color schemes</span>
+    <input type="search" data-palette-search placeholder="Search all base16 schemes" autocomplete="off" />
+  </label>
+  <div class="ojuny-theme-filters" role="group" aria-label="Filter by polarity">
+    <button type="button" class="is-active" data-palette-filter="all">All</button>
+    <button type="button" data-palette-filter="dark">Dark</button>
+    <button type="button" data-palette-filter="light">Light</button>
+  </div>
+</div>
+
+<p class="ojuny-palette-count" data-palette-count></p>
+<div class="ojuny-palette-grid" data-palette-grid></div>
+
+<script>
+  import {
+    SCHEMES,
+    THEME_EVENT,
+    applyScheme,
+    readStoredScheme,
+    type Scheme,
+  } from "../scripts/theme";
+
+  const search = document.querySelector<HTMLInputElement>("[data-palette-search]");
+  const grid = document.querySelector<HTMLElement>("[data-palette-grid]");
+  const count = document.querySelector<HTMLElement>("[data-palette-count]");
+  const filters = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-palette-filter]"));
+  if (!grid || !count) throw new Error("Palette grid is missing");
+
+  const gridEl: HTMLElement = grid;
+  const countEl: HTMLElement = count;
+  const SWATCH_KEYS = [
+    "base00",
+    "base01",
+    "base02",
+    "base03",
+    "base04",
+    "base05",
+    "base06",
+    "base07",
+    "base08",
+    "base09",
+    "base0a",
+    "base0b",
+    "base0c",
+    "base0d",
+    "base0e",
+    "base0f",
+  ];
+
+  let filter: "all" | "dark" | "light" = "all";
+  let query = "";
+
+  function swatches(scheme: Scheme): HTMLSpanElement {
+    const strip = document.createElement("span");
+    strip.className = "ojuny-palette-strip";
+    strip.setAttribute("aria-hidden", "true");
+    for (const key of SWATCH_KEYS) {
+      const swatch = document.createElement("span");
+      swatch.style.background = scheme.palette[key];
+      strip.append(swatch);
+    }
+    return strip;
+  }
+
+  function render(): void {
+    const selected = readStoredScheme();
+    const normalized = query.trim().toLowerCase();
+    const matches = SCHEMES.filter((scheme) => {
+      if (filter !== "all" && scheme.variant !== filter) return false;
+      if (!normalized) return true;
+      return (
+        scheme.name.toLowerCase().includes(normalized) ||
+        scheme.id.includes(normalized) ||
+        scheme.author.toLowerCase().includes(normalized)
+      );
+    });
+
+    gridEl.replaceChildren();
+    const fragment = document.createDocumentFragment();
+
+    for (const scheme of matches) {
+      const card = document.createElement("article");
+      card.className = "ojuny-palette-card";
+      card.dataset.paletteId = scheme.id;
+      card.classList.toggle("is-current", scheme.id === selected.id);
+
+      const title = document.createElement("h3");
+      title.textContent = scheme.name;
+
+      const meta = document.createElement("p");
+      meta.textContent = `${scheme.variant} · ${scheme.author || scheme.id}`;
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = scheme.id === selected.id ? "Current" : "Use this scheme";
+      button.addEventListener("click", () => {
+        applyScheme(scheme);
+        markCurrent();
+      });
+
+      card.append(swatches(scheme), title, meta, button);
+      fragment.append(card);
+    }
+
+    gridEl.append(fragment);
+    countEl.textContent = `Showing ${matches.length} of ${SCHEMES.length} schemes`;
+    markCurrent();
+  }
+
+  function markCurrent(): void {
+    const selected = readStoredScheme();
+    for (const card of gridEl.querySelectorAll<HTMLElement>("[data-palette-id]")) {
+      const current = card.dataset.paletteId === selected.id;
+      card.classList.toggle("is-current", current);
+      const button = card.querySelector("button");
+      if (button) button.textContent = current ? "Current" : "Use this scheme";
+    }
+  }
+
+  search?.addEventListener("input", () => {
+    query = search.value;
+    render();
+  });
+
+  for (const button of filters) {
+    button.addEventListener("click", () => {
+      filter = (button.dataset.paletteFilter as typeof filter) ?? "all";
+      for (const other of filters) other.classList.toggle("is-active", other === button);
+      render();
+    });
+  }
+
+  window.addEventListener(THEME_EVENT, markCurrent);
+  render();
+</script>

@@ -1,0 +1,1515 @@
+body:has(.ojuny-home-hero) .main-pane,
+body:has(.ojuny-home-hero) .content-panel,
+body:has(.ojuny-home-hero) .sl-container,
+body:has(.ojuny-home-hero) .sl-markdown-content {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+body:has(.ojuny-home-hero) .content-panel {
+  border: 0;
+  background: transparent;
+}
+
+.ojuny-site-title {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ojuny-brand-shell {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.ojuny-brand-fallback {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 150ms ease;
+}
+
+.ojuny-brand-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ojuny-brand-shell.is-recolored .ojuny-brand-fallback {
+  opacity: 0;
+}
+
+.ojuny-logo-shell {
+  height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+  width: auto;
+}
+
+.ojuny-logo-shell .ojuny-brand-fallback {
+  width: auto;
+  height: 100%;
+}
+
+.ojuny-logo-shell .ojuny-brand-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.sl-markdown-content > .ojuny-home-hero,
+.sl-markdown-content > .ojuny-section {
+  margin-top: 0;
+}
+
+.sl-markdown-content
+  :is(
+    .ojuny-card-grid,
+    .ojuny-figures,
+    .ojuny-voice-grid,
+    .ojuny-news-list,
+    .ojuny-install-grid,
+    .ojuny-theme-rail,
+    .ojuny-tour,
+    .ojuny-about,
+    .ojuny-about-body,
+    .ojuny-funding
+  )
+  > * {
+  margin-top: 0;
+}
+
+.ojuny-home-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100svh - var(--sl-nav-height));
+  padding: clamp(3rem, 8vh, 6rem) 1.5rem clamp(2rem, 6vh, 4rem);
+  overflow: hidden;
+  border-bottom: 1px solid var(--base02);
+  text-align: center;
+}
+
+.ojuny-home-field {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 14%, color-mix(in srgb, var(--base0d) 24%, transparent), transparent 52%),
+    radial-gradient(ellipse at 16% 82%, color-mix(in srgb, var(--base0e) 16%, transparent), transparent 44%),
+    radial-gradient(ellipse at 84% 78%, color-mix(in srgb, var(--base0b) 14%, transparent), transparent 44%),
+    var(--base00);
+}
+
+.ojuny-home-hexagons {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  mask-image: radial-gradient(ellipse at center, black 16%, transparent 74%);
+  pointer-events: none;
+}
+
+.ojuny-home-brand-shadow {
+  position: absolute;
+  z-index: -1;
+  top: 22%;
+  left: 50%;
+  width: min(96vw, 84rem);
+  height: clamp(18rem, 34vw, 32rem);
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--base00) 52%, #000) 0%,
+    color-mix(in srgb, var(--base00) 72%, #000) 46%,
+    transparent 74%
+  );
+  filter: blur(28px);
+  opacity: 0.95;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.ojuny-home-glow {
+  position: absolute;
+  z-index: -1;
+  width: min(88vw, 72rem);
+  aspect-ratio: 1.7;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--base0d) 22%, transparent), transparent 66%);
+  filter: blur(48px);
+  animation: ojuny-glow 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.ojuny-home-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 80rem;
+}
+
+.ojuny-home-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--base0d) 42%, var(--base02));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--base01) 72%, transparent);
+  color: var(--base0d);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+  text-decoration: none;
+  animation: ojuny-rise 600ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: 80ms;
+}
+
+.ojuny-home-callout:hover {
+  border-color: var(--base0d);
+  background: var(--base01);
+  color: var(--base0c);
+}
+
+.ojuny-home-callout-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--base0d);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--base0d) 18%, transparent);
+}
+
+.ojuny-home-brand {
+  width: min(92%, 78rem);
+  height: auto;
+  margin-top: clamp(1.5rem, 4vh, 3rem);
+  filter: drop-shadow(0 0 3rem color-mix(in srgb, var(--base0d) 28%, transparent));
+  animation: ojuny-brand-in 1s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: 140ms;
+}
+
+.ojuny-home-tagline {
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
+  color: var(--ojuny-text-muted);
+  font-family: var(--__sl-font-mono);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  animation: ojuny-rise 600ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: 520ms;
+}
+
+.ojuny-home-tagline a {
+  color: var(--base0d);
+  text-decoration: none;
+}
+
+.ojuny-home-tagline a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.ojuny-home-lead {
+  max-width: 48rem;
+  margin: 1rem auto 0;
+  color: var(--ojuny-text-muted);
+  font-size: clamp(1rem, 1.7vw, 1.15rem);
+  line-height: 1.65;
+  text-wrap: balance;
+  animation: ojuny-rise 600ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: 620ms;
+}
+
+.ojuny-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  animation: ojuny-rise 600ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: 720ms;
+}
+
+.ojuny-home-facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.25rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+  letter-spacing: 0.1em;
+  list-style: none;
+  text-transform: uppercase;
+  animation: ojuny-rise 600ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: 820ms;
+}
+
+.ojuny-home-facts li {
+  position: relative;
+}
+
+.ojuny-home-facts li + li::before {
+  position: absolute;
+  left: -0.7rem;
+  color: var(--base0d);
+  content: "·";
+}
+
+.ojuny-home-scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+  animation: ojuny-rise 600ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: 920ms;
+}
+
+.ojuny-home-scroll:hover {
+  color: var(--base0d);
+}
+
+.ojuny-section {
+  scroll-margin-top: calc(var(--sl-nav-height) + 1rem);
+  border-top: 1px solid var(--base02);
+  background: var(--base00);
+}
+
+.ojuny-section.alt {
+  background: var(--base01);
+}
+
+.ojuny-section-inner {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vh, 5.5rem) 1.5rem;
+}
+
+.ojuny-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.ojuny-section-head-copy {
+  max-width: 52rem;
+}
+
+.ojuny-section-title {
+  margin: 0;
+  color: var(--ojuny-strong);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.ojuny-section-lead {
+  max-width: 48rem;
+  margin: 0.75rem 0 0;
+  color: var(--ojuny-text-muted);
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  line-height: 1.65;
+}
+
+.ojuny-section-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+  color: var(--base0d);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-sm);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ojuny-section-action:hover {
+  color: var(--base0c);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.ojuny-about {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.ojuny-about-head {
+  max-width: 100%;
+}
+
+.ojuny-about-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.ojuny-about-title {
+  margin: 0;
+  color: var(--ojuny-strong);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.ojuny-about-copy > p {
+  max-width: 42rem;
+  margin: 1.25rem 0 0;
+  color: var(--ojuny-text-muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.ojuny-about-copy a {
+  color: var(--base0d);
+}
+
+.ojuny-typewriter {
+  color: var(--base0d);
+}
+
+.ojuny-typewriter-caret {
+  display: inline-block;
+  width: 0.09em;
+  height: 0.95em;
+  margin-left: 0.1em;
+  vertical-align: -0.12em;
+  background: var(--base0d);
+  animation: ojuny-blink 1.06s step-end infinite;
+}
+
+.ojuny-typewriter[data-typing="1"] .ojuny-typewriter-caret {
+  animation: none;
+}
+
+.ojuny-quote {
+  margin: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.9rem;
+  background: var(--base01);
+  transition: border-color 150ms ease;
+}
+
+.ojuny-quote:hover {
+  border-color: var(--base0d);
+}
+
+.ojuny-quote-mark {
+  height: 2.5rem;
+  color: var(--base0d);
+  font-family: var(--__sl-font);
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 0.8;
+}
+
+.ojuny-quote blockquote {
+  margin: 0;
+  color: var(--ojuny-heading);
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.ojuny-quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.ojuny-quote-badge {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  border: 1px solid var(--base02);
+  border-radius: 50%;
+  background: var(--base00);
+  overflow: hidden;
+}
+
+.ojuny-quote-logo {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.ojuny-quote-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.ojuny-quote-meta strong {
+  color: var(--ojuny-heading);
+  font-size: var(--sl-text-sm);
+}
+
+.ojuny-quote-meta small {
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+}
+
+.ojuny-quote figcaption > a {
+  margin-left: auto;
+  color: var(--base0d);
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.ojuny-tour {
+  margin-top: 1.5rem;
+}
+
+.ojuny-tour-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.ojuny-tour-tab {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.45rem;
+  background: var(--base01);
+  color: var(--ojuny-text-muted);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+  cursor: pointer;
+}
+
+.ojuny-tour-tab:hover {
+  color: var(--ojuny-strong);
+  border-color: var(--base0d);
+}
+
+.ojuny-tour-tab.is-active {
+  border-color: var(--base0d);
+  background: color-mix(in srgb, var(--base0d) 16%, var(--base01));
+  color: var(--base0d);
+}
+
+.ojuny-tour-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--base02);
+  border-radius: 0.9rem;
+  background: var(--base00);
+  aspect-ratio: 16 / 9;
+}
+
+.ojuny-tour-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--base02);
+  background: var(--base01);
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+}
+
+.ojuny-tour-bar-brand {
+  color: var(--base0d);
+}
+
+.ojuny-tour-bar-workspaces {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.ojuny-tour-bar-workspaces span {
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-top: 0;
+  border-radius: 50%;
+  background: var(--base03);
+}
+
+.ojuny-tour-bar-workspaces span:first-child {
+  background: var(--base0d);
+}
+
+.ojuny-tour-workspace {
+  display: grid;
+  flex: 1;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.ojuny-tour-workspace[data-layout="master"] {
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.ojuny-tour-workspace[data-layout="master"] .is-a {
+  grid-row: 1 / span 2;
+}
+
+.ojuny-tour-workspace[data-layout="dwindle"] {
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.ojuny-tour-workspace[data-layout="dwindle"] .is-b {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+}
+
+.ojuny-tour-workspace[data-layout="scroller"] {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.ojuny-tour-workspace.is-switching {
+  animation: ojuny-switch 260ms cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+.ojuny-tour-window {
+  position: relative;
+  padding: 0.75rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--base01) 78%, var(--base00));
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+}
+
+.ojuny-tour-window::before {
+  display: block;
+  width: 32%;
+  height: 0.3rem;
+  margin-bottom: 0.6rem;
+  border-radius: 999px;
+  background: var(--base0d);
+  content: "";
+}
+
+.ojuny-tour-window.is-b::before {
+  background: var(--base0e);
+}
+
+.ojuny-tour-window.is-c::before {
+  background: var(--base0b);
+}
+
+.ojuny-tour-dock {
+  position: absolute;
+  bottom: 0.65rem;
+  left: 50%;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--base03) 35%, transparent);
+  border-radius: 0.55rem;
+  background: color-mix(in srgb, var(--base01) 74%, transparent);
+  backdrop-filter: blur(8px);
+  transform: translateX(-50%);
+}
+
+.ojuny-tour-dock span {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: 0;
+  border-radius: 0.22rem;
+  background: var(--base0d);
+  opacity: 0.85;
+}
+
+.ojuny-tour-dock span:nth-child(2) {
+  background: var(--base0e);
+}
+
+.ojuny-tour-dock span:nth-child(3) {
+  background: var(--base0b);
+}
+
+.ojuny-tour-dock span:nth-child(4) {
+  background: var(--base0a);
+}
+
+.ojuny-tour-caption {
+  margin-top: 0.75rem;
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+}
+
+.ojuny-install-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.ojuny-install-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.9rem;
+  background: var(--base01);
+}
+
+.ojuny-install-mark {
+  align-self: flex-start;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--base02);
+  border-radius: 999px;
+  color: var(--base0d);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+  text-transform: uppercase;
+}
+
+.ojuny-install-card h3 {
+  margin: 0.9rem 0 0;
+  color: var(--ojuny-heading);
+  font-size: 1.25rem;
+}
+
+.ojuny-install-card p {
+  margin: 0.6rem 0 0;
+  color: var(--ojuny-text-muted);
+  font-size: var(--sl-text-sm);
+  line-height: 1.65;
+}
+
+.sl-markdown-content .ojuny-install-card code {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.6rem 0.75rem;
+  overflow-x: auto;
+  border: 1px solid var(--base02);
+  border-radius: 0.45rem;
+  background: var(--base00);
+  color: var(--base0b);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+}
+
+.ojuny-install-actions {
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+.ojuny-install-practices {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.9rem;
+  background: var(--base01);
+}
+
+.ojuny-install-practices h3 {
+  margin: 0.4rem 0 0;
+  color: var(--ojuny-heading);
+}
+
+.ojuny-install-practices p {
+  margin: 0.5rem 0 0;
+  color: var(--ojuny-text-muted);
+  font-size: var(--sl-text-sm);
+  line-height: 1.65;
+}
+
+.ojuny-install-note {
+  margin: 1rem 0 0;
+  color: var(--ojuny-text-subtle);
+  font-size: var(--sl-text-sm);
+}
+
+.ojuny-card-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.ojuny-card-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ojuny-card-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ojuny-card-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ojuny-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.25rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.8rem;
+  background: var(--base01);
+  color: var(--base05);
+  text-decoration: none;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.ojuny-card:hover {
+  border-color: var(--base0d);
+  transform: translateY(-2px);
+}
+
+.ojuny-card h3 {
+  margin: 0;
+  color: var(--ojuny-heading);
+  font-size: 1.12rem;
+}
+
+.ojuny-card p {
+  margin: 0;
+  color: var(--ojuny-text-muted);
+  font-size: var(--sl-text-sm);
+  line-height: 1.6;
+}
+
+.ojuny-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  color: var(--base0d);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+}
+
+.ojuny-section.alt .ojuny-card,
+.ojuny-section.alt .ojuny-voice,
+.ojuny-section.alt .ojuny-figure {
+  background: var(--base00);
+}
+
+.ojuny-keyhint {
+  margin: 0 0 1rem;
+  color: var(--ojuny-text-subtle);
+  font-size: var(--sl-text-sm);
+}
+
+.ojuny-keyhint kbd {
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--base03);
+  border-bottom-width: 2px;
+  border-radius: 0.3rem;
+  background: var(--base01);
+  color: var(--ojuny-heading);
+  font-family: var(--__sl-font-mono);
+  font-size: 0.85em;
+}
+
+.ojuny-gallery {
+  margin-top: 1.5rem;
+}
+
+.ojuny-gallery-stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--base02);
+  border-radius: 0.9rem;
+  background: var(--base00);
+}
+
+.ojuny-gallery-panel {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.99);
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+  pointer-events: none;
+}
+
+.ojuny-gallery-panel.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.ojuny-gallery-desktop {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ojuny-gallery-desktop-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 28%, color-mix(in srgb, var(--base0d) 35%, transparent), transparent 38%),
+    radial-gradient(circle at 24% 78%, color-mix(in srgb, var(--base0e) 25%, transparent), transparent 42%),
+    linear-gradient(160deg, var(--base01), var(--base00) 60%, color-mix(in srgb, var(--base0b) 12%, var(--base00)));
+}
+
+.ojuny-gallery-topbar {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.8rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--base00) 80%, transparent), transparent);
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+}
+
+.ojuny-gallery-brand {
+  color: var(--base0d);
+}
+
+.ojuny-gallery-window {
+  position: absolute;
+  padding: 0.75rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--base01) 78%, var(--base00));
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+}
+
+.ojuny-gallery-window::before {
+  display: block;
+  width: 32%;
+  height: 0.3rem;
+  margin-bottom: 0.6rem;
+  border-radius: 999px;
+  background: var(--base0d);
+  content: "";
+}
+
+.ojuny-gallery-window.is-a {
+  left: 6%;
+  top: 18%;
+  width: 54%;
+  height: 58%;
+}
+
+.ojuny-gallery-window.is-b {
+  right: 6%;
+  top: 24%;
+  width: 28%;
+  height: 44%;
+}
+
+.ojuny-gallery-window.is-b::before {
+  background: var(--base0e);
+}
+
+.ojuny-gallery-dock {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 50%;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--base03) 35%, transparent);
+  border-radius: 0.55rem;
+  background: color-mix(in srgb, var(--base01) 74%, transparent);
+  backdrop-filter: blur(8px);
+  transform: translateX(-50%);
+}
+
+.ojuny-gallery-dock span {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: 0;
+  border-radius: 0.22rem;
+  background: var(--base0d);
+  opacity: 0.85;
+}
+
+.ojuny-gallery-dock span:nth-child(2) {
+  background: var(--base0e);
+}
+
+.ojuny-gallery-dock span:nth-child(3) {
+  background: var(--base0b);
+}
+
+.ojuny-gallery-dock span:nth-child(4) {
+  background: var(--base0a);
+}
+
+.ojuny-gallery-layouts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 0.75rem;
+}
+
+.ojuny-gallery-layouts .ojuny-tour-screen {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.ojuny-gallery-layouts .ojuny-tour-caption {
+  margin-top: 0;
+}
+
+.ojuny-gallery-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 1rem;
+  overflow-y: auto;
+  background: var(--base00);
+}
+
+.ojuny-settings-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ojuny-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.45rem;
+  background: var(--base01);
+  color: var(--ojuny-text-muted);
+  font-size: var(--sl-text-sm);
+}
+
+.ojuny-settings-value {
+  color: var(--base0d);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+}
+
+.ojuny-settings-toggle {
+  position: relative;
+  width: 2rem;
+  height: 1rem;
+  flex: none;
+  border-radius: 999px;
+  background: var(--base02);
+}
+
+.ojuny-settings-toggle::after {
+  position: absolute;
+  top: 0.15rem;
+  left: 0.15rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--base04);
+  content: "";
+}
+
+.ojuny-settings-toggle.is-on {
+  background: color-mix(in srgb, var(--base0d) 55%, var(--base02));
+}
+
+.ojuny-settings-toggle.is-on::after {
+  right: 0.15rem;
+  left: auto;
+  background: var(--base00);
+}
+
+.ojuny-gallery-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.ojuny-gallery-thumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.45rem;
+  background: var(--base01);
+  color: var(--ojuny-text-muted);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+  cursor: pointer;
+}
+
+.ojuny-gallery-thumb:hover,
+.ojuny-gallery-thumb.is-active {
+  border-color: var(--base0d);
+  color: var(--base0d);
+}
+
+.ojuny-gallery-thumb-mark {
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-top: 0;
+  border-radius: 0.2rem;
+  background: linear-gradient(135deg, var(--thumb-a), var(--thumb-b));
+}
+
+.ojuny-theme-rail {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.ojuny-theme-rail-card {
+  display: flex;
+  flex: 0 0 10rem;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.6rem;
+  background: var(--base01);
+  color: var(--base05);
+  text-align: left;
+  scroll-snap-align: start;
+  cursor: pointer;
+}
+
+.ojuny-theme-rail-card:hover,
+.ojuny-theme-rail-card.is-current {
+  border-color: var(--base0d);
+}
+
+.ojuny-theme-rail-swatches {
+  display: flex;
+  gap: 2px;
+  height: 0.9rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+}
+
+.ojuny-theme-rail-swatches span {
+  flex: 1;
+  margin-top: 0;
+  background: var(--swatch);
+}
+
+.ojuny-theme-rail-card strong {
+  overflow: hidden;
+  color: var(--ojuny-heading);
+  font-size: var(--sl-text-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ojuny-theme-rail-card small {
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-2xs);
+  text-transform: uppercase;
+}
+
+.ojuny-news-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--base02);
+  list-style: none;
+}
+
+.ojuny-news-list li {
+  border-bottom: 1px solid var(--base02);
+}
+
+.ojuny-news-list a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 0;
+  text-decoration: none;
+}
+
+.ojuny-news-list time {
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+}
+
+.ojuny-news-title {
+  color: var(--ojuny-heading);
+  font-weight: 600;
+}
+
+.ojuny-news-excerpt {
+  color: var(--ojuny-text-muted);
+  font-size: var(--sl-text-sm);
+  line-height: 1.55;
+}
+
+.ojuny-news-list a:hover .ojuny-news-title {
+  color: var(--base0d);
+}
+
+.ojuny-figures {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.ojuny-figure {
+  padding: 1rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.8rem;
+  background: var(--base01);
+  text-align: center;
+}
+
+.ojuny-figure-value {
+  display: block;
+  color: var(--base0d);
+  font-family: var(--__sl-font-mono);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+}
+
+.ojuny-figure-label {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--ojuny-text-muted);
+  font-size: var(--sl-text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ojuny-voice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.ojuny-voice {
+  margin: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--base02);
+  border-radius: 0.8rem;
+  background: var(--base01);
+}
+
+.ojuny-voice p {
+  margin: 0;
+  color: var(--ojuny-heading);
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.ojuny-voice cite {
+  display: block;
+  margin-top: 1rem;
+  color: var(--ojuny-text-subtle);
+  font-family: var(--__sl-font-mono);
+  font-size: var(--sl-text-xs);
+  font-style: normal;
+}
+
+.ojuny-funding {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) auto;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ojuny-funding-stat {
+  display: grid;
+  place-items: center;
+  width: 12rem;
+  height: 12rem;
+  border: 1px solid var(--base02);
+  border-radius: 50%;
+  background: var(--base00);
+  text-align: center;
+}
+
+.ojuny-funding-stat span {
+  color: var(--base0d);
+  font-family: var(--__sl-font-mono);
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.ojuny-funding-stat small {
+  color: var(--ojuny-text-subtle);
+  font-size: var(--sl-text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes ojuny-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ojuny-brand-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ojuny-glow {
+  from {
+    opacity: 0.7;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes ojuny-switch {
+  from {
+    opacity: 0.4;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ojuny-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 60rem) {
+  .ojuny-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ojuny-about-body {
+    grid-template-columns: 1fr;
+  }
+
+  .ojuny-card-grid-3,
+  .ojuny-card-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ojuny-install-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ojuny-figures {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ojuny-funding {
+    grid-template-columns: 1fr;
+  }
+
+  .ojuny-funding-stat {
+    width: 9rem;
+    height: 9rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .ojuny-section-inner {
+    padding-inline: 1rem;
+  }
+
+  .ojuny-install-grid,
+  .ojuny-card-grid-2,
+  .ojuny-card-grid-3,
+  .ojuny-card-grid-4,
+  .ojuny-news-list,
+  .ojuny-voice-grid,
+  .ojuny-figures {
+    grid-template-columns: 1fr;
+  }
+
+  .ojuny-home-brand {
+    width: 100%;
+  }
+
+  .ojuny-gallery-stage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ojuny-tour-workspace {
+    gap: 0.35rem;
+    padding: 0.5rem;
+  }
+
+  .ojuny-tour-window {
+    padding: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ojuny-home-callout,
+  .ojuny-home-brand,
+  .ojuny-home-tagline,
+  .ojuny-home-lead,
+  .ojuny-home-actions,
+  .ojuny-home-facts,
+  .ojuny-home-scroll,
+  .ojuny-home-glow,
+  .ojuny-typewriter-caret {
+    animation: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+.sl-markdown-content .ojuny-section-head-copy > *,
+.sl-markdown-content .ojuny-card > .ojuny-eyebrow,
+.sl-markdown-content .ojuny-card > h3,
+.sl-markdown-content .ojuny-card > p,
+.sl-markdown-content .ojuny-funding > div > *,
+.sl-markdown-content .ojuny-about-copy > .ojuny-eyebrow,
+.sl-markdown-content .ojuny-about-copy > .ojuny-about-title,
+.sl-markdown-content .ojuny-tour-tabs > * {
+  margin-top: 0;
+}
+
+.sl-markdown-content .ojuny-section-head-copy > .ojuny-section-lead,
+.sl-markdown-content .ojuny-funding > div > .ojuny-section-lead,
+.sl-markdown-content .ojuny-tour-caption {
+  margin-top: 0.75rem;
+}
+
+.sl-markdown-content .ojuny-about-copy > p:not(.ojuny-eyebrow),
+.sl-markdown-content .ojuny-install-card > p {
+  margin-top: 1rem;
+}
+
+
+body:has(.ojuny-home-hero) .sl-markdown-content h2,
+body:has(.ojuny-home-hero) .sl-markdown-content h3 {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+body:has(.ojuny-home-hero) .ojuny-quote blockquote {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ojuny-heading);
+}
+
+body:has(.ojuny-home-hero) .ojuny-voice {
+  padding: 1.25rem;
+  border: 1px solid var(--base02);
+  background: var(--base01);
+  color: var(--ojuny-text-muted);
+}
+
+body:has(.ojuny-home-hero) .ojuny-section.alt .ojuny-voice {
+  background: var(--base00);
+}
+
+.sl-markdown-content .ojuny-install-note a {
+  color: var(--base0d);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+
+.sl-markdown-content
+  :is(.ojuny-gallery-layouts, .ojuny-gallery-settings, .ojuny-gallery-thumbs)
+  > * {
+  margin-top: 0;
+}
+
+
+.sl-markdown-content .ojuny-home-facts > * {
+  margin-top: 0;
+}

@@ -1,0 +1,46 @@
+---
+interface HomeCard {
+  eyebrow?: string;
+  title: string;
+  body: string;
+  href?: string;
+  linkLabel?: string;
+}
+
+interface Props {
+  items: HomeCard[];
+  columns?: 2 | 3 | 4;
+}
+
+const { items, columns = 3 } = Astro.props;
+---
+
+<div class:list={["ojuny-card-grid", `ojuny-card-grid-${columns}`]}>
+  {
+    items.map((item) => {
+      const content = (
+        <>
+          {item.eyebrow && <p class="ojuny-eyebrow">{item.eyebrow}</p>}
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+          {item.href && (
+            <span class="ojuny-card-link">
+              {item.linkLabel ?? "Learn more"}
+              <span aria-hidden="true">→</span>
+            </span>
+          )}
+        </>
+      );
+
+      return item.href ? (
+        <a class="ojuny-card" href={item.href} data-reveal>
+          {content}
+        </a>
+      ) : (
+        <article class="ojuny-card" data-reveal>
+          {content}
+        </article>
+      );
+    })
+  }
+</div>

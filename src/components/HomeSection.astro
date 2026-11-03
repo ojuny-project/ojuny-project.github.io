@@ -1,0 +1,14 @@
+---
+interface Props {
+  id?: string;
+  alt?: boolean;
+}
+
+const { id, alt = false } = Astro.props;
+---
+
+<section id={id} class:list={["ojuny-section", { alt }]}>
+  <div class="ojuny-section-inner">
+    <slot />
+  </div>
+</section>

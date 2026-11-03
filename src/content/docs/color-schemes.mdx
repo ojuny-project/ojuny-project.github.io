@@ -1,0 +1,70 @@
+---
+title: Color schemes
+description: Preview every base16 palette used by Ojuny.
+---
+
+import PaletteGrid from '../../components/PaletteGrid.astro';
+
+<!-- unreleased-marker -->
+> **Unreleased.** Ojuny is not released. This page is unreviewed, may contain placeholders, and is subject to change without notice.
+
+
+Ojuny uses base16 palettes from the [Tinted Theming
+collection](https://github.com/tinted-theming/schemes). The default is
+**Everforest Dark Hard**, and the site ships that scheme as its default. The
+site vendors a pinned copy of 360 schemes in `src/data/base16.json`; the desktop
+resolves scheme names from `pkgs.base16-schemes`, so the two collections come
+from separate sources even though they share upstream and the same default.
+
+The desktop uses Stylix to map the active palette into MangoWM and Dux Shell
+when `desktop.ojuny.stylix.enable` is on. The site applies its vendored palette
+to Starlight, Pagefind, Shiki, and the live wallpaper preview.
+
+Use the palette picker in the header to change the whole site, or choose a
+scheme below. Your selection is stored in `localStorage` and is applied before
+the page paints, so there is no flash of the wrong theme.
+
+<PaletteGrid />
+
+## How the mapping works
+
+The site maps base16 keys to interface roles like this:
+
+| Role in the site | Base16 key |
+| --- | --- |
+| Background | `base00` |
+| Panels and code blocks | `base01` |
+| Borders and inline code | `base02` |
+| Muted text | `base03` and `base04` |
+| Body text | `base05` |
+| Headings | `base06` and `base07` |
+| Errors | `base08` |
+| Numbers and warnings | `base09` and `base0a` |
+| Strings and success | `base0b` |
+| Types and info | `base0c` |
+| Links and focus | `base0d` |
+| Keywords | `base0e` |
+| Reserved, defined but unused | `base0f` |
+
+On the desktop, Stylix passes the active palette to MangoWM and Dux Shell. In
+`lib/stylix-colors.nix`, borders use `base02`, focus uses `base0D`, urgent
+windows use `base08`, maximized screens use `base0E`, scratchpads use `base0A`,
+and text uses `base05`.
+
+To apply a scheme in the template, set `ojuny.style.palette` to the scheme ID,
+without the `.yaml` suffix. The template derives `stylix.base16Scheme` from it,
+so the name must exist in `pkgs.base16-schemes`. The theme picker lists the
+schemes available in that package. The site's pinned snapshot can differ from
+the package version on an installed system.
+
+The default wallpaper preset is `everforest`, the Ojuny logo over color strips,
+recolored from the fills in `lib/wallpaper-presets.nix`. The site's live preview
+applies the Everforest preset's source-fill mapping to the wallpaper, matching
+the desktop's recolor path for that preset.
+
+## Credit
+
+Scheme data comes from
+[tinted-theming/schemes](https://github.com/tinted-theming/schemes), pinned at
+commit `3ac91137e879502c442ab89ba0f1a98077d0da9d`. The collection is MIT
+licensed.

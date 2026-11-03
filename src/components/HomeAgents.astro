@@ -1,0 +1,36 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="agents"
+  eyebrow="Agents"
+  title="No agent required"
+  description="Ojuny ships no agentic functionality out of the box. It also does not get in your way. The CLI, patches, and Nix make LLM-assisted troubleshooting safer: changes go through the flake and a rebuild, not a silent mutation of a running system."
+  action={{ label: "Read the doctrine", href: `${base}doctrine/` }}
+  columns={2}
+  items={[
+    {
+      eyebrow: "Optional",
+      title: "Your call",
+      body: "No bundled chatbot, no forced workflow. Use an agent or do not. The desktop works either way.",
+    },
+    {
+      eyebrow: "Interfaces",
+      title: "Easy to add",
+      body: "The CLI and patches are plain, inspectable interfaces. An agent can use them without a private API.",
+    },
+    {
+      eyebrow: "Safety",
+      title: "Safer troubleshooting",
+      body: "An agent can inspect and propose. The system still evaluates the diff and rebuilds. Nothing silently mutates the running machine.",
+    },
+    {
+      eyebrow: "Review",
+      title: "Read the diff",
+      body: "The rule is not trust the model; it is read the diff.",
+    },
+  ]}
+/>

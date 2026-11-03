@@ -1,0 +1,99 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const base = import.meta.env.BASE_URL;
+const paths = [
+  {
+    eyebrow: "No install",
+    title: "Run it without installing",
+    body: "Start the nested desktop from the flake. It uses temporary config and state directories and leaves your system alone.",
+    command: "nix run github:ojuny-project/ojuny-desktop",
+    href: `${base}desktop/overview/`,
+    link: "Desktop overview",
+  },
+  {
+    eyebrow: "NixOS module",
+    title: "Add the NixOS module",
+    body: "Import the desktop module into your existing NixOS configuration. The options appear in the settings menu.",
+    command: "ojuny-desktop.nixosModules.default",
+    href: "https://github.com/ojuny-project/ojuny-desktop",
+    link: "ojuny-desktop",
+  },
+  {
+    eyebrow: "Home Manager",
+    title: "Add the Home Manager module",
+    body: "Use the desktop from Home Manager on another distribution that supports Nix. The tested release path is NixOS on x86_64.",
+    command: "ojuny-desktop.homeManagerModules.default",
+    href: "https://github.com/ojuny-project/ojuny-desktop",
+    link: "ojuny-desktop",
+  },
+  {
+    eyebrow: "Setup script",
+    title: "Transform a NixOS install",
+    body: "Fork the template and run the setup app. It generates the hardware, user, and host modules for your machine.",
+    command: "nix run github:ojuny-project/ojuny-template#setup",
+    href: `${base}install/manual-template/`,
+    link: "Template guide",
+  },
+  {
+    eyebrow: "Attended ISO",
+    title: "No ISO release yet",
+    body: "There is no ISO release yet. The installer repository builds the attended images from source.",
+    command: "nix build .#ojuny-iso",
+    href: `${base}install/iso/`,
+    link: "ISO build guide",
+  },
+  {
+    eyebrow: "Unattended ISO",
+    title: "Build an unattended ISO",
+    body: "There is no ISO release yet. Build an installation medium that runs without prompts. See the installer repository for the current workflow.",
+    href: "https://github.com/ojuny-project/ojuny-installer",
+    link: "Installer repository",
+  },
+];
+---
+
+<HomeSection id="install">
+  <SectionHeading
+    eyebrow="Six ways in"
+    title="Install Ojuny"
+    description="From a zero-install run to an unattended ISO. Every path ends at the same Nix configuration."
+    action={{
+      label: "Full installation guide",
+      href: `${base}getting-started/installation/`,
+    }}
+  />
+
+  <div class="ojuny-install-grid">
+    {
+      paths.map((path) => (
+        <article class="ojuny-install-card" data-reveal>
+          <span class="ojuny-install-mark">{path.eyebrow}</span>
+          <h3>{path.title}</h3>
+          <p>{path.body}</p>
+          {path.command && <code>{path.command}</code>}
+          <div class="ojuny-install-actions">
+            <a class="ojuny-button secondary" href={path.href}>
+              {path.link}
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="ojuny-install-practices" data-reveal>
+    <p class="ojuny-eyebrow">NixOS best practices</p>
+    <h3>Keep the flake in git.</h3>
+    <p>
+      The setup script initializes a repository. The update GUI and CLI expect a
+      flake path. Git gives you diffs, rollbacks, and a reviewable history.
+    </p>
+  </div>
+
+  <p class="ojuny-install-note" data-reveal>
+    The manual also covers <a href={`${base}install/post-install/`}>post-install tasks</a>{" "}
+    and <a href={`${base}configuration/updates/`}>updates</a>.
+  </p>
+</HomeSection>

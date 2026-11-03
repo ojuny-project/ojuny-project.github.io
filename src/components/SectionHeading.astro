@@ -1,0 +1,26 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  action?: { label: string; href: string };
+}
+
+const { eyebrow, title, description, action } = Astro.props;
+---
+
+<header class="ojuny-section-head" data-reveal>
+  <div class="ojuny-section-head-copy">
+    {eyebrow && <p class="ojuny-eyebrow">{eyebrow}</p>}
+    <h2 class="ojuny-section-title">{title}</h2>
+    {description && <p class="ojuny-section-lead">{description}</p>}
+  </div>
+  {
+    action && (
+      <a class="ojuny-section-action" href={action.href}>
+        {action.label}
+        <span aria-hidden="true">→</span>
+      </a>
+    )
+  }
+</header>

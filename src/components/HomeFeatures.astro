@@ -1,0 +1,40 @@
+---
+const features = [
+  {
+    title: "Nix native",
+    body: "The desktop, the shell, the session, and every user-facing setting are generated from Nix options. There is no second source of truth.",
+  },
+  {
+    title: "Upstream, not rewritten",
+    body: "MangoWM and Dux Shell do the hard part. Ojuny configures and packages them instead of growing a bespoke compositor or shell.",
+  },
+  {
+    title: "Settings first",
+    body: "nix-settings-gui turns annotated modules into an editable settings menu. Every page is one file and every control maps to a Nix option.",
+  },
+  {
+    title: "Base16 everywhere",
+    body: "The desktop and this site share the same tinted base16 palette collection. Change the scheme and the whole interface follows.",
+  },
+  {
+    title: "Patches, not forks",
+    body: "ojuny-patches installs opt-in Nix modules from git repositories. Development tools, Flatpak, Docker, virtualization, and more.",
+  },
+  {
+    title: "Two ways in",
+    body: "Boot the Calamares installer ISO or fork the template and run the setup script. Both end at the same NixOS configuration.",
+  },
+];
+---
+
+<div class="ojuny-feature-grid">
+  {
+    features.map((feature) => (
+      <article class="ojuny-feature">
+        <span class="ojuny-feature-mark" aria-hidden="true" />
+        <h3>{feature.title}</h3>
+        <p>{feature.body}</p>
+      </article>
+    ))
+  }
+</div>

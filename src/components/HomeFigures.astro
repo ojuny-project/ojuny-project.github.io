@@ -1,0 +1,31 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const figures = [
+  { value: "360", label: "base16 themes" },
+  { value: "6", label: "public repositories" },
+  { value: "1", label: "settings menu" },
+  { value: "0", label: "custom compositors" },
+  { value: "0", label: "funding required" },
+];
+---
+
+<HomeSection id="figures" alt>
+  <SectionHeading
+    eyebrow="Figures"
+    title="Momentum by the numbers"
+    description="Not a growth chart. Just the shape of the project."
+  />
+
+  <div class="ojuny-figures">
+    {
+      figures.map((figure) => (
+        <div class="ojuny-figure" data-reveal>
+          <span class="ojuny-figure-value">{figure.value}</span>
+          <span class="ojuny-figure-label">{figure.label}</span>
+        </div>
+      ))
+    }
+  </div>
+</HomeSection>

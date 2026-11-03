@@ -1,0 +1,245 @@
+---
+---
+
+<div class="ojuny-theme-picker" data-theme-picker>
+  <button
+    type="button"
+    class="ojuny-theme-trigger"
+    data-theme-open
+    aria-haspopup="dialog"
+    aria-label="Choose a base16 color scheme"
+  >
+    <span class="ojuny-theme-swatches" aria-hidden="true">
+      <span style="--swatch: var(--base08)"></span>
+      <span style="--swatch: var(--base0a)"></span>
+      <span style="--swatch: var(--base0b)"></span>
+      <span style="--swatch: var(--base0c)"></span>
+      <span style="--swatch: var(--base0d)"></span>
+      <span style="--swatch: var(--base0e)"></span>
+    </span>
+    <span class="ojuny-theme-trigger-label" data-theme-name>Everforest Dark Hard</span>
+    <svg class="ojuny-theme-chevron" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+      <path d="m17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1 1 0 0 0 1.42 0L17 10.59a1 1 0 0 0 0-1.42Z" fill="currentColor"></path>
+    </svg>
+  </button>
+
+  <dialog class="ojuny-theme-dialog" data-theme-dialog aria-label="Choose a base16 color scheme">
+    <div class="ojuny-theme-dialog-head">
+      <div>
+        <p class="ojuny-eyebrow">Base16 palette</p>
+        <h2>Choose a color scheme</h2>
+      </div>
+      <button type="button" class="ojuny-icon-button" data-theme-close aria-label="Close palette picker">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+          <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.42L12 13.41l4.89 4.9a1 1 0 0 0 1.41-1.42L13.41 12l4.9-4.89a1 1 0 0 0 0-1.4Z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ojuny-theme-dialog-tools">
+      <label class="ojuny-search">
+        <span class="sr-only">Search color schemes</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+          <path d="M10.5 3a7.5 7.5 0 1 0 4.55 13.46l4.24 4.25a1 1 0 0 0 1.42-1.42l-4.25-4.24A7.5 7.5 0 0 0 10.5 3Zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z" fill="currentColor"></path>
+        </svg>
+        <input type="search" data-theme-search placeholder="Search 360 schemes" autocomplete="off" />
+      </label>
+      <div class="ojuny-theme-filters" role="group" aria-label="Filter by polarity">
+        <button type="button" class="is-active" data-theme-filter="all">All</button>
+        <button type="button" data-theme-filter="dark">Dark</button>
+        <button type="button" data-theme-filter="light">Light</button>
+      </div>
+    </div>
+
+    <div class="ojuny-theme-list" data-theme-list></div>
+
+    <div class="ojuny-theme-dialog-foot">
+      <span data-theme-count></span>
+      <button type="button" class="ojuny-text-button" data-theme-reset>Reset to Ojuny default</button>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  import {
+    SCHEMES,
+    THEME_EVENT,
+    applyScheme,
+    readStoredScheme,
+    resetScheme,
+    type Scheme,
+  } from "../scripts/theme";
+
+  const SWATCH_KEYS = ["base08", "base0a", "base0b", "base0c", "base0d", "base0e"];
+  const pickers = Array.from(document.querySelectorAll<HTMLElement>("[data-theme-picker]"));
+
+  function makeSwatches(scheme: Scheme, className: string): HTMLSpanElement {
+    const swatches = document.createElement("span");
+    swatches.className = className;
+    swatches.setAttribute("aria-hidden", "true");
+    for (const key of SWATCH_KEYS) {
+      const swatch = document.createElement("span");
+      swatch.style.background = scheme.palette[key];
+      swatches.append(swatch);
+    }
+    return swatches;
+  }
+
+  function syncPickers(): void {
+    const scheme = readStoredScheme();
+
+    for (const picker of pickers) {
+      const name = picker.querySelector<HTMLElement>("[data-theme-name]");
+      if (name) name.textContent = scheme.name;
+
+      const swatches = picker.querySelector<HTMLElement>(".ojuny-theme-swatches");
+      if (swatches) {
+        for (const [index, key] of SWATCH_KEYS.entries()) {
+          const swatch = swatches.children[index] as HTMLElement | undefined;
+          if (swatch) swatch.style.background = scheme.palette[key];
+        }
+      }
+
+      for (const item of picker.querySelectorAll<HTMLElement>("[data-scheme-id]")) {
+        item.classList.toggle("is-current", item.dataset.schemeId === scheme.id);
+        item.setAttribute("aria-current", item.dataset.schemeId === scheme.id ? "true" : "false");
+      }
+    }
+  }
+
+  function setupPicker(picker: HTMLElement): void {
+    const dialog = picker.querySelector<HTMLDialogElement>("[data-theme-dialog]");
+    const open = picker.querySelector<HTMLButtonElement>("[data-theme-open]");
+    const close = picker.querySelector<HTMLButtonElement>("[data-theme-close]");
+    const search = picker.querySelector<HTMLInputElement>("[data-theme-search]");
+    const list = picker.querySelector<HTMLElement>("[data-theme-list]");
+    const count = picker.querySelector<HTMLElement>("[data-theme-count]");
+    const reset = picker.querySelector<HTMLButtonElement>("[data-theme-reset]");
+    const filters = Array.from(picker.querySelectorAll<HTMLButtonElement>("[data-theme-filter]"));
+    if (!dialog || !open || !list || !count) return;
+
+    const dialogEl: HTMLDialogElement = dialog;
+    const listEl: HTMLElement = list;
+    const countEl: HTMLElement = count;
+
+    let filter: "all" | "dark" | "light" = "all";
+    let query = "";
+
+    function render(): void {
+      const selected = readStoredScheme();
+      const normalized = query.trim().toLowerCase();
+      const matches = SCHEMES.filter((scheme) => {
+        if (filter !== "all" && scheme.variant !== filter) return false;
+        if (!normalized) return true;
+        return (
+          scheme.name.toLowerCase().includes(normalized) ||
+          scheme.id.includes(normalized) ||
+          scheme.author.toLowerCase().includes(normalized)
+        );
+      });
+
+      listEl.replaceChildren();
+      const fragment = document.createDocumentFragment();
+
+      for (const scheme of matches) {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "ojuny-theme-item";
+        item.dataset.schemeId = scheme.id;
+        if (scheme.id === selected.id) item.classList.add("is-current");
+        item.setAttribute("aria-current", scheme.id === selected.id ? "true" : "false");
+
+        const text = document.createElement("span");
+        text.className = "ojuny-theme-item-text";
+        const title = document.createElement("strong");
+        title.textContent = scheme.name;
+        const meta = document.createElement("small");
+        meta.textContent = `${scheme.variant} · ${scheme.author || scheme.id}`;
+        text.append(title, meta);
+
+        const check = document.createElement("span");
+        check.className = "ojuny-theme-item-check";
+        check.setAttribute("aria-hidden", "true");
+        check.textContent = "✓";
+
+        item.append(makeSwatches(scheme, "ojuny-theme-item-swatches"), text, check);
+        item.addEventListener("click", () => {
+          applyScheme(scheme);
+          syncPickers();
+          dialogEl.close();
+        });
+        fragment.append(item);
+      }
+
+      listEl.append(fragment);
+      countEl.textContent = `${matches.length} of ${SCHEMES.length} schemes`;
+    }
+
+    function openDialog(): void {
+      if (typeof dialogEl.showModal === "function") dialogEl.showModal();
+      else dialogEl.setAttribute("open", "");
+      render();
+      requestAnimationFrame(() => search?.focus());
+    }
+
+    function closeDialog(): void {
+      if (typeof dialogEl.close === "function") dialogEl.close();
+      else dialogEl.removeAttribute("open");
+    }
+
+    open.addEventListener("click", openDialog);
+    close?.addEventListener("click", closeDialog);
+
+    dialogEl.addEventListener("click", (event) => {
+      if (event.target === dialogEl) closeDialog();
+    });
+
+    search?.addEventListener("input", () => {
+      query = search.value;
+      render();
+    });
+
+    for (const button of filters) {
+      button.addEventListener("click", () => {
+        filter = (button.dataset.themeFilter as typeof filter) ?? "all";
+        for (const other of filters) other.classList.toggle("is-active", other === button);
+        render();
+      });
+    }
+
+    reset?.addEventListener("click", () => {
+      resetScheme();
+      syncPickers();
+      closeDialog();
+    });
+
+    listEl.addEventListener("keydown", (event) => {
+      const items = Array.from(listEl.querySelectorAll<HTMLButtonElement>("[data-scheme-id]"));
+      const index = items.indexOf(document.activeElement as HTMLButtonElement);
+      if (index < 0) return;
+
+      if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+        event.preventDefault();
+        items[(index + 1) % items.length]?.focus();
+      } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        items[(index - 1 + items.length) % items.length]?.focus();
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        items[0]?.focus();
+      } else if (event.key === "End") {
+        event.preventDefault();
+        items.at(-1)?.focus();
+      }
+    });
+
+    dialogEl.addEventListener("close", () => open.focus());
+  }
+
+  for (const picker of pickers) setupPicker(picker);
+
+  const current = readStoredScheme();
+  applyScheme(current, false);
+  syncPickers();
+  window.addEventListener(THEME_EVENT, syncPickers);
+</script>

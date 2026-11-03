@@ -1,0 +1,38 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="hardware"
+  eyebrow="Hardware"
+  title="Your hardware, your settings"
+  description="Ojuny exposes the hardware settings in the menu instead of hiding them behind a troubleshooting ritual. You stay in control."
+  action={{ label: "Desktop options", href: `${base}configuration/options/` }}
+  columns={2}
+  items={[
+    {
+      eyebrow: "Control",
+      title: "Every knob in the menu",
+      body: "Displays, power, Bluetooth, networking, graphics, and input are settings pages, not terminal folklore.",
+    },
+    {
+      eyebrow: "Drivers",
+      title: "No scavenger hunt",
+      body: "AMD, Intel, and NVIDIA options are Nix options. No third-party repository archaeology.",
+    },
+    {
+      eyebrow: "Storage",
+      title: "A readable hardware file",
+      body: "The generated hardware.nix is a normal Nix file. Inspect it, edit it, or regenerate it.",
+      href: `${base}install/manual-template/`,
+      linkLabel: "Template install",
+    },
+    {
+      eyebrow: "Troubleshooting",
+      title: "No LLM required",
+      body: "If a setting is wrong, open the page and change it. You do not need to ask a model to debug your machine.",
+    },
+  ]}
+/>

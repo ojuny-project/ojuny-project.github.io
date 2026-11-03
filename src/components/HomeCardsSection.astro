@@ -1,0 +1,37 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+import HomeCards from "./HomeCards.astro";
+
+interface HomeCard {
+  eyebrow?: string;
+  title: string;
+  body: string;
+  href?: string;
+  linkLabel?: string;
+}
+
+interface Props {
+  id: string;
+  alt?: boolean;
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  action?: { label: string; href: string };
+  items: HomeCard[];
+  columns?: 2 | 3 | 4;
+}
+
+const { id, alt = false, eyebrow, title, description, action, items, columns = 3 } =
+  Astro.props;
+---
+
+<HomeSection id={id} alt={alt}>
+  <SectionHeading
+    eyebrow={eyebrow}
+    title={title}
+    description={description}
+    action={action}
+  />
+  <HomeCards items={items} columns={columns} />
+</HomeSection>

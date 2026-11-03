@@ -1,0 +1,56 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="stack"
+  eyebrow="The team"
+  title="The team already exists"
+  description="Ojuny does not need a dedicated company team. It is built from community projects and democratically run foundations. The stack is the team."
+  action={{ label: "What is Ojuny?", href: `${base}getting-started/what-is-ojuny/` }}
+  columns={3}
+  items={[
+    {
+      eyebrow: "Compositor",
+      title: "MangoWM",
+      body: "A community compositor. Ojuny configures it, not a replacement.",
+      href: "https://github.com/mangowm/mango",
+      linkLabel: "mangowm/mango",
+    },
+    {
+      eyebrow: "Desktop shell",
+      title: "Dux Shell",
+      body: "A community shell. Runtime identifiers keep the dms name.",
+      href: "https://github.com/duxlabs-dev/dux-shell",
+      linkLabel: "duxlabs-dev/dux-shell",
+    },
+    {
+      eyebrow: "System",
+      title: "NixOS",
+      body: "A community project backed by a foundation. The operating system and module system.",
+      href: "https://nixos.org",
+      linkLabel: "nixos.org",
+    },
+    {
+      eyebrow: "Home",
+      title: "Home Manager",
+      body: "A community project for user packages and dotfiles, using the same module system.",
+      href: "https://github.com/nix-community/home-manager",
+      linkLabel: "nix-community/home-manager",
+    },
+    {
+      eyebrow: "Style",
+      title: "Stylix",
+      body: "A community base16 pipeline that turns one palette into desktop colors, fonts, and wallpapers.",
+      href: "https://github.com/nix-community/stylix",
+      linkLabel: "nix-community/stylix",
+    },
+    {
+      eyebrow: "Independence",
+      title: "No single vendor",
+      body: "The major components are community projects or foundation-run. There is no corporate owner to lock you in.",
+    },
+  ]}
+/>

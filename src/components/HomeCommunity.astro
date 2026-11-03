@@ -1,0 +1,43 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<HomeCardsSection
+  id="community"
+  eyebrow="Community"
+  title="Get involved with Ojuny"
+  description="Open an issue, send a patch, or read the docs. No meetups yet. The issue tracker is the meetup."
+  columns={4}
+  items={[
+    {
+      eyebrow: "Source",
+      title: "GitHub",
+      body: "The desktop, template, CLI, installer, patches, and this site.",
+      href: "https://github.com/ojuny-project",
+      linkLabel: "ojuny-project",
+    },
+    {
+      eyebrow: "Bugs",
+      title: "Issues",
+      body: "File bugs in the repository that owns the affected code. Include ojuny doctor output.",
+      href: "https://github.com/ojuny-project/ojuny-template/issues",
+      linkLabel: "Template issues",
+    },
+    {
+      eyebrow: "Patches",
+      title: "Patch registry",
+      body: "Publish a patch repository or install one from the default registry.",
+      href: "https://github.com/ojuny-project/ojuny-patches",
+      linkLabel: "ojuny-patches",
+    },
+    {
+      eyebrow: "Docs",
+      title: "Read the manual",
+      body: "Start with what Ojuny is, then install it, configure it, and update it.",
+      href: `${base}getting-started/what-is-ojuny/`,
+      linkLabel: "Start reading",
+    },
+  ]}
+/>

@@ -1,0 +1,233 @@
+---
+import { DEFAULT_SCHEME } from "../scripts/theme";
+
+const base = import.meta.env.BASE_URL;
+const colors = [
+  "base00",
+  "base01",
+  "base02",
+  "base03",
+  "base04",
+  "base05",
+  "base06",
+  "base07",
+  "base08",
+  "base09",
+  "base0a",
+  "base0b",
+  "base0c",
+  "base0d",
+  "base0e",
+  "base0f",
+];
+---
+
+<div class="ojuny-theme-showcase">
+  <div class="ojuny-theme-preview">
+    <div class="ojuny-preview-scene">
+      <canvas
+        class="ojuny-preview-wallpaper"
+        data-wallpaper-canvas
+        role="img"
+        aria-label="Wallpaper preview generated from the active base16 palette"
+      ></canvas>
+
+      <div class="ojuny-preview-dock" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <p class="ojuny-theme-current" aria-live="polite">
+      <span>Currently previewing</span>
+      <strong data-theme-current>{DEFAULT_SCHEME.name}</strong>
+      <span class="ojuny-theme-variant" data-theme-variant>{DEFAULT_SCHEME.variant}</span>
+    </p>
+  </div>
+
+  <div class="ojuny-theme-details">
+    <p class="ojuny-eyebrow">Live base16 palette</p>
+    <h3 data-theme-current>{DEFAULT_SCHEME.name}</h3>
+    <p>
+      The palette picker in the header swaps the whole site: text, code blocks,
+      panel colors, focus states, and the wallpaper preview. Your choice is
+      stored locally and applied before the page paints.
+    </p>
+
+    <div class="ojuny-palette-strip" aria-hidden="true">
+      {colors.map((color) => <span style={`--swatch: var(--${color})`} />)}
+    </div>
+
+    <div class="ojuny-theme-actions">
+      <button type="button" class="ojuny-button secondary" data-theme-showcase-open>
+        Open palette picker
+      </button>
+      <a class="ojuny-text-link" href={`${base}color-schemes/`}>
+        Browse all 360 schemes
+      </a>
+    </div>
+
+    <p class="ojuny-theme-note">
+      The preview is recolored from the Ojuny wallpaper using the same palette
+      mapping the desktop applies to its stylix background.
+    </p>
+  </div>
+</div>
+
+<script>
+  import {
+    THEME_EVENT,
+    readStoredScheme,
+    type Scheme,
+  } from "../scripts/theme";
+
+  const SOURCE_FILLS = ["2e383c", "4f5b58", "4b5654", "dbbc7f", "7fbbb3", "e67e80", "689e6a"];
+  const TARGET_SLOTS = ["base00", "base02", "base02", "base0a", "base0d", "base08", "base0b"];
+  const WALLPAPER_WIDTH = 640;
+  const WALLPAPER_HEIGHT = 360;
+
+  type Mapping = { exact: number } | { first: number; second: number; amount: number };
+
+  function parseColor(value: string): [number, number, number] {
+    const hex = value.replace("#", "");
+    return [
+      Number.parseInt(hex.slice(0, 2), 16),
+      Number.parseInt(hex.slice(2, 4), 16),
+      Number.parseInt(hex.slice(4, 6), 16),
+    ];
+  }
+
+  function packedColor(red: number, green: number, blue: number): number {
+    return (red << 16) | (green << 8) | blue;
+  }
+
+  function closestMapping(color: [number, number, number], fills: [number, number, number][]): Mapping {
+    const exact = fills.findIndex(
+      (fill) => fill[0] === color[0] && fill[1] === color[1] && fill[2] === color[2],
+    );
+    if (exact >= 0) return { exact };
+
+    let bestDistance = Number.POSITIVE_INFINITY;
+    let bestFirst = 0;
+    let bestSecond = 1;
+    let bestAmount = 0;
+
+    for (let first = 0; first < fills.length; first += 1) {
+      for (let second = first + 1; second < fills.length; second += 1) {
+        const start = fills[first];
+        const direction = [
+          fills[second][0] - start[0],
+          fills[second][1] - start[1],
+          fills[second][2] - start[2],
+        ];
+        const offset = [
+          color[0] - start[0],
+          color[1] - start[1],
+          color[2] - start[2],
+        ];
+        const length = direction[0] ** 2 + direction[1] ** 2 + direction[2] ** 2;
+        const amount = Math.max(
+          0,
+          Math.min(1, (offset[0] * direction[0] + offset[1] * direction[1] + offset[2] * direction[2]) / length),
+        );
+        const distance =
+          (color[0] - (start[0] + amount * direction[0])) ** 2 +
+          (color[1] - (start[1] + amount * direction[1])) ** 2 +
+          (color[2] - (start[2] + amount * direction[2])) ** 2;
+
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestFirst = first;
+          bestSecond = second;
+          bestAmount = amount;
+        }
+      }
+    }
+
+    return { first: bestFirst, second: bestSecond, amount: bestAmount };
+  }
+
+  function syncThemeShowcase(): void {
+    const scheme = readStoredScheme();
+
+    for (const element of document.querySelectorAll<HTMLElement>("[data-theme-current]")) {
+      element.textContent = scheme.name;
+    }
+    for (const element of document.querySelectorAll<HTMLElement>("[data-theme-variant]")) {
+      element.textContent = scheme.variant;
+    }
+  }
+
+  async function setupWallpaper(): Promise<void> {
+    const canvas = document.querySelector<HTMLCanvasElement>("[data-wallpaper-canvas]");
+    if (!canvas) return;
+
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (!context) return;
+
+    const ctx: CanvasRenderingContext2D = context;
+
+    canvas.width = WALLPAPER_WIDTH;
+    canvas.height = WALLPAPER_HEIGHT;
+
+    const image = new Image();
+    image.src = `${import.meta.env.BASE_URL}ojuny-wallpaper-preview.webp`;
+    await image.decode();
+
+    ctx.drawImage(image, 0, 0, WALLPAPER_WIDTH, WALLPAPER_HEIGHT);
+    const source = ctx.getImageData(0, 0, WALLPAPER_WIDTH, WALLPAPER_HEIGHT);
+    const sourceFills = SOURCE_FILLS.map(parseColor);
+    const sourceMapping = new Map<number, Mapping>();
+
+    for (let index = 0; index < source.data.length; index += 4) {
+      const key = packedColor(source.data[index], source.data[index + 1], source.data[index + 2]);
+      if (sourceMapping.has(key)) continue;
+      sourceMapping.set(
+        key,
+        closestMapping(
+          [source.data[index], source.data[index + 1], source.data[index + 2]],
+          sourceFills,
+        ),
+      );
+    }
+
+    function render(scheme: Scheme): void {
+      const targets = TARGET_SLOTS.map((slot) => parseColor(scheme.palette[slot] ?? "#000000"));
+      const targetBySource = new Map<number, number>();
+
+      for (const [key, mapping] of sourceMapping) {
+        const color =
+          "exact" in mapping
+            ? targets[mapping.exact]
+            : [
+                Math.round((1 - mapping.amount) * targets[mapping.first][0] + mapping.amount * targets[mapping.second][0]),
+                Math.round((1 - mapping.amount) * targets[mapping.first][1] + mapping.amount * targets[mapping.second][1]),
+                Math.round((1 - mapping.amount) * targets[mapping.first][2] + mapping.amount * targets[mapping.second][2]),
+              ];
+        targetBySource.set(key, packedColor(color[0], color[1], color[2]));
+      }
+
+      const output = ctx.createImageData(WALLPAPER_WIDTH, WALLPAPER_HEIGHT);
+      for (let index = 0; index < source.data.length; index += 4) {
+        const key = packedColor(source.data[index], source.data[index + 1], source.data[index + 2]);
+        const target = targetBySource.get(key) ?? key;
+        output.data[index] = (target >> 16) & 255;
+        output.data[index + 1] = (target >> 8) & 255;
+        output.data[index + 2] = target & 255;
+        output.data[index + 3] = source.data[index + 3];
+      }
+      ctx.putImageData(output, 0, 0);
+    }
+
+    render(readStoredScheme());
+    window.addEventListener(THEME_EVENT, () => render(readStoredScheme()));
+  }
+
+  const open = document.querySelector<HTMLButtonElement>("[data-theme-showcase-open]");
+  open?.addEventListener("click", () => {
+    document.querySelector<HTMLButtonElement>("[data-theme-open]")?.click();
+  });
+
+  syncThemeShowcase();
+  window.addEventListener(THEME_EVENT, syncThemeShowcase);
+  void setupWallpaper().catch(() => {});
+</script>

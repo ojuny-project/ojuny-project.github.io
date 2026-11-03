@@ -1,0 +1,210 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+const base = import.meta.env.BASE_URL;
+const layouts = [
+  {
+    id: "master",
+    label: "Master",
+    caption: "One big window, a stack beside it.",
+  },
+  {
+    id: "dwindle",
+    label: "Dwindle",
+    caption: "Every new window splits the active one. Good for deep work.",
+  },
+  {
+    id: "scroller",
+    label: "Scroller",
+    caption: "A horizontal ribbon of windows. Good for wide monitors.",
+  },
+];
+---
+
+<HomeSection id="watch" alt>
+  <SectionHeading
+    eyebrow="Preview"
+    title="A look at the desktop"
+    description="Drawings of the desktop, window layouts, and settings menu. They are not screenshots."
+    action={{ label: "Read the desktop docs", href: `${base}desktop/overview/` }}
+  />
+
+  <div class="ojuny-gallery" data-gallery>
+    <div class="ojuny-gallery-stage">
+      <div class="ojuny-gallery-panel is-active" data-gallery-panel="desktop" role="tabpanel">
+        <div class="ojuny-gallery-desktop">
+          <div class="ojuny-gallery-desktop-bg" aria-hidden="true"></div>
+          <div class="ojuny-gallery-topbar">
+            <span class="ojuny-gallery-brand">Ojuny</span>
+            <span>09:41</span>
+          </div>
+          <div class="ojuny-gallery-window is-a"><span>terminal</span></div>
+          <div class="ojuny-gallery-window is-b"><span>browser</span></div>
+          <div class="ojuny-gallery-dock" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ojuny-gallery-panel" data-gallery-panel="layouts" role="tabpanel">
+        <div class="ojuny-gallery-layouts">
+          <div class="ojuny-tour-tabs" role="tablist" aria-label="Window layouts">
+            {
+              layouts.map((layout, index) => (
+                <button
+                  type="button"
+                  class:list={["ojuny-tour-tab", { "is-active": index === 0 }]}
+                  data-tour-tab={layout.id}
+                  role="tab"
+                  aria-selected={index === 0 ? "true" : "false"}
+                >
+                  {layout.label}
+                </button>
+              ))
+            }
+          </div>
+
+          <div class="ojuny-tour-screen">
+            <div class="ojuny-tour-bar" aria-hidden="true">
+              <span class="ojuny-tour-bar-brand">Ojuny</span>
+              <span class="ojuny-tour-bar-workspaces"><span></span><span></span><span></span></span>
+              <span class="ojuny-tour-bar-clock">09:41</span>
+            </div>
+            <div class="ojuny-tour-workspace" data-tour-workspace data-layout="master">
+              <div class="ojuny-tour-window is-a"><span>terminal</span></div>
+              <div class="ojuny-tour-window is-b"><span>browser</span></div>
+              <div class="ojuny-tour-window is-c"><span>editor</span></div>
+            </div>
+            <div class="ojuny-tour-dock" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="ojuny-tour-caption" data-tour-caption>{layouts[0].caption}</div>
+        </div>
+      </div>
+
+      <div class="ojuny-gallery-panel" data-gallery-panel="settings" role="tabpanel">
+        <div class="ojuny-gallery-settings">
+          <div class="ojuny-settings-head">
+            <span>Settings</span>
+            <span>Ojuny</span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Theme</span>
+            <span class="ojuny-settings-value">Everforest Dark Hard</span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Bar</span>
+            <span class="ojuny-settings-toggle is-on" aria-hidden="true"></span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Notifications</span>
+            <span class="ojuny-settings-toggle is-on" aria-hidden="true"></span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Network</span>
+            <span class="ojuny-settings-value">Connected</span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Bluetooth</span>
+            <span class="ojuny-settings-value">On</span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Display</span>
+            <span class="ojuny-settings-value">2560x1440</span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Gaming</span>
+            <span class="ojuny-settings-value">SteamOS mode</span>
+          </div>
+          <div class="ojuny-settings-row">
+            <span>Patches</span>
+            <span class="ojuny-settings-value">Open</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ojuny-gallery-thumbs" role="tablist" aria-label="Preview panels">
+      <button
+        type="button"
+        class="ojuny-gallery-thumb is-active"
+        data-gallery-tab="desktop"
+        role="tab"
+        aria-selected="true"
+      >
+        <span class="ojuny-gallery-thumb-mark" style="--thumb-a: var(--base0d); --thumb-b: var(--base0e)"></span>
+        Desktop
+      </button>
+      <button
+        type="button"
+        class="ojuny-gallery-thumb"
+        data-gallery-tab="layouts"
+        role="tab"
+        aria-selected="false"
+      >
+        <span class="ojuny-gallery-thumb-mark" style="--thumb-a: var(--base0b); --thumb-b: var(--base0c)"></span>
+        Layouts
+      </button>
+      <button
+        type="button"
+        class="ojuny-gallery-thumb"
+        data-gallery-tab="settings"
+        role="tab"
+        aria-selected="false"
+      >
+        <span class="ojuny-gallery-thumb-mark" style="--thumb-a: var(--base0a); --thumb-b: var(--base08)"></span>
+        Settings
+      </button>
+    </div>
+  </div>
+</HomeSection>
+
+<script>
+  const gallery = document.querySelector<HTMLElement>("[data-gallery]");
+  if (gallery) {
+    const tabs = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-gallery-tab]"));
+    const panels = Array.from(gallery.querySelectorAll<HTMLElement>("[data-gallery-panel]"));
+    const layoutTabs = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-tour-tab]"));
+    const workspace = gallery.querySelector<HTMLElement>("[data-tour-workspace]");
+    const caption = gallery.querySelector<HTMLElement>("[data-tour-caption]");
+    const layoutCopy: Record<string, string> = {
+      master: "One big window, a stack beside it.",
+      dwindle: "Every new window splits the active one. Good for deep work.",
+      scroller: "A horizontal ribbon of windows. Good for wide monitors.",
+    };
+
+    for (const tab of tabs) {
+      tab.addEventListener("click", () => {
+        const id = tab.dataset.galleryTab;
+        for (const other of tabs) {
+          const active = other === tab;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-selected", active ? "true" : "false");
+        }
+        for (const panel of panels) {
+          panel.classList.toggle("is-active", panel.dataset.galleryPanel === id);
+        }
+      });
+    }
+
+    for (const tab of layoutTabs) {
+      tab.addEventListener("click", () => {
+        const layout = tab.dataset.tourTab ?? "master";
+        if (!workspace) return;
+        workspace.dataset.layout = layout;
+        workspace.classList.remove("is-switching");
+        void workspace.offsetWidth;
+        workspace.classList.add("is-switching");
+        for (const other of layoutTabs) {
+          const active = other === tab;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-selected", active ? "true" : "false");
+        }
+        if (caption) caption.textContent = layoutCopy[layout] ?? "";
+      });
+    }
+  }
+</script>

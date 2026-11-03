@@ -1,0 +1,54 @@
+---
+import HomeSection from "./HomeSection.astro";
+import HomeCards from "./HomeCards.astro";
+
+const upstream = [
+  {
+    eyebrow: "Compositor",
+    title: "MangoWM",
+    body: "Support the compositor directly. Ojuny is a configuration layer, not a funding vehicle.",
+    href: "https://github.com/mangowm/mango",
+    linkLabel: "MangoWM on GitHub",
+  },
+  {
+    eyebrow: "Desktop shell",
+    title: "Dux Shell",
+    body: "The shell has its own support links. Use them if the shell is what you value.",
+    href: "https://ko-fi.com/duxlabs",
+    linkLabel: "Support Dux Labs",
+  },
+  {
+    eyebrow: "System",
+    title: "NixOS",
+    body: "The foundation is a community project. Donate to the foundation, not to this page.",
+    href: "https://nixos.org/donate/",
+    linkLabel: "Donate to NixOS",
+  },
+];
+---
+
+<HomeSection id="funding" alt>
+  <div class="ojuny-funding" data-reveal>
+    <div>
+      <p class="ojuny-eyebrow">No funding necessary</p>
+      <h2 class="ojuny-section-title">We didn't need the money.</h2>
+      <p class="ojuny-section-lead">
+        Ojuny was built without a budget, a foundation, or a corporate patron.
+        No grant paid for the flake. No logo bought a section of this page. The
+        project exists because the upstream work is good and the configuration
+        is fun.
+      </p>
+      <p class="ojuny-section-lead">
+        If you want to support something, support the projects doing the heavy
+        lifting. There is no Ojuny donation link, and there does not need to be
+        one.
+      </p>
+    </div>
+    <div class="ojuny-funding-stat" aria-label="Zero euros of funding">
+      <span>€0</span>
+      <small>funding required</small>
+    </div>
+  </div>
+
+  <HomeCards items={upstream} columns={3} />
+</HomeSection>

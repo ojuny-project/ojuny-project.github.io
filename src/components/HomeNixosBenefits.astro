@@ -1,0 +1,45 @@
+---
+import HomeCardsSection from "./HomeCardsSection.astro";
+---
+
+<HomeCardsSection
+  id="nixos"
+  alt
+  eyebrow="NixOS"
+  title="What NixOS gives you"
+  description="These are not developer-only features. They are the reason a normal user can trust the machine to keep working."
+  action={{ label: "Why NixOS?", href: "https://nixos.org" }}
+  columns={3}
+  items={[
+    {
+      eyebrow: "Updates",
+      title: "Atomic upgrades",
+      body: "A rebuild creates a new generation. The previous one stays available as a boot entry.",
+    },
+    {
+      eyebrow: "System",
+      title: "Immutable by default",
+      body: "The system profile is read-only. Changes go through a rebuild, not ad-hoc edits.",
+    },
+    {
+      eyebrow: "Stability",
+      title: "Rolling, but yours",
+      body: "You choose when to update. The lock file pins inputs, and rollback is a boot entry away.",
+    },
+    {
+      eyebrow: "Builds",
+      title: "Sandboxed",
+      body: "Nix builds run in a sandbox. Packages do not get to write wherever they like during a build.",
+    },
+    {
+      eyebrow: "Configuration",
+      title: "Declarative",
+      body: "The configuration is the system. There is no second state to drift.",
+    },
+    {
+      eyebrow: "Repeatability",
+      title: "Reproducible",
+      body: "The same flake and lock file produce the same result on another machine.",
+    },
+  ]}
+/>
