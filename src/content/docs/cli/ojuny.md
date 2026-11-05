@@ -29,8 +29,7 @@ ojuny settings open displays
 ojuny flake validate
 ```
 
-`ojuny doctor` is read-only. It prints the resolved flake and host, the Dux
-Shell config directory, the backend commands it expects, and the patch state.
+`ojuny doctor` is read-only. It prints the resolved flake and host, the DMS config directory, the backend commands it expects, and the patch state.
 
 The usage line is:
 

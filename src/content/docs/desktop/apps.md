@@ -104,7 +104,7 @@ The template groups the application pages into two settings folders.
 - **Web apps** (`01-webapps.nix`) installs Chromium-based web applications as
   desktop entries. YouTube is the default row, and rows can carry a name, URL,
   and optional icon.
-- **Dux Shell plugins** (`02-plugins.nix`, titled DMS plugins) manages the
+- **Dux Modular Shell plugins** (`02-plugins.nix`, titled DMS plugins) manages the
   plugin settings and installs the plugin set used by the shipped layout. The
   default set includes the application menu, emoji launcher, KDE Connect,
   world clock, Nix monitor, local services, scratchpad helper, developer
@@ -138,7 +138,7 @@ line, then enable it on the Patches page.
 
 The desktop layer includes the tools needed by the shipped bar and menus:
 
-- Dux Shell and its default plugin set.
+- Dux Modular Shell and its default plugin set.
 - KDE Connect integration.
 - `iproute2` and related session utilities.
 - `ojuny-ghostty`.

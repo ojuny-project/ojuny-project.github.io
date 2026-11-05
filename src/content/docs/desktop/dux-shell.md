@@ -1,5 +1,5 @@
 ---
-title: Dux Shell
+title: Dux Modular Shell
 description: The desktop shell Ojuny configures, and where to read the rest.
 sidebar:
   order: 3
@@ -8,7 +8,7 @@ sidebar:
 <!-- unreleased-marker -->
 > **Unreleased.** Ojuny is not released. This page is unreviewed, may contain placeholders, and is subject to change without notice.
 
-[Dux Shell](https://github.com/duxlabs-dev/dux-shell) provides the bar, dock,
+[Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell) provides the bar, dock,
 launcher, dashboard, control center, notifications, clipboard, lock screen, and
 power controls around MangoWM. Ojuny generates its configuration from
 `desktop.ojuny.dux.*`.
@@ -39,7 +39,7 @@ is `desktop.ojuny.dux`.
 - [Desktop usage in the manual](/ojuny-manual/usage/desktop/)
 - [Settings menu in the manual](/ojuny-manual/usage/settings/)
 - [Desktop option reference](https://github.com/ojuny-project/ojuny-desktop/blob/main/options.md)
-- [Dux Shell upstream](https://github.com/duxlabs-dev/dux-shell)
+- [Dux Modular Shell upstream](https://github.com/duxlabs-dev/dux-shell)
 
 ## Next
 

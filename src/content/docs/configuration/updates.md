@@ -47,9 +47,9 @@ The update GUI is a repo-sync checker, not a package updater. It keeps an
 installed system in sync with the remote flake repository the flake is on. It is
 primarily for multi-user or multi-system flakes with one primary maintainer.
 
-It is disabled by default, so its daemon and tray do not run. The shipped Dux
+It is disabled by default, so its daemon and tray do not run. The shipped DMS
 updater policy also starts no check, sends no notification, and updates nothing
-automatically. Dux has no single enable key; changing any of its advanced keys
+automatically. DMS has no single enable key; changing any of its advanced keys
 is your own choice.
 
 The checker compares the active system path with the evaluated system

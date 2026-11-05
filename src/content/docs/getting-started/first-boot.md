@@ -24,7 +24,7 @@ ojuny network status
 
 The annotation-driven settings menu is the primary place to change user-facing
 options. Open it from the application menu. `ojuny settings open <page>` opens a
-Dux Shell runtime page instead:
+Dux Modular Shell runtime page instead:
 
 ```sh
 ojuny settings open displays

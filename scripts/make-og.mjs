@@ -37,7 +37,7 @@ const svg = `
   <circle cx="128" cy="120" r="8" fill="#7fbbb3" />
   <text x="202" y="140" fill="#fffbef" font-family="sans-serif" font-size="54" font-weight="700">Ojuny</text>
   <text x="80" y="290" fill="#d3c6aa" font-family="sans-serif" font-size="46" font-weight="700">NixOS desktop, built from Nix.</text>
-  <text x="80" y="350" fill="#9da9a0" font-family="sans-serif" font-size="28">MangoWM, Dux Shell, a settings menu, and base16 themes.</text>
+  <text x="80" y="350" fill="#9da9a0" font-family="sans-serif" font-size="28">MangoWM, Dux Modular Shell, a settings menu, and base16 themes.</text>
   ${bars}
   <text x="80" y="570" fill="#859289" font-family="monospace" font-size="22">github.com/ojuny-project</text>
   <text x="1120" y="570" fill="#859289" font-family="monospace" font-size="22" text-anchor="end">everforest-dark-hard</text>

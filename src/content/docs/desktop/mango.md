@@ -46,4 +46,4 @@ bar.
 ## Next
 
 - [Keybinds](/desktop/keybinds/)
-- [Dux Shell](/desktop/dux-shell/)
+- [Dux Modular Shell](/desktop/dux-shell/)

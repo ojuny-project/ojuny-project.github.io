@@ -9,7 +9,7 @@ sidebar:
 > **Unreleased.** Ojuny is not released. This page is unreviewed, may contain placeholders, and is subject to change without notice.
 
 Keybinds are defined once in Nix and rendered twice: into the MangoWM config and
-into the Dux Shell keybind cheatsheet. The same definitions also drive the Binds
+into the Dux Modular Shell keybind cheatsheet. The same definitions also drive the Binds
 pages in the settings GUI.
 
 ## Default keyboard model
@@ -99,7 +99,7 @@ written directly.
 
 Rebuild to regenerate the session config and the cheatsheet. `SUPER+R` reloads
 the MangoWM config at runtime, but it does not regenerate the cheatsheet. Restart
-Dux Shell after a rebuild to load the updated cheatsheet.
+Dux Modular Shell after a rebuild to load the updated cheatsheet.
 
 ## Next
 

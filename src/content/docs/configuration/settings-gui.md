@@ -22,8 +22,8 @@ value in an existing file; the GUI cannot create an option on its own.
 Launch the annotation-driven window from the desktop application menu. Its page
 names come from the `@menu` headers in the flake, not from a command line.
 
-The `ojuny settings open` command opens a Dux Shell settings page. The page name
-is a Dux Shell page id or alias, and an unknown name is rejected:
+The `ojuny settings open` command opens a Dux Modular Shell settings page. The page name
+is a Dux Modular Shell page id or alias, and an unknown name is rejected:
 
 ```sh
 ojuny settings open displays
@@ -31,7 +31,7 @@ ojuny settings open dankbar
 ojuny settings open network
 ```
 
-That command focuses the matching Dux Shell page. It does not start the
+That command focuses the matching Dux Modular Shell page. It does not start the
 annotation-driven window.
 
 ## One file, one menu

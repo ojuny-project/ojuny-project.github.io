@@ -15,7 +15,7 @@ The palette is the template option `ojuny.style.palette`. It resolves against
 `pkgs.base16-schemes`, and `stylix.base16Scheme` is derived from it. The desktop
 module does not define a separate palette option.
 
-MangoWM colors, the Dux Shell theme, and the wallpapers are generated from that
+MangoWM colors, the Dux Modular Shell theme, and the wallpapers are generated from that
 palette. When `desktop.ojuny.stylix.enable` is on, stylix colors are mapped into
 MangoWM and the shell. Without stylix, the desktop falls back to Everforest Dark
 Hard and stays usable.

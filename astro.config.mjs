@@ -28,7 +28,7 @@ export default defineConfig({
     starlight({
       title: "Ojuny",
       description:
-        "An opinionated NixOS desktop built on MangoWM and Dux Shell.",
+        "An opinionated NixOS desktop built on MangoWM and Dux Modular Shell.",
       favicon: "/favicon.svg",
       customCss: [
         "./src/styles/base16.css",

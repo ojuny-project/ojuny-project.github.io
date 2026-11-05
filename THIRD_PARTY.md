@@ -15,7 +15,7 @@ is also used by the Ojuny desktop.
 Ojuny configures and packages two upstream desktop projects:
 
 - [MangoWM](https://github.com/mangowm/mango), the Wayland compositor.
-- [Dux Shell](https://github.com/duxlabs-dev/dux-shell), the desktop shell still
+- [Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell), the desktop shell still
   called DMS in the Ojuny codebase.
 
 Their code and licenses remain with their respective projects.

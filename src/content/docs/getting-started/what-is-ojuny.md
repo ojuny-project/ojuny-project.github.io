@@ -16,7 +16,7 @@ It is not a fork of NixOS, a separate package manager, a new compositor, or a
 new desktop shell. It is not a competitor to NixOS or its upstream projects. It
 is a configuration and packaging layer over upstream projects. The compositor
 is [MangoWM](https://github.com/mangowm/mango) and the desktop shell is
-[Dux Shell](https://github.com/duxlabs-dev/dux-shell). Runtime identifiers still
+[Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell). Runtime identifiers still
 use the shorter `dms` name.
 
 Status: pre-release. There is no release schedule. The `ojuny` CLI is pending:
@@ -65,7 +65,7 @@ Ojuny is split across six public repositories.
 
 | Piece | Repository | Role |
 | --- | --- | --- |
-| Desktop | [ojuny-desktop](https://github.com/ojuny-project/ojuny-desktop) | MangoWM and Dux Shell, generated configuration, NixOS and Home Manager modules, nested runner |
+| Desktop | [ojuny-desktop](https://github.com/ojuny-project/ojuny-desktop) | MangoWM and Dux Modular Shell, generated configuration, NixOS and Home Manager modules, nested runner |
 | Template | [ojuny-template](https://github.com/ojuny-project/ojuny-template) | Forkable NixOS flake, settings pages, setup script, generated machine data |
 | CLI | [ojuny-cli](https://github.com/ojuny-project/ojuny-cli) | `ojuny` runtime and flake commands, `ojuny-patches` patch manager |
 | Installer | [ojuny-installer](https://github.com/ojuny-project/ojuny-installer) | Attended Calamares main, discovery, and offline ISOs; unattended online, offline, and discovery ISOs; persistent image builder |
@@ -79,7 +79,7 @@ extend it without forking it.
 ## What a normal user gets
 
 - A Wayland desktop session with MangoWM.
-- Dux Shell with a bar, launcher, dashboard, control center, notifications,
+- Dux Modular Shell with a bar, launcher, dashboard, control center, notifications,
   clipboard history, on-screen display, sounds, lock and power controls, and an
   application menu. The dock is available but off by default.
 - Master, dwindle, and scroller layouts, workspaces and tags, window rules, and
@@ -146,7 +146,7 @@ presentable, and the status page records what is tested.
 
 Ojuny comes with no warranty and no support contract. Support is limited to
 opening an issue on GitHub. There is no support team. Community answers in
-Ojuny, NixOS, Dux Shell, and MangoWM spaces are best effort and not a promise.
+Ojuny, NixOS, Dux Modular Shell, and MangoWM spaces are best effort and not a promise.
 
 ## Ownership
 
@@ -164,8 +164,8 @@ installation, and the reverse is also true.
 
 - **Ojuny**: the project and the desktop experience. Capitalized in prose.
 - **`ojuny`**: the command and code prefix.
-- **Dux Shell**: the desktop shell, consumed from upstream.
-- **`dms`**: the lowercase runtime identifiers retained by Dux Shell in its
+- **Dux Modular Shell**: the desktop shell, consumed from upstream.
+- **`dms`**: the lowercase runtime identifiers retained by Dux Modular Shell in its
   binary, directories, service, and IPC.
 - **Desktop layer**: `ojuny-desktop`, the package and modules that expose
   options under `desktop.ojuny.*`, including `desktop.ojuny.dux.*`.

@@ -68,7 +68,7 @@ deliberately local.
 
 Ojuny is a configuration layer. The compositor is
 [MangoWM](https://github.com/mangowm/mango). The shell is
-[Dux Shell](https://github.com/duxlabs-dev/dux-shell). We configure and package
+[Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell). We configure and package
 them; we do not fork them, we do not pretend to have written them, and we do not
 grow a custom compositor to avoid reading their docs.
 

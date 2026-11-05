@@ -10,7 +10,7 @@ sidebar:
 
 The Ojuny desktop is a wrapped Wayland session built from
 [MangoWM](https://github.com/mangowm/mango) and
-[Dux Shell 2.0](https://github.com/duxlabs-dev/dux-shell). It is not a copy of
+[Dux Modular Shell 2.0](https://github.com/duxlabs-dev/dux-shell). It is not a copy of
 a dotfiles directory. Every setting is generated from `desktop.ojuny.*` Nix
 options.
 
@@ -33,7 +33,7 @@ desktop, not a mockup.
 ## Session and login
 
 The desktop is registered as a Wayland session named Ojuny. The session starts
-MangoWM with the generated configuration, then brings up Dux Shell.
+MangoWM with the generated configuration, then brings up Dux Modular Shell.
 
 The template provides a graphical greeter through dux-greeter and sets the
 Ojuny session as the default. The login page exists in the settings menu but is
@@ -42,7 +42,7 @@ settings.
 
 ## Shell surfaces
 
-Dux Shell provides several distinct surfaces, all configured from the same
+Dux Modular Shell provides several distinct surfaces, all configured from the same
 option tree. Every surface is optional. The dock is off by default. The bar,
 launcher, dashboard, control center, and application menu are in use by
 default.
@@ -77,7 +77,7 @@ default.
 - **Lock and power**: session actions, lock-screen widgets, fingerprint and
   security-key authentication, and power controls.
 - **Wallpaper**: bundled presets and a user wallpaper directory, with
-  interval or time-based cycling, random order, and transitions in Dux Shell.
+  interval or time-based cycling, random order, and transitions in Dux Modular Shell.
   Bundled presets are recolored with the active palette and can be included in
   or excluded from cycling.
 - **World clock**: the `worldClock` plugin provides multiple cities and time
@@ -126,7 +126,7 @@ store.
   Advanced, hidden, and unexposed options are outside that claim.
 
 Without touching Nix, you can fully configure the visuals of MangoWM, the
-theming of the whole desktop, and the visuals and layouts of the Dux Shell bar,
+theming of the whole desktop, and the visuals and layouts of the Dux Modular Shell bar,
 dock, dashboard, and control center. Ojuny can stop feeling like base Ojuny
 within an hour after install.
 
@@ -217,13 +217,12 @@ The MangoWM configuration is rendered as TOML and launched with
 `-c ~/.config/mango/ojuny.toml`. That path is a stable symlink into the Nix
 store.
 
-The Dux Shell configuration tree is generated in the store and each file is
+The Dux Modular Shell configuration tree is generated in the store and each file is
 symlinked into `~/.config/dms`. The directory stays writable so the shell can
 create and update its own files. The session file is seeded into
 `~/.local/state/dms` and stays writable, so runtime state such as wallpaper
 cycling works. On NixOS, the `ojuny-config` oneshot repoints the generated links
-during activation, so a switch updates the config without a relogin. Restart Dux
-Shell afterward to reload the shell and MangoWM.
+during activation, so a switch updates the config without a relogin. Restart DMS afterward to reload the shell and MangoWM.
 
 ## The namespace
 
@@ -235,7 +234,7 @@ Everything is under `desktop.ojuny.*`:
 | `mango.*` | Global settings, environment, rules, key binds, mouse binds, axis binds, switch binds, and trackpad gestures |
 | `dux.*` | Shell settings, session settings, clipboard settings, plugin settings, bar, dock, control center, dashboard |
 | `dankMenu.*` | Structured application menu |
-| `stylix.enable` | Map the stylix palette into MangoWM and Dux Shell |
+| `stylix.enable` | Map the stylix palette into MangoWM and Dux Modular Shell |
 | `defaultApps` | Packages added to the session PATH |
 
 See [reading desktop options](/configuration/options/) for where the reference lives.
@@ -255,14 +254,14 @@ modules, and does not touch your real shell configuration.
 - Installing and removing patches is CLI-only. Installed patches expose their
   options in the GUI.
 - Advanced Nix functionality is Nix-only.
-- The desktop is one shape: MangoWM plus Dux Shell. Alternate desktops exist
+- The desktop is one shape: MangoWM plus Dux Modular Shell. Alternate desktops exist
   only as patches, which are extensions with their own support burden.
 - The desktop must never become bloated.
 
 ## Next
 
 - [MangoWM](/desktop/mango/)
-- [Dux Shell](/desktop/dux-shell/)
+- [Dux Modular Shell](/desktop/dux-shell/)
 - [Keybinds](/desktop/keybinds/)
 - [Theming](/desktop/theming/)
 - [Applications](/desktop/apps/)

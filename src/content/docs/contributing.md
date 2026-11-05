@@ -82,7 +82,7 @@ There is no release schedule. See the status page for what is tested.
 
 Ojuny has no funding, no donation link, no paid tier, and no support team.
 Support is community-bound and best effort. Support comes from the Ojuny, NixOS,
-Dux Shell, and MangoWM communities.
+Dux Modular Shell, and MangoWM communities.
 
 The binary cache is a future infrastructure goal, not a shipped service. Install
 time on low-end systems is the acknowledged weak point.
@@ -144,5 +144,5 @@ and link.
 The site and the component repositories are GPL-3.0. GPL-3.0 was chosen because
 many upstream projects are GPL-3.0. Base16 scheme data is MIT licensed and
 attributed in `THIRD_PARTY.md`. Credit the upstream projects:
-NixOS, nixpkgs, flake-parts, import-tree, Home Manager, MangoWM, Dux Shell,
+NixOS, nixpkgs, flake-parts, import-tree, Home Manager, MangoWM, Dux Modular Shell,
 Stylix, base16-schemes, Calamares, disko, and the supporting Nix GUI tools.

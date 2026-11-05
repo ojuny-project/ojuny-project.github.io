@@ -37,7 +37,7 @@ These words have fixed meanings:
 
 | Component | State | Note |
 | --- | --- | --- |
-| Desktop session, MangoWM and Dux Shell | untested | The modules exist; no end-to-end hardware run is recorded for this pass |
+| Desktop session, MangoWM and Dux Modular Shell | untested | The modules exist; no end-to-end hardware run is recorded for this pass |
 | Attended ISO | untested | Test runs are written, none completed as of 2026-11-03 |
 | Unattended ISO, online and offline | untested | Not run on hardware |
 | Offline ISO | untested | The offline hardware matrix is not complete |
@@ -57,7 +57,7 @@ recorded timings.
 - There is no ISO release and no release schedule.
 - There is no binary cache. Some components build from source, which can take
   up to an hour on a low-end machine.
-- The desktop is one shape: MangoWM plus Dux Shell. Alternate desktops are
+- The desktop is one shape: MangoWM plus Dux Modular Shell. Alternate desktops are
   patches with their own support burden.
 - Patches are third-party Nix code with build privileges and no sandbox.
 - Runtime changes made through the shell are not persistent. Save the change to

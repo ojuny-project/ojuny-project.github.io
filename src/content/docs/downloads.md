@@ -149,7 +149,7 @@ will be listed when they exist:
 ## Support
 
 There is no support team and no paid support. Support is best effort from the
-Ojuny, NixOS, Dux Shell, and MangoWM communities. Reproducibility helps a helper
+Ojuny, NixOS, Dux Modular Shell, and MangoWM communities. Reproducibility helps a helper
 rebuild a configuration from a repository URL, but it is not a support contract.
 There is no obligation to support arbitrary modified systems.
 
@@ -187,7 +187,7 @@ packages.
 ## License
 
 Ojuny is GPL-3.0. It builds on NixOS, nixpkgs, flake-parts, import-tree, Home
-Manager, MangoWM, Dux Shell, Stylix, base16-schemes, Calamares, disko, and the
+Manager, MangoWM, Dux Modular Shell, Stylix, base16-schemes, Calamares, disko, and the
 supporting Nix GUI tools. Credit the upstream projects.
 
 There is no donation link and no paid tier. Support upstream instead.

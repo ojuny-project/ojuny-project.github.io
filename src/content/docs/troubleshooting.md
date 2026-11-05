@@ -89,7 +89,7 @@ borders, or the bar. Fixing the display first makes everything else easier.
 
 ## The theme does not change
 
-Change `ojuny.style.palette` and rebuild. Restart Dux Shell and MangoWM
+Change `ojuny.style.palette` and rebuild. Restart Dux Modular Shell and MangoWM
 afterward so both reload the generated configuration.
 
 ## Password changes do not work

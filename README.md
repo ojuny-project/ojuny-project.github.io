@@ -5,7 +5,7 @@ the installer, the CLI, patches, downloads, and troubleshooting.
 
 Ojuny is a configuration layer for
 [MangoWM](https://github.com/mangowm/mango) and
-[Dux Shell](https://github.com/duxlabs-dev/dux-shell). The site says so plainly:
+[Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell). The site says so plainly:
 we package and configure upstream projects instead of rewriting them.
 
 ## Stack

@@ -34,12 +34,12 @@ published under the `ojuny-project` organization on GitHub.
 **MangoWM**: The upstream Wayland compositor. Ojuny configures it and does not
 fork it.
 
-**Dux Shell**: The desktop shell product, consumed from `duxlabs-dev/dux-shell`.
-Dux Shell is the public name.
+**Dux Modular Shell**: The desktop shell product, consumed from `duxlabs-dev/dux-shell`.
+DMS is the accepted shorthand after the first mention.
 
-**DMS**: The runtime identifier that Dux Shell still uses. It remains in the
-`dms` binary, the `dms.service` unit, paths such as `~/.config/dms`, the `DMS_`
-environment prefix, and commands such as `dms ipc call`.
+**DMS**: The shorthand and runtime identifier for Dux Modular Shell. It remains in
+the `dms` binary, the `dms.service` unit, paths such as `~/.config/dms`, the
+`DMS_` environment prefix, and commands such as `dms ipc call`.
 
 **dux suite**: The upstream projects Ojuny consumes: dux-shell, dux-files,
 dux-gop, dux-search, dux-calendar, and dux-greeter.

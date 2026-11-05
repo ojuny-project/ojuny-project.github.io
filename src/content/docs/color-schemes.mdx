@@ -16,7 +16,7 @@ site vendors a pinned copy of 360 schemes in `src/data/base16.json`; the desktop
 resolves scheme names from `pkgs.base16-schemes`, so the two collections come
 from separate sources even though they share upstream and the same default.
 
-The desktop uses Stylix to map the active palette into MangoWM and Dux Shell
+The desktop uses Stylix to map the active palette into MangoWM and Dux Modular Shell
 when `desktop.ojuny.stylix.enable` is on. The site applies its vendored palette
 to Starlight, Pagefind, Shiki, and the live wallpaper preview.
 
@@ -46,7 +46,7 @@ The site maps base16 keys to interface roles like this:
 | Keywords | `base0e` |
 | Reserved, defined but unused | `base0f` |
 
-On the desktop, Stylix passes the active palette to MangoWM and Dux Shell. In
+On the desktop, Stylix passes the active palette to MangoWM and Dux Modular Shell. In
 `lib/stylix-colors.nix`, borders use `base02`, focus uses `base0D`, urgent
 windows use `base08`, maximized screens use `base0E`, scratchpads use `base0A`,
 and text uses `base05`.
