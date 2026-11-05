@@ -6,8 +6,11 @@ description: Repositories, install paths, and the source-first release model.
 <!-- unreleased-marker -->
 > **Unreleased.** Ojuny is not released. This page is unreviewed, may contain placeholders, and is subject to change without notice.
 
-Ojuny is distributed as source flakes. There is no package archive, binary
-channel, or paid tier. There is no release schedule. No ISO release exists yet.
+The template and desktop are distributed as source flakes. Individual release
+tools also publish pre-built Linux bundles, recorded in each repository's
+`binary-url.json` and selectable from the System page. There is no package
+archive, Nix binary cache, or paid tier. There is no release schedule. No ISO
+release exists yet.
 
 Ojuny has no package repositories or distribution infrastructure of its own. It
 has no own git host, Hydra build server, or Nix cache. It uses NixOS
@@ -37,6 +40,15 @@ existing shell configuration.
 
 Use the NixOS or Home Manager module. See
 [NixOS and Home Manager modules](/install/modules/).
+
+## Release bundles
+
+Release tools publish a self-extracting Linux bundle and a checksum file on
+GitHub. The repository commits the tag, asset names, URLs, and SRI hashes to
+`binary-url.json`. The template reads that file through the source flake, so a
+lock update is what makes a new release visible. The System page selects source,
+the newest recorded release, or a named release per tool. A tag that is not in
+the committed file fails with an explicit error.
 
 ## Install the full system
 

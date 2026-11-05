@@ -41,7 +41,7 @@ ojuny-template/
     05-applications/ 01-applist.nix ... 06-kdeconnect.nix 07-screenshot.nix
     06-utility/      00-dux-tools.nix 01-webapps.nix 02-plugins.nix
     07-system/       00-hardware.nix 00-host.nix 00-imports.nix
-                     00-ojuny-cli.nix 00-secureboot.nix _00-ssh-test.nix
+                     00-secureboot.nix _00-ssh-test.nix
                      01-configuration.nix 02-networking.nix 03-bluetooth.nix
                      04-graphics.nix 05-power.nix 06-lock.nix 07-plymouth.nix
                      08-accessibility.nix 09-facter.nix 10-hardware-profile.nix
