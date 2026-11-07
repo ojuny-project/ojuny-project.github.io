@@ -19,6 +19,25 @@
         ];
       };
 
+      apps.${system}.ci = {
+        type = "app";
+        program = "${
+          pkgs.writeShellApplication {
+            name = "ci";
+            runtimeInputs = [ pkgs.nix pkgs.git ];
+            text = ''
+              exec nix develop -c bash -c '
+                if [ ! -d node_modules ]; then npm ci; fi
+                npm run check
+                node scripts/check-docs.mjs
+                node scripts/docs-metrics.mjs --json
+                SITE_URL=https://ojuny-project.github.io SITE_BASE=/ npm run build
+              '
+            '';
+          }
+        }/bin/ci";
+      };
+
       formatter.${system} = pkgs.nixfmt;
     };
 }
