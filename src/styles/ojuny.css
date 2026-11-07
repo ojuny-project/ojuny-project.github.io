@@ -23,11 +23,47 @@
 }
 
 .ojuny-site-title {
+  flex: none;
   color: var(--base05);
 }
 
 .ojuny-site-title:hover {
   color: var(--base0d);
+}
+
+.ojuny-header-nav {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 1rem;
+  margin-inline-start: 1rem;
+  font-size: var(--sl-text-sm);
+  font-weight: 600;
+}
+
+.ojuny-header-nav a {
+  color: var(--base05);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ojuny-header-nav a:hover,
+.ojuny-header-nav a:focus-visible {
+  color: var(--base0d);
+}
+
+.ojuny-header-nav a:focus-visible {
+  outline: 2px solid var(--base0d);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 30rem) {
+  .ojuny-header-nav {
+    gap: 0.5rem;
+    margin-inline-start: 0.5rem;
+    font-size: var(--sl-text-xs);
+  }
 }
 
 .ojuny-logo {

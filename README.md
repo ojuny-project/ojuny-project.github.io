@@ -60,6 +60,10 @@ The sidebar uses Starlight autogenerate groups, so a new file in an existing
 folder appears automatically. Use `sidebar.order` to control the position. The
 Project group at the root is explicit because those pages are not in a folder.
 
+The landing page header links to the docs, the manual, and the tools hub. The
+tools hub at `src/content/docs/tools/index.md` links each tool to the options
+reference owned by its repository.
+
 The landing page is `src/content/docs/index.mdx`. It composes the `Home*.astro`
 section components in `src/components/`. Homepage copy lives in the frontmatter
 arrays of those components, so the page stays easy to edit without touching the
@@ -138,8 +142,8 @@ Set both variables only if the deployment target changes.
 ```text
 src/
   assets/           brand PNGs, logo, wallpaper source
-  components/       homepage sections, theme picker, palette grid
-  content/docs/     Markdown documentation
+  components/       homepage sections, header override, theme picker, palette grid
+  content/docs/     Markdown documentation, including the tools hub
   data/base16.json  vendored palette data
   scripts/          theme, typewriter, and copy-code clients
   styles/           base16 mapping, homepage, layout, code styles

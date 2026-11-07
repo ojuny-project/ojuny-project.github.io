@@ -48,6 +48,7 @@ export default defineConfig({
         baseUrl: "https://github.com/ojuny-project/ojuny-site/edit/main/",
       },
       components: {
+        Header: "./src/components/Header.astro",
         SiteTitle: "./src/components/SiteTitle.astro",
         ThemeProvider: "./src/components/ThemeProvider.astro",
         ThemeSelect: "./src/components/ThemeSelect.astro",
@@ -124,6 +125,10 @@ export default defineConfig({
         {
           label: "Patches",
           items: [{ autogenerate: { directory: "patches" } }],
+        },
+        {
+          label: "Tools",
+          items: [{ autogenerate: { directory: "tools" } }],
         },
         {
           label: "Project",
