@@ -34,7 +34,9 @@ Recovery` are the top two internal entries, in that order. External entries
 keep their exact positions, other internal systems keep their relative order
 below the two Ojuny entries, and nothing changes when the order is already
 correct. If Windows resets the order, boot Ojuny once from the firmware menu and
-the service restores it.
+the service restores it. The installer applies the same placement once after
+`nixos-install`, restoring the order it captured before the install, so the
+one-time move to the top done by `bootctl install` is undone.
 
 ```console
 $ ojuny recovery status
