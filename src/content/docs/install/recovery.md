@@ -29,9 +29,12 @@ boot-from-file option or a live USB in that case.
 
 ## Boot order
 
-The boot order service keeps `Linux Boot Manager`, `Ojuny Recovery` and
-`Windows Boot Manager` in that order. If Windows resets the order, boot Ojuny
-once from the firmware menu and the service restores it.
+The boot order service asserts only that `Linux Boot Manager` and `Ojuny
+Recovery` are the top two internal entries, in that order. External entries
+keep their exact positions, other internal systems keep their relative order
+below the two Ojuny entries, and nothing changes when the order is already
+correct. If Windows resets the order, boot Ojuny once from the firmware menu and
+the service restores it.
 
 ```console
 $ ojuny recovery status
