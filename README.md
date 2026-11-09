@@ -175,3 +175,4 @@ The site is GPL-3.0. Base16 palette data is MIT licensed and attributed in
 
 Ojuny is written with AI in the loop. The code is still read, tested, and
 reviewed. The rule is not "trust the model"; it is "read the diff."
+
