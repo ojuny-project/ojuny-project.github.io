@@ -1,0 +1,67 @@
+---
+import { variantBySlug } from "../../data/variants";
+import { schemeById } from "../../scripts/theme";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const variant = variantBySlug(slug);
+
+if (!variant) throw new Error(`Unknown Ojuny variant: ${slug}`);
+
+const scheme = schemeById(variant.defaultScheme);
+const base = import.meta.env.BASE_URL;
+const swatches = scheme
+  ? ["base08", "base0a", "base0b", "base0c", "base0d", "base0e"].map(
+      (key) => scheme.palette[key],
+    )
+  : [];
+---
+
+<section
+  class="ojuny-variant-hero ojuny-hero-console"
+  aria-labelledby={`ojuny-variant-${slug}-title`}
+>
+  <div class="console-screen">
+    <div class="console-glow" aria-hidden="true"></div>
+
+    <div class="console-content">
+      <span class="console-badge">Living room edition</span>
+
+      <h1 id={`ojuny-variant-${slug}-title`}>{variant.name}</h1>
+
+      <p class="console-tagline">{variant.tagline}</p>
+      <p class="console-lead">{variant.description}</p>
+
+      <div class="console-actions">
+        <a class="console-button" href={`${base}${slug}/docs/overview/`}>
+          Open the manual
+        </a>
+        <a class="console-button ghost" href={base}>
+          Ojuny
+        </a>
+      </div>
+
+      <dl class="console-stats">
+        {variant.facts.map((fact, index) => (
+          <div>
+            <dt>{String(index + 1).padStart(2, "0")}</dt>
+            <dd>{fact}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <footer class="console-foot">
+      <div class="console-scheme">
+        <span>Default scheme</span>
+        <strong>{scheme?.name ?? variant.defaultScheme}</strong>
+        <span class="ojuny-scheme-swatches" aria-hidden="true">
+          {swatches.map((color) => <span style={`--swatch: ${color}`}></span>)}
+        </span>
+      </div>
+    </footer>
+  </div>
+</section>

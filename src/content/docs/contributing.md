@@ -44,24 +44,30 @@ There is no release schedule. See the status page for what is tested.
 
 ## Public copy rules
 
-- Prefer **wrapper around NixOS**, **dotfiles**, **desktop**, or
-  **configuration**. Avoid **distro**, **OS**, and **platform** in public copy.
+- Prefer **ghost distribution**, **metadistribution**, **template**, **template
+  layer**, **dotfiles**, or **configuration**. Avoid **distro**, **OS**, and
+  **platform** as loose substitutes. Use **distribution** only in the precise
+  ghost distribution or metadistribution sense.
 - Do not directly call out competing projects on public pages. Use subtle
   references and similarities, not direct comparisons.
 - Do not describe Ojuny as a fork of NixOS, a package repository, a new
   compositor, or a new shell.
 - Do not claim Ojuny has its own git host, Hydra, or Nix cache. It uses NixOS
   repositories, Flathub, and GitHub.
-- Do not describe Ojuny as a company, foundation, paid product, or
-  enterprise-supported product.
+- Do not imply paid infrastructure, a company, a foundation, a support
+  contract, or a service that the project cannot lose.
+- Do not imply a permanent maintainer or a privileged official repository. A
+  valid fork is a first-class template.
 - Do not make bold security claims. Ojuny is secure by default, not a
   security-focused product.
-- Do not claim Ojuny is anti-AI or 100 percent AI-free.
+- Do not claim Ojuny is anti-AI or 100 percent AI-free. The default install is
+  AI-free out of the box.
 - Do not claim AI-generated images, videos, animations, or audio.
 - Do not describe patches as part of core Ojuny. Patches are third-party
   content; Ojuny provides the interface and the default registry.
 - Do not claim patches are sandboxed.
-- Do not claim Ojuny ships a built-in AI agent or chatbot.
+- Do not claim core Ojuny ships an AI agent or chatbot. The agent patch is
+  optional.
 
 ## AI policy
 
@@ -71,8 +77,10 @@ There is no release schedule. See the status page for what is tested.
 - AI is used for static, targeted security analysis now; sandboxed penetration
   testing is a future possibility.
 - The rule is not "trust the model"; it is "read the diff."
-- Core Ojuny ships no explicit AI features. The development patch includes
-  `opencode`; other patches may add more.
+- Core Ojuny ships no explicit AI features. The default install is fully
+  AI-free out of the box. The development patch includes `opencode`;
+  `patch-ojuny-agent` adds the optional agent workflow; `patch-local-llm` adds
+  the local model and harness.
 - Patches that are vibe-coded must be marked in the registry.
 - Responsibility for an AI-assisted patch stays with the person who made it.
 - Contributor disclosure rules are not decided. A disclosure policy takes effect

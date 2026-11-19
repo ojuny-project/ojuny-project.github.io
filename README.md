@@ -1,10 +1,12 @@
 # ojuny-site
 
-The public site for the Ojuny project. It covers the desktop, the template,
-the installer, the CLI, patches, downloads, and troubleshooting.
+The public site for the Ojuny project. It covers the base desktop, the six
+product templates, the installer, the CLI, patches, downloads, and
+troubleshooting.
 
-Ojuny is a configuration layer for
-[MangoWM](https://github.com/mangowm/mango) and
+Ojuny is a ghost distribution and a metadistribution: a template layer over
+NixOS with no paid infrastructure and no permanent maintainer. The base desktop
+uses [MangoWM](https://github.com/mangowm/mango) and
 [Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell). The site says so plainly:
 we package and configure upstream projects instead of rewriting them.
 
@@ -70,11 +72,11 @@ arrays of those components, so the page stays easy to edit without touching the
 layout. The docs themselves remain Markdown.
 
 The homepage is a full tour: a full-height wordmark image over an animated
-hexagon field, a typewriter headline, a doctrine quote, a screenshot gallery
-with an interactive layout tour, six install paths, a NixOS benefits section,
-hardware, patches, optional agents, 360 themes, developer notes, gaming,
-virtualization, news, figures, the upstream stack, the no-funding section, and
-community links.
+hexagon field, a typewriter headline, a doctrine quote, a ghost distribution
+section, a screenshot gallery with an interactive layout tour, six install
+paths, a NixOS benefits section, hardware, patches, optional agentic use, 360
+themes, developer notes, gaming, virtualization, news, figures, the upstream
+stack, the no-funding section, and community links.
 
 Root-relative links in Markdown, such as `/getting-started/requirements/`, are
 rewritten to the configured base path after the Astro build. Author links as

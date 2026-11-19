@@ -26,6 +26,9 @@ jobs:
       - name: Type and content checks
         run: npm run check
 
+      - name: Variant registry and content checks
+        run: node scripts/check-variants.mjs
+
       - name: Docs link and frontmatter checks
         run: node scripts/check-docs.mjs
 

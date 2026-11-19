@@ -8,7 +8,7 @@ const base = import.meta.env.BASE_URL;
   id="stack"
   eyebrow="The team"
   title="The team already exists"
-  description="Ojuny does not need a dedicated company team. It is built from community projects and democratically run foundations. The stack is the team."
+  description="Ojuny does not need a dedicated company team. It is built from community projects and democratically run foundations. The base desktop and each product template compose the upstreams they need."
   action={{ label: "What is Ojuny?", href: `${base}getting-started/what-is-ojuny/` }}
   columns={3}
   items={[
@@ -46,6 +46,27 @@ const base = import.meta.env.BASE_URL;
       body: "A community base16 pipeline that turns one palette into desktop colors, fonts, and wallpapers.",
       href: "https://github.com/nix-community/stylix",
       linkLabel: "nix-community/stylix",
+    },
+    {
+      eyebrow: "Pro",
+      title: "GNOME",
+      body: "The Pro product template uses GNOME instead of MangoWM and Dux Modular Shell.",
+      href: "https://www.gnome.org",
+      linkLabel: "gnome.org",
+    },
+    {
+      eyebrow: "Console",
+      title: "gamescope",
+      body: "The Console product template runs Steam Big Picture under gamescope.",
+      href: "https://github.com/ValveSoftware/gamescope",
+      linkLabel: "ValveSoftware/gamescope",
+    },
+    {
+      eyebrow: "Infrastructure",
+      title: "Hydra",
+      body: "The Infrastructure CI product runs Hydra and a LAN cache on one headless host.",
+      href: "https://hydra.nixos.org",
+      linkLabel: "hydra.nixos.org",
     },
     {
       eyebrow: "Independence",

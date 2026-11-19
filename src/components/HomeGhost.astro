@@ -1,0 +1,87 @@
+---
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+import HomeCards from "./HomeCards.astro";
+import { VARIANTS } from "../data/variants";
+
+const base = import.meta.env.BASE_URL;
+
+const properties = [
+  {
+    eyebrow: "Infrastructure",
+    title: "No paid infrastructure",
+    body: "No Ojuny-owned server, binary cache, CI service, domain, sponsorship, or company is required. GitHub, NixOS, Flathub, and community caches carry the project.",
+  },
+  {
+    eyebrow: "Maintainer",
+    title: "Bus factor 0",
+    body: "There is no bus. If the maintainer dies, anyone can fork the repositories, declare themselves the maintainer, and continue. Bankruptcy changes nothing because there is no company to fail.",
+  },
+  {
+    eyebrow: "Forks",
+    title: "Any fork is valid",
+    body: "A fork that installs, boots, and runs is an Ojuny template. The behavioral contract makes it valid, not the brand or the official repository.",
+  },
+  {
+    eyebrow: "Official",
+    title: "Official is not privileged",
+    body: "The official repositories may not be the most popular Ojuny templates later. A fork can win on its own merits, and the project does not depend on being the winner.",
+  },
+];
+---
+
+<HomeSection id="ghost">
+  <SectionHeading
+    eyebrow="Ghost distribution"
+    title="No company. No server. No single maintainer."
+    description="Ojuny is a ghost distribution: a metadistribution with no paid infrastructure, no permanent maintainer, and no privileged official repository. The template contract is the product."
+  />
+
+  <HomeCards items={properties} columns={2} />
+
+  <div class="ojuny-ghost-layers" data-reveal>
+    <div class="ojuny-ghost-layer">
+      <span class="ojuny-ghost-layer-index">01</span>
+      <h3>NixOS</h3>
+      <p>
+        Kernel, package set, module system, and generations. Ojuny does not fork
+        it and does not ship its own copy.
+      </p>
+    </div>
+
+    <span class="ojuny-ghost-arrow" aria-hidden="true">→</span>
+
+    <div class="ojuny-ghost-layer">
+      <span class="ojuny-ghost-layer-index">02</span>
+      <h3>The template contract</h3>
+      <p>
+        The flake shape, generated machine data, settings annotations, patch
+        switch, and installer interface. This is the part Ojuny owns.
+      </p>
+    </div>
+
+    <span class="ojuny-ghost-arrow" aria-hidden="true">→</span>
+
+    <div class="ojuny-ghost-layer">
+      <span class="ojuny-ghost-layer-index">03</span>
+      <h3>Products</h3>
+      <p>
+        Base Ojuny, Pro, Console, Fleet, Minimal, Home Server, and
+        Infrastructure. Each one is a template, not a new operating system.
+      </p>
+    </div>
+  </div>
+
+  <p class="ojuny-ghost-note" data-reveal>
+    Remove the Ojuny template and the machine is still NixOS. Ojuny has no
+    kernel, package repository, binary cache, or update channel of its own.
+  </p>
+
+  <nav class="ojuny-ghost-products" aria-label="Ojuny products">
+    <span>Products built on the same contract</span>
+    <a href={base}>Ojuny</a>
+    {VARIANTS.map((variant) => (
+      <a href={`${base}${variant.slug}/`}>{variant.name}</a>
+    ))}
+  </nav>
+</HomeSection>

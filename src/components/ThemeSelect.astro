@@ -65,6 +65,7 @@
     SCHEMES,
     THEME_EVENT,
     applyScheme,
+    pageDefaultScheme,
     readStoredScheme,
     resetScheme,
     type Scheme,
@@ -91,6 +92,11 @@
     for (const picker of pickers) {
       const name = picker.querySelector<HTMLElement>("[data-theme-name]");
       if (name) name.textContent = scheme.name;
+
+      const resetLabel = picker.querySelector<HTMLElement>("[data-theme-reset]");
+      if (resetLabel) {
+        resetLabel.textContent = `Reset to ${pageDefaultScheme().name}`;
+      }
 
       const swatches = picker.querySelector<HTMLElement>(".ojuny-theme-swatches");
       if (swatches) {

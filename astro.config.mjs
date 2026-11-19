@@ -2,11 +2,26 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
 import { createCssVariablesTheme } from "shiki/core";
+import variants from "./src/data/variants.json" with { type: "json" };
 
 const site = process.env.SITE_URL ?? "https://ojuny-project.github.io";
 const base = process.env.SITE_BASE ?? "/";
 const basePath = base.endsWith("/") ? base : `${base}/`;
 const ogImage = new URL(`${basePath}og.png`, site).href;
+
+const variantLinks = variants.map((variant) => ({
+  label: variant.name,
+  link: `/${variant.slug}/`,
+}));
+
+const variantGroups = variants.map((variant) => ({
+  label: variant.name,
+  collapsed: true,
+  items: [
+    { label: `${variant.name} home`, link: `/${variant.slug}/` },
+    { autogenerate: { directory: `${variant.slug}/docs` } },
+  ],
+}));
 
 const base16Theme = createCssVariablesTheme({
   name: "base16",
@@ -28,12 +43,13 @@ export default defineConfig({
     starlight({
       title: "Ojuny",
       description:
-        "An opinionated NixOS desktop built on MangoWM and Dux Modular Shell.",
+        "A ghost distribution of NixOS: one template shape, six products, and no paid infrastructure.",
       favicon: "/favicon.svg",
       customCss: [
         "./src/styles/base16.css",
         "./src/styles/ojuny.css",
         "./src/styles/home.css",
+        "./src/styles/variants.css",
         "./src/styles/code.css",
       ],
       expressiveCode: false,
@@ -48,7 +64,9 @@ export default defineConfig({
         baseUrl: "https://github.com/ojuny-project/ojuny-site/edit/main/",
       },
       components: {
+        Head: "./src/components/Head.astro",
         Header: "./src/components/Header.astro",
+        Sidebar: "./src/components/Sidebar.astro",
         SiteTitle: "./src/components/SiteTitle.astro",
         ThemeProvider: "./src/components/ThemeProvider.astro",
         ThemeSelect: "./src/components/ThemeSelect.astro",
@@ -56,10 +74,6 @@ export default defineConfig({
       },
       pagefind: true,
       head: [
-        {
-          tag: "meta",
-          attrs: { name: "theme-color", content: "#272e33" },
-        },
         {
           tag: "meta",
           attrs: { property: "og:type", content: "website" },
@@ -103,6 +117,10 @@ export default defineConfig({
       ],
       sidebar: [
         {
+          label: "Variants",
+          items: [{ label: "Ojuny", link: "/" }, ...variantLinks],
+        },
+        {
           label: "Getting started",
           items: [{ autogenerate: { directory: "getting-started" } }],
         },
@@ -130,6 +148,7 @@ export default defineConfig({
           label: "Tools",
           items: [{ autogenerate: { directory: "tools" } }],
         },
+        ...variantGroups,
         {
           label: "Project",
           items: [

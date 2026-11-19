@@ -1,0 +1,32 @@
+---
+import { variantBySlug } from "../data/variants";
+import ProHero from "./variant-heroes/ProHero.astro";
+import ConsoleHero from "./variant-heroes/ConsoleHero.astro";
+import FleetHero from "./variant-heroes/FleetHero.astro";
+import MinimalHero from "./variant-heroes/MinimalHero.astro";
+import HomeServerHero from "./variant-heroes/HomeServerHero.astro";
+import InfrastructureHero from "./variant-heroes/InfrastructureHero.astro";
+import VariantNotice from "./VariantNotice.astro";
+import VariantLanding from "./VariantLanding.astro";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+
+if (!variantBySlug(slug)) {
+  throw new Error(`Unknown Ojuny variant: ${slug}`);
+}
+---
+
+<VariantNotice slug={slug} />
+
+{slug === "pro" && <ProHero slug={slug} />}
+{slug === "console" && <ConsoleHero slug={slug} />}
+{slug === "fleet" && <FleetHero slug={slug} />}
+{slug === "minimal" && <MinimalHero slug={slug} />}
+{slug === "home-server" && <HomeServerHero slug={slug} />}
+{slug === "infrastructure" && <InfrastructureHero slug={slug} />}
+
+<VariantLanding slug={slug} />

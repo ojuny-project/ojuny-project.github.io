@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/prefix-base.mjs",
+    "build": "node scripts/check-variants.mjs && astro build && node scripts/prefix-base.mjs",
     "preview": "astro preview",
     "check": "astro check",
+    "check:variants": "node scripts/check-variants.mjs",
     "update:base16": "node scripts/update-base16.mjs",
     "og": "node scripts/make-og.mjs",
     "wallpaper:preview": "node scripts/make-wallpaper-preview.mjs"

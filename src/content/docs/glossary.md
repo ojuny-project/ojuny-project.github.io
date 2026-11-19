@@ -14,20 +14,39 @@ the reference.
 
 ## Project
 
-**Ojuny**: The project and the desktop experience it provides. Capitalize it in
+**Ojuny**: The project and the product family it provides. Capitalize it in
 prose.
 
 **`ojuny`**: The lowercase spelling used in commands, option prefixes, and
 repository names.
 
-**Wrapper around NixOS**: The most accurate short description. Ojuny is a
+**Ghost distribution**: A distribution with no paid infrastructure, no
+permanent maintainer, and no privileged official repository. Ojuny is a ghost
+distribution. A fork can declare a new maintainer and continue without
+permission.
+
+**Metadistribution**: A distribution that does not own the kernel, package set,
+binary cache, or update channel. It owns the template contract and the product
+composition. Ojuny is a metadistribution over NixOS.
+
+**Template**: The flake shape, generated machine files, settings annotations,
+patch switch, and installer interface. The template is the product.
+
+**Product**: One template in the Ojuny family. The base desktop, Pro, Console,
+Fleet, Minimal, Home Server, and Infrastructure are products.
+
+**Valid fork**: A fork of a template that installs, boots, and runs under the
+same behavioral contract. A valid fork is a first-class template.
+
+**Wrapper around NixOS**: A short technical description. Ojuny is a
 configuration and packaging layer, not a fork of NixOS.
 
 **Dotfiles**: The public framing. Ojuny is a dotfiles setup that can also build
 an ISO, deploy a machine, and provide a settings menu.
 
 **SDG / `ojuny-project`**: SDG makes Ojuny. The public repositories are
-published under the `ojuny-project` organization on GitHub.
+published under the `ojuny-project` organization on GitHub. The role is not a
+dependency on SDG.
 
 ## Desktop
 
@@ -109,6 +128,10 @@ exclusive to Ojuny.
 
 **Patch registry**: The default source for patches. Entries are reviewed, but
 each patch remains third-party content.
+
+**Agent patch**: The optional `patch-ojuny-agent` registry patch. It adds
+`ojuny-agent`, `ojuny-assist`, and `ojuny-agent-cli`. The default install ships
+no agent.
 
 **Third-party content**: Patches, including those in the default registry.
 Ojuny provides the interface and does not own the patches.

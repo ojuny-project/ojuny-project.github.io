@@ -1,15 +1,63 @@
 ---
 title: The Ojuny Doctrine
-description: Seven rules for a desktop you can read, rebuild, and hand to someone else.
+description: Nine rules for a ghost distribution you can read, fork, rebuild, and hand to someone else.
 ---
 
 <!-- unreleased-marker -->
 > **Unreleased.** Ojuny is not released. This page is unreviewed, may contain placeholders, and is subject to change without notice.
 
-Ojuny is a response to the usual Linux desktop setup: a pile of dotfiles, a
-wiki, and a prayer. The doctrine is the part we try not to compromise.
+Ojuny is a response to the usual Linux system setup: a pile of dotfiles, a
+wiki, and a prayer. It is also a deliberate answer to the question of who owns
+the project after the first maintainer. The doctrine is the part we try not to
+compromise.
 
-## 1. Generalized
+## What a ghost distribution is
+
+A ghost distribution has no paid infrastructure and no permanent maintainer. It
+has no company, foundation, server, binary cache, CI service, domain, or
+sponsorship that the project cannot lose. The repositories are the project.
+
+The bus factor is zero because there is no bus. If the maintainer dies, anyone
+can fork the repositories, declare themselves the maintainer, and continue. If
+the maintainer goes bankrupt, nothing changes, because there is no company to
+fail and no paid service to switch off.
+
+A fork of the template is itself a valid template when it meets the behavioral
+contract: the installer can install it, the setup script can install it, and
+the installed system boots and runs. The official repositories have no
+permanent privilege. Ojuny's own repositories may not be the most popular Ojuny
+templates after a while, and that is acceptable.
+
+Ojuny is also a metadistribution. It does not own the kernel, the package set,
+the binary cache, or the update channel. It owns the template contract and the
+product composition. The distribution underneath is NixOS. Remove the Ojuny
+template and the machine is still NixOS.
+
+The products are the base desktop, Pro, Console, Fleet, Minimal, Home Server,
+and Infrastructure. Each one is a template, not a new operating system.
+
+## 1. Ghost distribution
+
+No paid infrastructure, no permanent maintainer, and no privileged official
+repository. A fork that meets the contract is a first-class Ojuny template. The
+project must remain buildable, installable, and forkable without permission
+from a company or a named person.
+
+This rule outranks branding. If a decision makes the project depend on one
+server, one account, one paid service, or one maintainer, the decision is
+wrong.
+
+## 2. Template first
+
+The product is the flake and the template, not an Ojuny-owned image. The
+template defines the generated machine files, the settings annotations, the
+patch switch, and the installer interface. The base desktop and every product
+template follow the same behavioral contract.
+
+A product is not a fork of NixOS. It is a composition of upstream projects
+behind one template shape.
+
+## 3. Generalized
 
 No user names, hostnames, disk UUIDs, SSH keys, hashed passwords, personal
 paths, or personal repositories are hand-written into tracked files. Those
@@ -20,25 +68,33 @@ A fresh fork contains no personal data. This is both a privacy property and a
 handover property: a configuration can be shared without leaking the person who
 made it.
 
-## 2. Settings-menu first
+## 4. The menu is the design surface
 
-The settings menu is the primary design surface. A setting a normal user would
-want is designed as a page and a control before the Nix is written.
+The settings menu is the primary design surface where a product has a GUI. A
+setting a normal user would want is designed as a page and a control before the
+Nix is written.
 
 Not every user-facing setting has a page. Some stay advanced, hidden, or
 unexposed, but everything a normal user would want as a setting is exposed.
 Normal options must never be able to break the system.
 
-## 3. One file per page
+Headless products such as Fleet, Minimal, and Infrastructure expose the same
+options through their supported surfaces. A product without a GUI is still
+expected to have a readable option tree.
+
+## 5. One file per page, names carry ordering
 
 One settings page equals one file and one `@menu`. The NixOS module, Home
 Manager module, packages, services, and options for that page live in the same
 file. The file may grow. The boundary stays obvious.
 
-A reader who wants to understand a page reads one file. A contributor who wants
-to add a page creates one file. There is no central registry.
+Folders and menu categories are numbered. The GUI prints the `@menu` category
+string verbatim and sorts by that string, then by the page's `@menu` order and
+display name. A reader who wants to understand a page reads one file. A
+contributor who wants to add a page creates one file. There is no central
+registry.
 
-## 4. Dendritic
+## 6. Dendritic
 
 flake-parts and import-tree compose the flake from small modules. A page is a
 module. A host imports the pages it wants. The settings menu follows the import
@@ -47,15 +103,7 @@ graph.
 There is no central registry to update when a page is added. Composition
 replaces enumeration.
 
-## 5. Names carry ordering
-
-Folders and menu categories are numbered. The GUI ignores folder and file
-names: it prints the `@menu` category string verbatim and sorts by that string,
-then by the page's `@menu` order and display name. So `01-Users` and `07-System`
-have a predictable place, and the order is visible in the repository and in the
-menu.
-
-## 6. Generated, not committed
+## 7. Generated, not committed
 
 Personal and machine-specific files are generated. `hardware.nix` comes from
 the detected hardware. Hardware quirks come from the detected profile. The user
@@ -64,16 +112,38 @@ module comes from the account prompts. The tracked defaults stay neutral.
 The interesting parts of a system are reproducible. The personal parts are
 deliberately local.
 
-## 7. Upstream first
+## 8. Upstream, not rewritten
 
-Ojuny is a configuration layer. The compositor is
-[MangoWM](https://github.com/mangowm/mango). The shell is
-[Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell). We configure and package
-them; we do not fork them, we do not pretend to have written them, and we do not
-grow a custom compositor to avoid reading their docs.
+Ojuny is a configuration and packaging layer. The base desktop uses
+[MangoWM](https://github.com/mangowm/mango) and
+[Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell). Pro uses GNOME.
+Console uses gamescope and Steam. Infrastructure uses Hydra and the Nix cache
+tools. We configure and package upstream projects; we do not fork them, we do
+not pretend to have written them, and we do not grow a custom component to
+avoid reading their docs.
 
-This is a scope discipline. It keeps the project small and makes the upstream
-projects the place to fix upstream problems.
+Product-specific upstreams are allowed when the product requires them. The rule
+is still to use the upstream instead of a private replacement.
+
+## 9. Agent-ready, not agent-run
+
+The default install is fully AI-free out of the box. It ships no model server,
+no agent, no assistant, and no telemetry. AI is an option the user adds.
+
+The optional `patch-ojuny-agent` adds a full agentic workflow through
+`ojuny-agent`, `ojuny-assist`, and `ojuny-agent-cli`. `patch-local-llm` adds the
+local model server and harness. The patch does not enable itself.
+
+The safety boundary is the flake. An agent can read the flake, propose a
+setting change, edit inside the flake with explicit approval, validate the
+change, show a Git diff, and revert it. It cannot rebuild, activate a
+generation, use `sudo`, install packages, or change services. Generated
+hardware, account, and secret files are denied even inside the flake. The user
+owns the rebuild.
+
+This is why the NixOS base matters. Declarative configuration, Git, validation,
+and generations make full agentic use possible without giving an agent broad or
+superuser permissions.
 
 ## Why Nix
 
@@ -87,7 +157,7 @@ rolling-release system.
 
 A user can change the whole system from one declarative configuration. Changes
 can be traced, reviewed, and reverted. The project accepts the Nix learning
-curve because the result is a desktop that can be reproduced and handed over.
+curve because the result is a system that can be reproduced and handed over.
 
 The system is declarative, so it does not change until the declarations change.
 Identical operation does not mean indefinite compatibility with external
@@ -112,15 +182,15 @@ debugging, code analysis, testing, and code translation. Most of Ojuny is based
 on the maintainer's own human-authored NixOS setup; AI helps translate a
 finished human design into code.
 
-Core Ojuny ships no bundled agent or chatbot and no explicit AI features. The
-opt-in development patch includes opencode, and other patches may add AI. Ojuny
-never ships AI-generated images, videos, animations, or audio. It does not claim
-to be anti-AI or 100 percent AI-free.
+The default install ships no model, no agent, and no assistant. It is fully
+AI-free out of the box. The project itself uses AI as a tool in development and
+does not claim to be 100 percent AI-free. It never ships AI-generated images,
+videos, animations, or audio.
 
-The rule is not "trust the model"; it is "read the diff." For patches, that
-means security is the user's concern. Vibe-coded patches must be marked in the
-registry. Responsibility for an AI-assisted patch stays with the person who
-made it.
+The optional agent patch is described in [Agentic Ojuny](/configuration/agentic/).
+The rule is not "trust the model"; it is "read the diff." For patches, security
+is the user's concern. Vibe-coded patches must be marked in the registry.
+Responsibility for an AI-assisted patch stays with the person who made it.
 
 When Ojuny says "by SDG," it means by SDG, not by a model.
 
@@ -134,14 +204,19 @@ development choices.
 Secure defaults include SSH server disabled, secure password requirements
 during install, a firewall enabled with no open ports, sandboxed builds,
 sandboxed apps, an immutable core, and rollback. A regular user should not have
-to review settings after install to be secure. Security is secure by default but
-not guaranteed, and it is a conscious choice the user keeps making with every
-change.
+to review settings after install to be secure. Security is secure by default
+but not guaranteed, and it is a conscious choice the user keeps making with
+every change.
 
 The primary risk Ojuny introduces is malicious patches. Patches are third-party
 Nix code with build privileges and no sandbox. Ojuny provides the interface and
 the default registry, not the patches themselves. The registry is reviewed, but
 the final trust decision belongs to the user. Read the diff.
+
+The optional agent patch keeps the same boundary. The agent can change the
+flake, not the running system. The change is a Git diff, it is validated, and
+the user rebuilds. The agent does not receive `sudo`, package installation, or
+service control.
 
 Ojuny has no core secrets store. A secrets store is an opt-in patch
 (`patch-secrets`), not core. Do not put secrets in a patch repository, and
@@ -156,6 +231,10 @@ Changes are reviewable and revertible.
 The user owns the system and its configuration. Ojuny owns only the published
 source repositories and the main patch repository.
 
+Maintainership is a role, not a dependency. A fork can declare a new
+maintainer, keep the template contract, and continue. The official repository
+has no permanent claim on the name, the users, or the direction of the project.
+
 > When you install ojuny, that is not my desktop. It is yours.
 
 If it needs to persist, save it to the flake. The forked git repository is the
@@ -164,15 +243,17 @@ installation, and the reverse is also true.
 
 ## The paper cuts
 
-The result is a reproducible system. It is a desktop that can be read
-by a person who did not write it, rebuilt by a person who has never seen the
-machine, and handed to someone else without your secrets coming with it.
+The result is a reproducible system. It is a system that can be read by a
+person who did not write it, rebuilt by a person who has never seen the
+machine, and handed to someone else without your secrets coming with it. It is
+also a system that can outlive its first maintainer.
 
 We can fix every paper cut. We just do it declaratively.
 
 ## See also
 
 - [What is Ojuny?](/getting-started/what-is-ojuny/)
+- [Agentic Ojuny](/configuration/agentic/)
 - [Template layout](/configuration/template-layout/)
 - [Settings menu](/configuration/settings-gui/)
 - [Contributing](/contributing/)

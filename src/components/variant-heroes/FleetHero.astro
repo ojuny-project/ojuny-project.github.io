@@ -1,0 +1,77 @@
+---
+import { variantBySlug } from "../../data/variants";
+import { schemeById } from "../../scripts/theme";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const variant = variantBySlug(slug);
+
+if (!variant) throw new Error(`Unknown Ojuny variant: ${slug}`);
+
+const scheme = schemeById(variant.defaultScheme);
+const base = import.meta.env.BASE_URL;
+const swatches = scheme
+  ? ["base08", "base0a", "base0b", "base0c", "base0d", "base0e"].map(
+      (key) => scheme.palette[key],
+    )
+  : [];
+
+const panels = [
+  { code: "OFC", name: "Controller", detail: "Host, deployment, cache" },
+  { code: "OFM", name: "Manager", detail: "Web interface and policy" },
+  { code: "EP", name: "Endpoint", detail: "Integrated managed template" },
+];
+---
+
+<section
+  class="ojuny-variant-hero ojuny-hero-fleet"
+  aria-labelledby={`ojuny-variant-${slug}-title`}
+>
+  <div class="fleet-shell">
+    <header class="fleet-top">
+      <span class="fleet-brand">Ojuny Fleet / Control plane</span>
+      <span class="fleet-state"><i aria-hidden="true"></i>Control plane</span>
+    </header>
+
+    <div class="fleet-body">
+      <div class="fleet-copy">
+        <p class="fleet-kicker">OFC / OFM / ENDPOINT</p>
+
+        <h1 id={`ojuny-variant-${slug}-title`}>{variant.name}</h1>
+
+        <p class="fleet-tagline">{variant.tagline}</p>
+        <p class="fleet-lead">{variant.description}</p>
+
+        <div class="fleet-actions">
+          <a class="fleet-button" href={`${base}${slug}/docs/overview/`}>
+            Read the fleet docs
+          </a>
+          <a class="fleet-link" href={base}>Ojuny</a>
+        </div>
+      </div>
+
+      <div class="fleet-panels">
+        {panels.map((panel) => (
+          <article class="fleet-panel">
+            <span class="fleet-panel-code">{panel.code}</span>
+            <strong>{panel.name}</strong>
+            <small>{panel.detail}</small>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <footer class="fleet-foot">
+      <div class="fleet-scheme">
+        <span>Default scheme</span>
+        <strong>{scheme?.name ?? variant.defaultScheme}</strong>
+        <span class="ojuny-scheme-swatches" aria-hidden="true">
+          {swatches.map((color) => <span style={`--swatch: ${color}`}></span>)}
+        </span>
+      </div>
+    </footer>
+  </div>
+</section>

@@ -1,26 +1,65 @@
 ---
+import { VARIANTS } from "../data/variants";
+import { schemeById } from "../scripts/theme";
+
+const basePath = import.meta.env.BASE_URL;
+
+const variantSchemes = Object.fromEntries(
+  VARIANTS.flatMap((variant) => {
+    const scheme = schemeById(variant.defaultScheme);
+    return scheme ? [[variant.slug, scheme]] : [];
+  }),
+);
 ---
+
+<script
+  type="application/json"
+  id="ojuny-variant-defaults"
+  data-base={basePath}
+  set:html={JSON.stringify(variantSchemes)}
+/>
 
 <script is:inline>
   (() => {
     const storageKey = "ojuny.base16";
     const root = document.documentElement;
     const themeColor = document.querySelector('meta[name="theme-color"]');
-    let scheme = null;
+    const defaultsElement = document.getElementById("ojuny-variant-defaults");
+
+    const basePath = defaultsElement?.dataset.base || "/";
+    let variantSchemes = {};
 
     try {
-      scheme = JSON.parse(localStorage.getItem(storageKey) || "null");
+      variantSchemes = JSON.parse(defaultsElement?.textContent || "{}");
     } catch {
-      scheme = null;
+      variantSchemes = {};
     }
 
-    if (
-      scheme &&
-      typeof scheme === "object" &&
-      (scheme.variant === "dark" || scheme.variant === "light") &&
-      scheme.palette &&
-      typeof scheme.palette === "object"
-    ) {
+    let path = window.location.pathname;
+    if (basePath !== "/" && path.startsWith(basePath)) {
+      path = path.slice(basePath.length);
+    }
+
+    const slug = path.split("/").filter(Boolean)[0] || "";
+    const variantScheme = variantSchemes[slug] || null;
+
+    let stored = null;
+    try {
+      stored = JSON.parse(localStorage.getItem(storageKey) || "null");
+    } catch {
+      stored = null;
+    }
+
+    const hasStored =
+      stored &&
+      typeof stored === "object" &&
+      (stored.variant === "dark" || stored.variant === "light") &&
+      stored.palette &&
+      typeof stored.palette === "object";
+
+    const scheme = hasStored ? stored : variantScheme;
+
+    if (scheme) {
       for (const [key, value] of Object.entries(scheme.palette)) {
         if (/^base0[0-9a-f]$/i.test(key) && /^#[0-9a-f]{6}$/i.test(value)) {
           root.style.setProperty(`--${key.toLowerCase()}`, value);
@@ -29,6 +68,7 @@
       root.dataset.theme = scheme.variant;
       root.dataset.scheme = scheme.id;
       root.style.colorScheme = scheme.variant;
+      if (variantScheme) root.dataset.variant = slug;
       if (themeColor && typeof scheme.palette.base00 === "string") {
         themeColor.setAttribute("content", scheme.palette.base00);
       }

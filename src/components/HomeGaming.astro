@@ -7,25 +7,25 @@ const base = import.meta.env.BASE_URL;
 <HomeCardsSection
   id="gaming"
   eyebrow="Gaming"
-  title="SteamOS mode, one toggle"
-  description="The base install is lean. Patches add what you need. When you want a console-like session, enable the Gamescope session in the Gaming page and log into Steam Big Picture."
-  action={{ label: "Application pages", href: `${base}desktop/apps/` }}
+  title="A console product, or a gaming desktop"
+  description="The base desktop keeps gaming optional. Ojuny Console is a separate product template that boots into Steam Big Picture under gamescope. The desktop can still add a Gamescope session with a patch."
+  action={{ label: "Console product", href: `${base}console/` }}
   columns={2}
   items={[
     {
-      eyebrow: "Lean",
+      eyebrow: "Base desktop",
       title: "Lean by default",
-      body: "Steam, Proton GE, GameMode, and compatibility tools are one toggle away.",
+      body: "Steam, Proton GE, GameMode, and compatibility tools are one toggle away on the base desktop.",
     },
     {
       eyebrow: "Console",
-      title: "Steam Big Picture",
-      body: "Enable the Gamescope session in the menu to boot straight into Steam Big Picture.",
+      title: "A separate product",
+      body: "Console is its own template and installer. It starts in Steam Big Picture with a controller-first settings frontend.",
     },
     {
-      eyebrow: "Both modes",
-      title: "One install",
-      body: "The desktop session stays. The Gamescope session is an additional login option, not a second system.",
+      eyebrow: "Contract",
+      title: "Same template shape",
+      body: "Console follows the same template contract as the base desktop, with its own session layer and install media.",
     },
     {
       eyebrow: "Gaps",

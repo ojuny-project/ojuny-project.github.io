@@ -1,0 +1,186 @@
+---
+import { variantBySlug } from "../data/variants";
+import { VARIANT_CONTENT } from "../data/variant-content";
+import { schemeById } from "../scripts/theme";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const variant = variantBySlug(slug);
+
+if (!variant) throw new Error(`Unknown Ojuny variant: ${slug}`);
+
+const content = VARIANT_CONTENT[slug];
+
+if (!content) throw new Error(`Missing landing content for Ojuny variant: ${slug}`);
+
+const scheme = schemeById(variant.defaultScheme);
+const base = import.meta.env.BASE_URL;
+const swatches = scheme
+  ? ["base08", "base0a", "base0b", "base0c", "base0d", "base0e"].map(
+      (key) => scheme.palette[key],
+    )
+  : [];
+
+const docHref = (page: string) => `${base}${slug}/docs/${page}/`;
+---
+
+<div class="ojuny-landing" data-variant={slug}>
+  <section class="ojuny-landing-section ojuny-landing-intro">
+    <div class="ojuny-landing-inner">
+      <div class="ojuny-landing-copy">
+        <p class="ojuny-landing-kicker">{content.intro.kicker}</p>
+        <h2>{content.intro.title}</h2>
+        {content.intro.body.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+
+      <dl class="ojuny-landing-stats">
+        {content.intro.stats.map((stat) => (
+          <div>
+            <dt>{stat.value}</dt>
+            <dd>{stat.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="ojuny-landing-section ojuny-landing-capabilities">
+    <div class="ojuny-landing-inner">
+      <header class="ojuny-landing-head">
+        <p class="ojuny-landing-kicker">Capabilities</p>
+        <h2>What the product does.</h2>
+      </header>
+
+      <div class="ojuny-landing-cards">
+        {content.capabilities.map((item, index) => (
+          <article class="ojuny-landing-card">
+            <span class="ojuny-landing-index">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ojuny-landing-section ojuny-landing-workflow">
+    <div class="ojuny-landing-inner">
+      <header class="ojuny-landing-head">
+        <p class="ojuny-landing-kicker">Workflow</p>
+        <h2>How it runs.</h2>
+      </header>
+
+      <ol class="ojuny-landing-steps">
+        {content.workflow.map((step, index) => (
+          <li>
+            <span class="ojuny-landing-index">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="ojuny-landing-section ojuny-landing-install">
+    <div class="ojuny-landing-inner">
+      <header class="ojuny-landing-head">
+        <p class="ojuny-landing-kicker">Install</p>
+        <h2>Pick the path that fits.</h2>
+      </header>
+
+      <div class="ojuny-landing-install-grid">
+        {content.install.map((item) => (
+          <a class="ojuny-landing-install-card" href={docHref(item.page)}>
+            <span class="ojuny-landing-index">Install path</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            <span class="ojuny-landing-card-link">
+              Read the path
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ojuny-landing-section ojuny-landing-boundaries">
+    <div class="ojuny-landing-inner ojuny-landing-split">
+      <div>
+        <p class="ojuny-landing-kicker">Requirements</p>
+        <h2>What it needs.</h2>
+        <ul class="ojuny-landing-list">
+          {content.requirements.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div>
+        <p class="ojuny-landing-kicker">Boundaries</p>
+        <h2>What it does not do.</h2>
+        <ul class="ojuny-landing-list">
+          {content.limits.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ojuny-landing-section ojuny-landing-scheme">
+    <div class="ojuny-landing-inner ojuny-landing-scheme-inner">
+      <div>
+        <p class="ojuny-landing-kicker">Default scheme</p>
+        <h2>{scheme?.name ?? variant.defaultScheme}</h2>
+        <p>
+          The whole product and this page share one base16 palette. Change it
+          from the picker in the header, or keep the default and make the
+          product your own.
+        </p>
+      </div>
+
+      <div class="ojuny-landing-swatches" aria-hidden="true">
+        {swatches.map((color) => <span style={`--swatch: ${color}`}></span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="ojuny-landing-section ojuny-landing-docs">
+    <div class="ojuny-landing-inner">
+      <header class="ojuny-landing-head">
+        <p class="ojuny-landing-kicker">Documentation</p>
+        <h2>Documentation.</h2>
+      </header>
+
+      <div class="ojuny-landing-docs-grid">
+        {content.docs.map((item) => (
+          <a class="ojuny-landing-doc" href={docHref(item.page)}>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            <span class="ojuny-landing-card-link">
+              Open
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        ))}
+
+        <a class="ojuny-landing-doc" href={docHref("tools")}>
+          <h3>Tools</h3>
+          <p>The Ojuny-specific tooling included with this product.</p>
+          <span class="ojuny-landing-card-link">
+            Open
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>

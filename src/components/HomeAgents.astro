@@ -1,36 +1,71 @@
 ---
-import HomeCardsSection from "./HomeCardsSection.astro";
+import HomeSection from "./HomeSection.astro";
+import SectionHeading from "./SectionHeading.astro";
+import HomeCards from "./HomeCards.astro";
 
 const base = import.meta.env.BASE_URL;
+
+const items = [
+  {
+    eyebrow: "Default",
+    title: "AI-free out of the box",
+    body: "The default install ships no model server, no agent, no chat UI, and no telemetry. It is fully AI-free out of the box.",
+  },
+  {
+    eyebrow: "Maintenance",
+    title: "ojuny-agent",
+    body: "The maintenance agent edits inside the flake only with explicit approval. It validates every change, shows the diff, can revert, and can sync the flake git.",
+  },
+  {
+    eyebrow: "Explain",
+    title: "ojuny-assist",
+    body: "The read-only explainer answers questions about Ojuny, the settings menu, patches, and the flake. It cannot edit, sync, revert, rebuild, or mutate anything.",
+  },
+  {
+    eyebrow: "Interface",
+    title: "ojuny-agent-cli",
+    body: "The flake-safe CLI is read-only by default. Mutating commands require --yes, never accept --flake, and never push.",
+  },
+  {
+    eyebrow: "Local model",
+    title: "patch-local-llm",
+    body: "Adds the local model server, the Nix-managed harness, and the LSP wiring for a fully local agent stack.",
+  },
+  {
+    eyebrow: "Safety",
+    title: "Designed for agents",
+    body: "The flake is the boundary. Agents work in a Git diff and validate before the user rebuilds. They never get sudo, rebuild, package, or service control.",
+  },
+];
 ---
 
-<HomeCardsSection
-  id="agents"
-  eyebrow="Agents"
-  title="No agent required"
-  description="Ojuny ships no agentic functionality out of the box. It also does not get in your way. The CLI, patches, and Nix make LLM-assisted troubleshooting safer: changes go through the flake and a rebuild, not a silent mutation of a running system."
-  action={{ label: "Read the doctrine", href: `${base}doctrine/` }}
-  columns={2}
-  items={[
-    {
-      eyebrow: "Optional",
-      title: "Your call",
-      body: "No bundled chatbot, no forced workflow. Use an agent or do not. The desktop works either way.",
-    },
-    {
-      eyebrow: "Interfaces",
-      title: "Easy to add",
-      body: "The CLI and patches are plain, inspectable interfaces. An agent can use them without a private API.",
-    },
-    {
-      eyebrow: "Safety",
-      title: "Safer troubleshooting",
-      body: "An agent can inspect and propose. The system still evaluates the diff and rebuilds. Nothing silently mutates the running machine.",
-    },
-    {
-      eyebrow: "Review",
-      title: "Read the diff",
-      body: "The rule is not trust the model; it is read the diff.",
-    },
-  ]}
-/>
+<HomeSection id="agents">
+  <SectionHeading
+    eyebrow="Agentic use"
+    title="AI-free out of the box. Agentic on request."
+    description="Ojuny is built to be agent-ready without shipping an agent. The optional patch adds a full agentic workflow that works inside the flake instead of handing an agent the machine."
+    action={{ label: "Read the agent docs", href: `${base}configuration/agentic/` }}
+  />
+
+  <HomeCards items={items} columns={3} />
+
+  <div class="ojuny-agent-install" data-reveal>
+    <div>
+      <p class="ojuny-eyebrow">Install the agent patch</p>
+      <h3>One patch, then the normal rebuild.</h3>
+      <p>
+        The patch does not enable itself. Install it, turn on Development and
+        Ojuny agent in Patches, then rebuild. The agent works on the flake, not
+        on the running system.
+      </p>
+    </div>
+
+    <pre><code>ojuny-patches sync
+ojuny-patches install patch-ojuny-agent</code></pre>
+  </div>
+
+  <p class="ojuny-agent-note" data-reveal>
+    The default install is fully AI-free out of the box. Ojuny uses AI as a
+    tool in its own development and does not claim to be 100 percent AI-free.
+  </p>
+</HomeSection>

@@ -1,0 +1,22 @@
+---
+import { variantBySlug } from "../data/variants";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const variant = variantBySlug(slug);
+
+if (!variant) {
+  throw new Error(`Unknown Ojuny variant: ${slug}`);
+}
+---
+
+<div class="ojuny-variant-notice" role="note">
+  <strong>Unreleased.</strong>
+  <span>
+    Ojuny {variant.name} is not released. These pages are unreviewed, may
+    contain placeholders, and are subject to change without notice.
+  </span>
+</div>

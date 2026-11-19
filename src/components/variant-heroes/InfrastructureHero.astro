@@ -1,0 +1,86 @@
+---
+import { variantBySlug } from "../../data/variants";
+import { schemeById } from "../../scripts/theme";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const variant = variantBySlug(slug);
+
+if (!variant) throw new Error(`Unknown Ojuny variant: ${slug}`);
+
+const scheme = schemeById(variant.defaultScheme);
+const base = import.meta.env.BASE_URL;
+const swatches = scheme
+  ? ["base08", "base0a", "base0b", "base0c", "base0d", "base0e"].map(
+      (key) => scheme.palette[key],
+    )
+  : [];
+
+const roles = [
+  {
+    code: "01 / PENTEST",
+    name: "Security lab",
+    detail: "A disposable target, a mediated tool runner, and verified findings for human triage.",
+    href: `/infrastructure/docs/pentest-server/`,
+  },
+  {
+    code: "02 / CI",
+    name: "Build server",
+    detail: "Hydra and nix-cache-discovery on one headless host, configured from a workstation.",
+    href: `/infrastructure/docs/ci-server/`,
+  },
+];
+---
+
+<section
+  class="ojuny-variant-hero ojuny-hero-infra"
+  aria-labelledby={`ojuny-variant-${slug}-title`}
+>
+  <div class="infra-shell">
+    <header class="infra-top">
+      <span>Ojuny / Infrastructure</span>
+      <span>Pentest + CI</span>
+    </header>
+
+    <div class="infra-body">
+      <div class="infra-copy">
+        <p class="infra-kicker">Server line</p>
+
+        <h1 id={`ojuny-variant-${slug}-title`}>{variant.name}</h1>
+
+        <p class="infra-tagline">{variant.tagline}</p>
+        <p class="infra-lead">{variant.description}</p>
+
+        <div class="infra-actions">
+          <a class="infra-button" href={`${base}${slug}/docs/overview/`}>
+            Read the server docs
+          </a>
+          <a class="infra-link" href={base}>Ojuny</a>
+        </div>
+      </div>
+
+      <div class="infra-roles">
+        {roles.map((role) => (
+          <a class="infra-role" href={`${base}${role.href.replace(/^\//, "")}`}>
+            <span class="infra-role-code">{role.code}</span>
+            <strong>{role.name}</strong>
+            <p>{role.detail}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <footer class="infra-foot">
+      <div class="infra-scheme">
+        <span>Default scheme</span>
+        <strong>{scheme?.name ?? variant.defaultScheme}</strong>
+        <span class="ojuny-scheme-swatches" aria-hidden="true">
+          {swatches.map((color) => <span style={`--swatch: ${color}`}></span>)}
+        </span>
+      </div>
+    </footer>
+  </div>
+</section>

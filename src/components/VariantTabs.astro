@@ -1,0 +1,68 @@
+---
+import { VARIANTS, variantForPath } from "../data/variants";
+import { schemeById } from "../scripts/theme";
+
+const base = import.meta.env.BASE_URL;
+const current = variantForPath(Astro.url.pathname, base);
+
+let relativePath = Astro.url.pathname;
+if (base !== "/" && relativePath.startsWith(base)) {
+  relativePath = relativePath.slice(base.length);
+}
+
+const segments = relativePath.split("/").filter(Boolean);
+const inVariantDocs = Boolean(current && segments[1] === "docs");
+const isVariantHome = Boolean(current) && !inVariantDocs;
+const inDocs =
+  Astro.locals.starlightRoute.id !== "" &&
+  !isVariantHome;
+
+const hrefFor = (slug: string) =>
+  inDocs ? `${base}${slug}/docs/overview/` : `${base}${slug}/`;
+
+const ojunyHref = inDocs
+  ? `${base}getting-started/what-is-ojuny/`
+  : base;
+
+const variants = VARIANTS.map((variant) => ({
+  ...variant,
+  scheme: schemeById(variant.defaultScheme),
+}));
+---
+
+<nav class="ojuny-variant-tabs" aria-label="Ojuny products">
+  <a
+    class:list={["ojuny-variant-tab", { "is-active": !current }]}
+    href={ojunyHref}
+    aria-current={!current ? "page" : undefined}
+    title="Ojuny"
+  >
+    <span
+      class="ojuny-variant-tab-dot"
+      style="--tab-accent: var(--base0d)"
+      aria-hidden="true"
+    />
+    <span class="ojuny-variant-tab-label-full">Ojuny</span>
+    <span class="ojuny-variant-tab-label-short">Ojuny</span>
+  </a>
+
+  {variants.map((variant) => (
+    <a
+      class:list={[
+        "ojuny-variant-tab",
+        { "is-active": current?.slug === variant.slug },
+      ]}
+      href={hrefFor(variant.slug)}
+      aria-current={current?.slug === variant.slug ? "page" : undefined}
+      title={variant.name}
+    >
+      <span
+        class="ojuny-variant-tab-dot"
+        style={`--tab-accent: ${variant.scheme?.palette.base0d ?? "currentColor"}`}
+        aria-hidden="true"
+      />
+      <span class="ojuny-variant-tab-label-full">{variant.name}</span>
+      <span class="ojuny-variant-tab-label-short">{variant.shortName}</span>
+    </a>
+  ))}
+</nav>

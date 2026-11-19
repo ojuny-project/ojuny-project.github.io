@@ -1,0 +1,74 @@
+---
+import { variantBySlug } from "../../data/variants";
+import { schemeById } from "../../scripts/theme";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const variant = variantBySlug(slug);
+
+if (!variant) throw new Error(`Unknown Ojuny variant: ${slug}`);
+
+const scheme = schemeById(variant.defaultScheme);
+const base = import.meta.env.BASE_URL;
+const swatches = scheme
+  ? ["base08", "base0a", "base0b", "base0c", "base0d", "base0e"].map(
+      (key) => scheme.palette[key],
+    )
+  : [];
+---
+
+<section class="ojuny-variant-hero ojuny-hero-pro" aria-labelledby={`ojuny-variant-${slug}-title`}>
+  <div class="pro-frame">
+    <header class="pro-masthead">
+      <span class="pro-mark">Ojuny / Pro</span>
+      <span class="pro-edition">Workplace edition</span>
+    </header>
+
+    <div class="pro-body">
+      <div class="pro-copy">
+        <p class="pro-kicker">For the professional workplace</p>
+
+        <h1 id={`ojuny-variant-${slug}-title`}>{variant.name}</h1>
+
+        <p class="pro-tagline">{variant.tagline}</p>
+        <p class="pro-lead">{variant.description}</p>
+
+        <div class="pro-actions">
+          <a class="pro-button" href={`${base}${slug}/docs/overview/`}>
+            Read the Pro documentation
+          </a>
+          <a class="pro-link" href={base}>Ojuny</a>
+        </div>
+      </div>
+
+      <aside class="pro-panel" aria-label="Pro profile">
+        <p class="pro-panel-label">Profile</p>
+
+        <dl class="pro-facts">
+          {variant.facts.map((fact) => (
+            <div>
+              <dt>Included</dt>
+              <dd>{fact}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div class="pro-scheme">
+          <span>Default scheme</span>
+          <strong>{scheme?.name ?? variant.defaultScheme}</strong>
+          <span class="ojuny-scheme-swatches" aria-hidden="true">
+            {swatches.map((color) => <span style={`--swatch: ${color}`}></span>)}
+          </span>
+        </div>
+
+        <a class="pro-panel-link" href={`${base}${slug}/docs/security/`}>
+          Security baseline
+          <span aria-hidden="true">→</span>
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>

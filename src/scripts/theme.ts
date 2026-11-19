@@ -1,4 +1,5 @@
 import data from "../data/base16.json";
+import { variantForPath } from "../data/variants";
 
 export type SchemeVariant = "dark" | "light";
 
@@ -32,6 +33,21 @@ export function schemeById(id: string): Scheme | undefined {
   return SCHEMES.find((scheme) => scheme.id === id);
 }
 
+export function pageDefaultScheme(
+  pathname?: string,
+  basePath?: string,
+): Scheme {
+  if (typeof window === "undefined") return DEFAULT_SCHEME;
+
+  const variant = variantForPath(
+    pathname ?? window.location.pathname,
+    basePath ?? import.meta.env.BASE_URL,
+  );
+  const scheme = variant ? schemeById(variant.defaultScheme) : undefined;
+
+  return scheme ?? DEFAULT_SCHEME;
+}
+
 export function isScheme(value: unknown): value is Scheme {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Partial<Scheme>;
@@ -57,10 +73,10 @@ export function readStoredScheme(): Scheme {
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null");
     if (isScheme(stored)) return normalize(stored);
   } catch {
-    return DEFAULT_SCHEME;
+    return pageDefaultScheme();
   }
 
-  return DEFAULT_SCHEME;
+  return pageDefaultScheme();
 }
 
 export function saveScheme(scheme: Scheme): void {
@@ -96,7 +112,7 @@ export function applyScheme(scheme: Scheme, persist = true): void {
 
 export function resetScheme(): void {
   clearStoredScheme();
-  applyScheme(DEFAULT_SCHEME, false);
+  applyScheme(pageDefaultScheme(), false);
 }
 
 export function swatchStyle(scheme: Scheme): string {

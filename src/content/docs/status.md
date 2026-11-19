@@ -11,7 +11,8 @@ software is usable from the repositories, but parts are incomplete and most
 paths have not been run on hardware.
 
 This page applies to the repository state on 2026-11-03. It is the one place
-that states release status for the project.
+that states release status for the project. The table covers the base project.
+Each product page states the scope of its own template.
 
 ## Support policy
 
@@ -57,8 +58,9 @@ recorded timings.
 - There is no ISO release and no release schedule.
 - There is no binary cache. Some components build from source, which can take
   up to an hour on a low-end machine.
-- The desktop is one shape: MangoWM plus Dux Modular Shell. Alternate desktops are
-  patches with their own support burden.
+- The base desktop is one shape: MangoWM plus Dux Modular Shell. Pro is the
+  GNOME product, and Console is the gamescope product. Alternate desktops
+  remain separate products or patches with their own support burden.
 - Patches are third-party Nix code with build privileges and no sandbox.
 - Runtime changes made through the shell are not persistent. Save the change to
   the flake.

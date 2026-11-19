@@ -1,0 +1,107 @@
+[
+  {
+    "slug": "pro",
+    "name": "Pro",
+    "shortName": "Pro",
+    "tagline": "A workplace machine that stays readable.",
+    "description": "The professional workplace template, tuned for GNOME rather than the MangoWM desktop, with its own ISO installer.",
+    "defaultScheme": "google-dark",
+    "facts": [
+      "GNOME",
+      "workplace profile",
+      "ISO installer"
+    ],
+    "repos": [
+      "ojuny-pro-template",
+      "ojuny-pro-desktop",
+      "ojuny-pro-installer"
+    ]
+  },
+  {
+    "slug": "console",
+    "name": "Console",
+    "shortName": "Console",
+    "tagline": "Put the console where the couch is.",
+    "description": "The living-room variant: a gamescope Steam Big Picture session with a controller-first settings frontend and a Millennium theme.",
+    "defaultScheme": "nova",
+    "facts": [
+      "gamescope",
+      "Steam Big Picture",
+      "controller-first"
+    ],
+    "repos": [
+      "ojuny-console-template",
+      "ojuny-console-desktop",
+      "ojuny-console-installer"
+    ]
+  },
+  {
+    "slug": "fleet",
+    "name": "Fleet",
+    "shortName": "Fleet",
+    "tagline": "One control plane for every endpoint.",
+    "description": "The managed-fleet line, split into a controller server, a web fleet manager, and an endpoint role kept separate from the desktop template.",
+    "defaultScheme": "github",
+    "facts": [
+      "controller",
+      "web manager",
+      "endpoint role"
+    ],
+    "repos": [
+      "ojuny-fleet-controller",
+      "ojuny-fleet-manager"
+    ]
+  },
+  {
+    "slug": "minimal",
+    "name": "Minimal",
+    "shortName": "Minimal",
+    "tagline": "Start with the smallest honest system.",
+    "description": "The bare template and terminal installer. It installs with the standard setup script, boots to a console login, and leaves desktops and GUI tooling to the fork.",
+    "defaultScheme": "linux-vt",
+    "facts": [
+      "bare template",
+      "terminal installer",
+      "console login"
+    ],
+    "repos": [
+      "ojuny-minimal-template",
+      "ojuny-minimal-installer"
+    ]
+  },
+  {
+    "slug": "home-server",
+    "name": "Home Server",
+    "shortName": "Home",
+    "tagline": "A home server that stays quiet.",
+    "description": "The home NAS and server variant, with a template and installer for the machine that stays on in the corner.",
+    "defaultScheme": "nord",
+    "facts": [
+      "NAS template",
+      "server ISO",
+      "small rack"
+    ],
+    "repos": [
+      "ojuny-home-server-template",
+      "ojuny-home-server-installer"
+    ]
+  },
+  {
+    "slug": "infrastructure",
+    "name": "Infrastructure",
+    "shortName": "Infra",
+    "tagline": "Keep the servers out of the desktop.",
+    "description": "The server line for automated pentesting and CI, kept apart from the desktop and home-server variants.",
+    "defaultScheme": "tokyo-night-storm",
+    "facts": [
+      "pentest",
+      "CI",
+      "server roles"
+    ],
+    "repos": [
+      "ojuny-pentest-server",
+      "ojuny-ci-server",
+      "ojuny-ci-workflows"
+    ]
+  }
+]

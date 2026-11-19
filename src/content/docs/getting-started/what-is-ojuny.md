@@ -14,10 +14,15 @@ dotfiles**. The technical relationship is a wrapper around NixOS.
 
 It is not a fork of NixOS, a separate package manager, a new compositor, or a
 new desktop shell. It is not a competitor to NixOS or its upstream projects. It
-is a configuration and packaging layer over upstream projects. The compositor
-is [MangoWM](https://github.com/mangowm/mango) and the desktop shell is
+is a configuration and packaging layer over upstream projects. The base desktop
+compositor is [MangoWM](https://github.com/mangowm/mango) and the shell is
 [Dux Modular Shell](https://github.com/duxlabs-dev/dux-shell). Runtime identifiers still
 use the shorter `dms` name.
+
+Ojuny is a ghost distribution and a metadistribution. It does not own the
+kernel, the package set, the binary cache, or the update channel. It owns the
+template contract and the product composition. Remove the Ojuny template and
+the machine is still NixOS.
 
 Status: pre-release. There is no release schedule. The `ojuny` CLI is pending:
 parts of its designed command surface are not implemented.
@@ -38,7 +43,46 @@ Two rules follow from that:
 The project also takes a position on AI-assisted software. The detailed design
 is human. AI is used as a tool for debugging, analysis, testing, and code
 translation, not as an author or decision maker. The rule is to read the diff.
-Core Ojuny ships no agent or chatbot.
+
+The default install is fully AI-free out of the box. It ships no model server,
+no agent, no assistant, and no telemetry. `patch-ojuny-agent` adds the optional
+agentic workflow, and `patch-local-llm` adds the local model server and harness.
+The project itself uses AI as a tool in development and does not claim to be
+100 percent AI-free. See [Agentic Ojuny](/configuration/agentic/).
+
+## Ghost distribution
+
+A ghost distribution has no paid infrastructure and no permanent maintainer.
+Ojuny has no company, foundation, server, binary cache, CI service, domain, or
+sponsorship that the project cannot lose.
+
+The bus factor is zero because there is no bus. If the maintainer dies, anyone
+can fork the repositories, declare themselves the maintainer, and continue. If
+the maintainer goes bankrupt, nothing changes, because there is no company to
+fail and no paid service to switch off.
+
+A fork of the template is itself a valid template when it installs, boots, and
+runs under the same behavioral contract. The official repositories have no
+permanent privilege. Ojuny's own repositories may not be the most popular Ojuny
+templates after a while, and that is acceptable.
+
+## Products are templates
+
+The base desktop is one product. The variants are separate products built on
+the same template contract:
+
+| Product | What it is |
+| --- | --- |
+| [Ojuny](/) | The base desktop with MangoWM and Dux Modular Shell |
+| [Pro](/pro/) | The workplace template with GNOME |
+| [Console](/console/) | The living-room template with gamescope and Steam Big Picture |
+| [Fleet](/fleet/) | The controller, manager, and endpoint templates |
+| [Minimal](/minimal/) | The bare template and terminal installer |
+| [Home Server](/home-server/) | The home NAS and server template |
+| [Infrastructure](/infrastructure/) | The pentest and CI server templates |
+
+Each product is a flake and a template, not a new operating system. A fork that
+meets the contract is a first-class product.
 
 ## Why Nix
 
@@ -61,7 +105,7 @@ files. Changes are reviewable and revertible.
 
 ## The pieces
 
-Ojuny is split across six public repositories.
+The base project is split across six public repositories. Each product template adds its own repositories and install media, and every one follows the same contract.
 
 | Piece | Repository | Role |
 | --- | --- | --- |
@@ -103,13 +147,16 @@ extend it without forking it.
 
 ## What is not included
 
-Ojuny deliberately leaves out personal infrastructure and personal workflow
-tooling. There is no G13 driver, core secrets store, Hydra instance, binary
-cache, server host configuration, or personal user split. Secrets and password
-managers are opt-in third-party patches: `patch-secrets` and
-`patch-password-manager`. There is no AUR, no proprietary subscription app by
-default, no telemetry, and no AI-generated images, videos, animations, or
-audio.
+The base desktop deliberately leaves out personal infrastructure and personal
+workflow tooling. There is no G13 driver, core secrets store, or personal user
+split. Secrets and password managers are opt-in third-party patches:
+`patch-secrets` and `patch-password-manager`. There is no AUR, no proprietary
+subscription app by default, no telemetry, and no AI-generated images, videos,
+animations, or audio.
+
+Fleet, Home Server, and Infrastructure are separate product lines. They add
+server hosts, Hydra, caches, and deployment tooling because those products
+require them. They do not change what the base desktop includes.
 
 Secure Boot is optional and UEFI-only, and it is not a security guarantee. Core
 Ojuny otherwise makes no security overclaims: it promises secure defaults and
@@ -135,9 +182,10 @@ are the secondary audience: NixOS and tiling window managers provide
 reproducible environments, good terminal workflows, and a system that can be
 versioned like code.
 
-Ojuny is not for users who want a different compositor, a different shell, KDE,
-or GNOME as a supported core mode. A patch can introduce another desktop, but
-that is an extension with its own support burden.
+The base desktop is not for users who want a different compositor, a different
+shell, or KDE as a supported core mode. Pro is the GNOME product. A patch can
+introduce another desktop, but that is an extension with its own support
+burden.
 
 ## Release and support
 
@@ -177,10 +225,11 @@ installation, and the reverse is also true.
 
 ## The doctrine
 
-The project publishes seven rules as the
-[Ojuny Doctrine](/doctrine/): generalized, settings-menu first, one file per
-page, dendritic, names carry ordering, generated not committed, and upstream
-first.
+The project publishes nine rules as the
+[Ojuny Doctrine](/doctrine/): ghost distribution, template first, generalized,
+the menu as the design surface, one file per page with names carrying ordering,
+dendritic, generated not committed, upstream not rewritten, and agent-ready not
+agent-run.
 
 ## Where to go next
 
