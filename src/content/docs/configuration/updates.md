@@ -9,7 +9,9 @@ sidebar:
 > **Unreleased.** Ojuny is not released. This page is unreviewed, may contain placeholders, and is subject to change without notice.
 
 Updates are up to the user. Ojuny has no built-in auto-update. A patch could add
-auto-updating, but it is not core behavior.
+auto-updating, but it is not core behavior. The templates ship an optional
+GitHub Actions workflow that updates `flake.lock` and opens a pull request; it
+is off by default and never rebuilds the system.
 
 ## What can be updated independently
 
@@ -40,6 +42,29 @@ default on the next boot, and `activate-now` switches immediately.
 
 Use `activate-boot` for large updates. It leaves the running system untouched
 until you reboot.
+
+## Optional input update workflow
+
+Ojuny templates ship `.github/workflows/update-flake-inputs.yml`. It is
+disabled by default. To turn it on, open the fork on GitHub, select the workflow
+under Actions, and click **Enable workflow**. That one switch enables the weekly
+schedule and the **Run workflow** button. No repository variable, local command,
+or file edit is required.
+
+When it runs, the workflow updates every input with `nix flake update`, then
+checks the result with `nix flake check --no-build`. It pushes a
+`flake-update/<run>` branch and opens a pull request. If the repository does not
+allow GitHub Actions to create pull requests, the run summary prints the compare
+link instead. A pull request created by the workflow token needs one **Approve
+workflows to run** click before CI starts.
+
+The schedule runs only in a fork. The template repositories skip it, so upstream
+does not update itself, and a manual run remains available there. Merging the
+pull request changes `flake.lock` only; the running system changes at the next
+rebuild. GitHub disables the schedule after 60 days without repository activity.
+A fork that already ran Actions before the workflow existed may start the
+schedule on the next pull; disable the workflow in Actions if you do not want
+it.
 
 ## Update GUI
 
